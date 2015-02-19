@@ -19,5 +19,5 @@ var server = app.listen(port, function () {
   var host = server.address().address
   var port = server.address().port
 
-  console.log('Website live at at http://localhost:%s', port)
+  console.log('Website live at http://localhost:%s', port)
 })
