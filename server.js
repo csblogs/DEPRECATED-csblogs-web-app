@@ -1,7 +1,7 @@
 var express = require('express')
 var compression = require('compression')
 var exphbs  = require('express-handlebars')
-var Schema = require('./schema.js')
+var database = require('./database.js')
 
 var app = express()
 app.use(compression())
@@ -16,12 +16,12 @@ app.get('/', function(req, res) {
 
 // respond with bloggers from mongo
 app.get('/bloggers',function(req, res) {
-    Schema.Blogger.find(function(error,bloggers) {
+        database.Blogger.find(function(error,bloggers) {
         if(error) {
             console.log('Error fetching bloggers')
         }
         else {
-            res.render('bloggers', {title:"All Bloggers", bloggers: bloggers})
+            res.render('bloggers', {title:"All Bloggers | CS Blogs", bloggers: bloggers})
         }
     })
 })

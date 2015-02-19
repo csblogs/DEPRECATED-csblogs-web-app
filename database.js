@@ -5,7 +5,7 @@ var mongoose = require('mongoose')
 mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI)
 
 // define schema
-exports.Blogger = mongoose.model('Blogger',{name: String, email: String, site: String,feed: String})
+exports.Blogger = mongoose.model('Blogger', {name: String, email: String, site: String,feed: String})
 
 // create sample bloggers if none exist
 exports.Blogger.find(function(error,bloggers) {
@@ -25,21 +25,14 @@ exports.Blogger.find(function(error,bloggers) {
             site: 'alexpringle.co.uk',
             feed: 'alexpringle.co.uk/atom.xml'
         })
-        var joe = new exports.Blogger({
-            name: 'Joe Bloggs',
-            email: 'joe@joe.co.uk',
-            site: 'joe.co.uk',
-            feed: 'joe.co.uk/atom.xml'
-        })
-        var tim = new exports.Blogger({
-            name: 'Tim Tin',
-            email: 'tim@tin.co.uk',
-            site: 'tin.co.uk',
-            feed: 'tin.co.uk/atom.xml'
+        var danny = new exports.Blogger({
+            name: 'Daniel Brown',
+            email: 'd.t.brown@outlook.com',
+            site: 'dannybrown.net',
+            feed: 'dannycomputerscientist.wordpress.com/feed'
         })
 
         pring.save(bloggerError)
-        joe.save(bloggerError)
-        tim.save(bloggerError)
+        danny.save(bloggerError)
     }
 })
