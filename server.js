@@ -17,13 +17,11 @@ app.get('/', function(req, res) {
 // respond with bloggers from mongo
 app.get('/bloggers',function(req, res) {
     Schema.Blogger.find(function(error,bloggers) {
-
         if(error) {
             console.log('Error fetching bloggers')
         }
         else {
-            res.render('bloggers',{title:"All Bloggers",bloggers: bloggers})
-
+            res.render('bloggers', {title:"All Bloggers", bloggers: bloggers})
         }
     })
 })

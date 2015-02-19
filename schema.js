@@ -1,7 +1,8 @@
 var mongoose = require('mongoose')
 
 // connect to mongo
-mongoose.connect('mongodb://localhost/csblogs')
+// mongodb uri stored securely in azure configuration
+mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI)
 
 // define schema
 exports.Blogger = mongoose.model('Blogger',{name: String, email: String, site: String,feed: String})
