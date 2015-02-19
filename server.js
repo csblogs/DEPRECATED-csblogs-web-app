@@ -1,10 +1,10 @@
-var express = require('express');
+var express = require('express')
 var compression = require('compression')
 
-var app = express();
+var app = express()
 
-app.use(compression());
-app.use(express.static(__dirname + '/static')); //Files in /static appear as if in root.
+app.use(compression())
+app.use(express.static(__dirname + '/static')) //Files in /static appear as if in root.
                                                 //E.g. /static/default.css is shown to user as just /default.css
 
 // respond with "hello world" when a GET request is made to the homepage
