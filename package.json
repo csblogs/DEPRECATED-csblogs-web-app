@@ -1,0 +1,29 @@
+{
+  "name": "csblogs",
+  "version": "1.0.0",
+  "description": "A node.js application to serve the Computer Science Blogging community.",
+  "main": "server.js",
+  "scripts": {
+    "test": "node tests.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/csblogs/csblogs.git"
+  },
+  "keywords": [
+    "Computer",
+    "Science",
+    "Blogs"
+  ],
+  "author": "Daniel Brown",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/csblogs/csblogs/issues"
+  },
+  "homepage": "https://csblogs.com",
+  "dependencies": {
+    "compression": "^1.4.1",
+    "express": "^4.11.2"
+  }
+}
