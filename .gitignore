@@ -1,3 +1,5 @@
 node_modules/
+database/
 .idea/**
 *.iml
+*._0
