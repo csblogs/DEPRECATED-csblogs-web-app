@@ -2,19 +2,21 @@ var express = require('express')
 var compression = require('compression')
 var exphbs  = require('express-handlebars')
 var database = require('./database.js')
+var lessMiddleware = require('less-middleware');
 
 var app = express()
 app.use(compression())
 app.use(express.static(__dirname + '/static'))
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
+app.use(lessMiddleware(__dirname + '/static'));
 
-// respond with "hello world" when a GET request is made to the homepage
+// respond with the handlebars compiled homepage
 app.get('/', function(req, res) {
   res.render('index', {title:"Index | CS Blogs"})
 })
 
-// respond with bloggers from mongo
+//respond with bloggers from mongo
 app.get('/bloggers',function(req, res) {
         database.Blogger.find(function(error,bloggers) {
         if(error) {
