@@ -27,6 +27,10 @@ To be able to develop code you will have to be able to set up the development en
 
 CS Blogs is a Node.js web application so you will have to have the node.js runtime installed. You can install node.js for OS X, Linux or Windows by following the instructions here: http://nodejs.org/download/
 
-Once you have node installed clone this repository. Open a terminal and change directory (cd) to the location to which you cloned this repository. Type 'node server' and press enter. Something along the lines of the following will be displayed: "Website live at http://localhost:3000". Copy the localhost url and paste it into your favourite browser and you should see a completely local version of CSBlogs.com -- magic.
+Once you have node installed clone this repository. Open a terminal and change directory (cd) to the location to which you cloned this repository. 
+
+Type 'npm install' to download and install all of the dependencies required.
+
+Type 'node server' and press enter. Something along the lines of the following will be displayed: "Website live at http://localhost:3000". Copy the localhost url and paste it into your favourite browser and you should see a completely local version of CSBlogs.com -- magic.
 
 From there, start changing code as you see fit. If you need any help then feel free to contact d.t.brown@outlook.com :-)
