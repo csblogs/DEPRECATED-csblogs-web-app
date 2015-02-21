@@ -37,12 +37,17 @@ Open a terminal window if using Linux or OSX or cmd if running windows. Navigate
 If Linux or mac:
 * Make a directory for the database data to be stored. 'mkdir -p ./database'
 * Start the Database daemon, telling it where the database folder you just made is 'mongod --dbpath ./database'
+* Leave this terminal window open and launch another one
 
 If Windows:
-* Make a directory for the database data to be stored. 'md ./database'
-* Start the Database service, telling it where the database folder you just made is 'C:\mongodb\bin\mongod.exe --dbpath ./database'
+* Make a directory for the database data to be stored. 'md database'
+* Change directory to the location monogodb was installed. Normally this will be 'C:\Program Files\MongoDB 2.6 Standard\bin'
+* Start the database service, telling it the location of the database folder you just made is 'mongod --dbpath [LOCATION OF REPO]/database'
+* Leave this terminal window open and launch another one
 
 ##### Resolve Node Dependencies and Run
+Navigate to the directory into which you cloned this repository using the cd command.
+
 Type 'npm install' to download and install all of the node dependencies required.
 
 Type 'npm start' and press enter. Something along the lines of the following will be displayed: "Website live at http://localhost:3000". Copy the localhost url and paste it into your favourite browser and you should see a completely local version of CSBlogs.com -- magic.
