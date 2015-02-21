@@ -10,12 +10,12 @@ exports.Blogger = mongoose.model('Blogger', {name: String, email: String, site: 
 // create sample bloggers if none exist
 exports.Blogger.find(function(error,bloggers) {
     if (error) {
-        console.log('Error fetching bloggers :' + error)
+        console.log('Error fetching bloggers: ' + error)
     }
     else if (bloggers.length === 0) {
         var bloggerError = function (error) {
             if (error) {
-                console.log('Error saving blogger :' + error)
+                console.log('Error saving blogger: ' + error)
             }
         }
 
