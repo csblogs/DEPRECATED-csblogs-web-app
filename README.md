@@ -4,7 +4,7 @@ A node.js web application serving the Computer Science blogging community. Hoste
 ## Get Involved
 CS Blogs is a project in its infancy, and so now is a great time to get involved! There are a few ways in which to do this, and these are outlined in some detail below.
 
-### Reporting bugs and requesting features.
+### Reporting bugs and requesting features
 If something weird has happened when you've been browsing the site, or you would love a certain feature added then please don't hesistate to report it. Both bug reports and feature requests can be added as issues on the issue tracker that is avalible here: https://github.com/csblogs/csblogs/issues.
 
 On the issue tracker simply hit the "New Issue" button and fill in the required fields. With bug reports its often useful to know information such as:
