@@ -5,7 +5,7 @@ A node.js web application serving the Computer Science blogging community. Hoste
 CS Blogs is a project in its infancy, and so now is a great time to get involved! There are a few ways in which to do this, and these are outlined in some detail below.
 
 ### Reporting bugs and requesting features.
-If something weird has happened when you've been browsing the site, or you would love a certain feature added then please don't hesistate to report it. Both bug reports and feature requests can be added as issues on the issue tracker that is avalible here: https://github.com/csblogs/csblogs/issues. 
+If something weird has happened when you've been browsing the site, or you would love a certain feature added then please don't hesistate to report it. Both bug reports and feature requests can be added as issues on the issue tracker that is avalible here: https://github.com/csblogs/csblogs/issues.
 
 On the issue tracker simply hit the "New Issue" button and fill in the required fields. With bug reports its often useful to know information such as:
 
@@ -45,6 +45,6 @@ If Windows:
 ##### Resolve Node Dependencies and Run
 Type 'npm install' to download and install all of the node dependencies required.
 
-Type 'node server' and press enter. Something along the lines of the following will be displayed: "Website live at http://localhost:3000". Copy the localhost url and paste it into your favourite browser and you should see a completely local version of CSBlogs.com -- magic.
+Type 'npm start' and press enter. Something along the lines of the following will be displayed: "Website live at http://localhost:3000". Copy the localhost url and paste it into your favourite browser and you should see a completely local version of CSBlogs.com -- magic.
 
 From there, start changing code as you see fit. If you need any help then feel free to contact d.t.brown@outlook.com :-)

@@ -4,7 +4,6 @@
   "description": "A node.js application to serve the Computer Science Blogging community.",
   "main": "server.js",
   "scripts": {
-    "test": "node tests.js",
     "start": "node server.js"
   },
   "repository": {
