@@ -25,7 +25,7 @@ Its often most useful to start by working on an issue in the issue tracker which
 #### How to set up the development environment
 To be able to develop code you will have to be able to set up the development environment.
 
-##### Download MonogoDB and Node.js
+##### Download MongoDB and Node.js
 CS Blogs is a Node.js web application so you will have to have the node.js runtime installed. You can install node.js for OS X, Linux or Windows by following the instructions here: http://nodejs.org/download/. We use MongoDB as our database, so you will also have to install that following the instructions here https://www.mongodb.org/downloads
 
 ##### Fork and Clone this Repository
