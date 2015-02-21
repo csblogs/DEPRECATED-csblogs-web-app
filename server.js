@@ -7,9 +7,9 @@ var lessMiddleware = require('less-middleware');
 var app = express()
 app.use(compression())
 app.use(express.static(__dirname + '/static'))
+app.use(lessMiddleware(__dirname + '/static'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
-app.use(lessMiddleware(__dirname + '/static'));
 
 // respond with the handlebars compiled homepage
 app.get('/', function(req, res) {
@@ -20,7 +20,7 @@ app.get('/', function(req, res) {
 app.get('/bloggers',function(req, res) {
         database.Blogger.find(function(error,bloggers) {
         if(error) {
-            console.log('Error fetching bloggers')
+            console.error('Error fetching bloggers')
         }
         else {
             res.render('bloggers', {title:"All Bloggers | CS Blogs", bloggers: bloggers})
