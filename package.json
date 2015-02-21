@@ -4,7 +4,6 @@
   "description": "A node.js application to serve the Computer Science Blogging community.",
   "main": "server.js",
   "scripts": {
-    "test": "node tests.js",
     "start": "node server.js"
   },
   "repository": {
@@ -26,6 +25,7 @@
     "compression": "^1.4.1",
     "express": "^4.11.2",
     "express-handlebars": "^1.2.1",
+    "less-middleware": "^1.0.4",
     "mongoose": "^3.8.23"
   }
 }
