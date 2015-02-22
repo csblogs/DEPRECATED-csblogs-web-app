@@ -30,7 +30,7 @@ app.get('/bloggers',function(req, res) {
 
 // respond with blogs page
 app.get('/blogs', function(req, res) {
-    var blogs = jQuery.getJSON('blogs.json')
+    var blogs = require('./blogs.json')
     res.render('blogs', {title: 'Blogs | CS Blogs', content: blogs})
 })
 
