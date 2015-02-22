@@ -31,18 +31,21 @@ CS Blogs is a Node.js web application so you will have to have the node.js runti
 ##### Fork and Clone this Repository
 Fork this repository through the Github interface (press the fork button in the top right of the github page above this readme file). Clone your fork of the repository though a command line git interface (advanced) or github for mac or windows (Downloads: http://mac.github.com and http://windows.github.com)
 
+_Note: I reccomend you install both Node.js and MonogoDB through a package manager such as [Homebrew](http://brew.sh) on OS X or apt-get on Ubuntu. (Users of other Linux systems will know their own package manager) This means that you dont have to directly edit your $PATH environmental variable or ensure all your software is up to date yourself. :-) 
+
 ##### Setup your Local Database
 Open a terminal window if using Linux or OSX or cmd if running windows. Navigate to the directory into which you cloned this repository using the cd command.
 
 If Linux or mac:
 * Make a directory for the database data to be stored. 'mkdir -p ./database'
 * Start the Database daemon, telling it where the database folder you just made is 'mongod --dbpath ./database'
+  * NOTE: If you didn't install mongo through a package manager you will have to add mongod to your $PATH variable or call it using its fully qualified location instead of just mongod.
 * Leave this terminal window open and launch another one
 
 If Windows:
 * Make a directory for the database data to be stored. 'md database'
 * Change directory to the location monogodb was installed. Normally this will be 'C:\Program Files\MongoDB 2.6 Standard\bin'
-* Start the database service, telling it the location of the database folder you just made is 'mongod --dbpath [LOCATION OF REPO]/database'
+* Start the database service, telling it the location of the database folder you just made is 'mongod --dbpath [LOCATION OF REPOSITORY]/database'
 * Leave this terminal window open and launch another one
 
 ##### Resolve Node Dependencies and Run
