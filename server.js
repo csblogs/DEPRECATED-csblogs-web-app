@@ -13,10 +13,10 @@ app.set('view engine', 'handlebars')
 
 // respond with the handlebars compiled homepage
 app.get('/', function(req, res) {
-  res.render('index', {title: 'Index | CS Blogs'})
+    res.render('index', {title: 'Index | CS Blogs'})
 })
 
-//respond with bloggers from mongo
+// respond with bloggers from mongo
 app.get('/bloggers',function(req, res) {
         database.Blogger.find(function(error,bloggers) {
         if(error) {
@@ -26,6 +26,12 @@ app.get('/bloggers',function(req, res) {
             res.render('bloggers', {title: 'All Bloggers | CS Blogs', bloggers: bloggers})
         }
     })
+})
+
+// respond with blogs page
+app.get('/blogs', function(req, res) {
+    var blogs = require('./blogs.json')
+    res.render('blogs', {title: 'Blogs | CS Blogs', content: blogs})
 })
 
 var port = process.env.PORT || 3000; //process.evn.PORT is required to work on Azure
