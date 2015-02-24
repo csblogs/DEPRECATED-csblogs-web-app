@@ -6,7 +6,7 @@ var lessMiddleware = require('less-middleware')
 
 var app = express()
 app.use(compression())
-app.use(lessMiddleware(__dirname + '/static', {cacheFile: '/static/style'}))
+app.use(lessMiddleware(__dirname + '/static', {cacheFile: __dirname + '/static/style/cache.json'}))
 app.use(express.static(__dirname + '/static'))
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
