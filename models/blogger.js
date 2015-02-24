@@ -1,21 +1,15 @@
-var mongoose = require('mongoose')
-
-// connect to mongo
-// mongodb uri stored securely in azure configuration
-mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || "mongodb://localhost")
-
 // define schema
 exports.Blogger = mongoose.model('Blogger', {name: String, email: String, site: String,feed: String})
 
 // create sample bloggers if none exist
 exports.Blogger.find(function(error,bloggers) {
     if (error) {
-        console.log('Error fetching bloggers: ' + error)
+        console.error('Error fetching bloggers: ' + error)
     }
     else if (bloggers.length === 0) {
         var bloggerError = function (error) {
             if (error) {
-                console.log('Error saving blogger: ' + error)
+                console.error('Error saving blogger: ' + error)
             }
         }
 
