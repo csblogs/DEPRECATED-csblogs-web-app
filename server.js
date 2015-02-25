@@ -8,7 +8,7 @@ var mongoose = require('mongoose')
 // CSBlogs prototypes
 var blogger = require('./models/blogger')
 var blog = require('./models/blog')
-var organisation =  require('./models/organisation')
+var organisation = require('./models/organisation')
 
 // Initialize app
 var app = express()
