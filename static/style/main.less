@@ -79,8 +79,10 @@ p {
 
 footer {
     height: 100px;
-    margin: 10px auto;
-    clear: left;
+    margin: 0px auto;
+    clear: both;
+    display: flex;
+    align-items: center;
 }
 
 #footer-logo {
@@ -90,12 +92,18 @@ footer {
 }
 
 #footer-info {
-    padding-top: 4px;
-    margin-left: 78px;
+    float: left;
+    margin-left: 10px;
     
     p {
         font-size: 14px;
         line-height: 120%;
         font-family: "Open Sans", sans-serif;
     }
+}
+
+#footer-github {
+    float: right;
+    width: 40px;
+    height: 40px;
 }
