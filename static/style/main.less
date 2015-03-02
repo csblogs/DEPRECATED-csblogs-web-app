@@ -57,10 +57,10 @@ header {
     letter-spacing: -1px;
 }
 
-main {
-	max-width: 800px;
-	margin: 10px auto;
-	//padding: 35px;
+main, footer {
+	max-width: 850px;
+	margin: 0px auto;
+	padding: 0px 25px 0px 25px;
 }
 
 a {
@@ -79,9 +79,29 @@ p {
 
 footer {
     height: 100px;
-    max-width: 800px;
-    margin: 10px auto;
-    clear: left;
+    margin: 0px auto;
+    clear: both;
+    margin-top: 10px;
+    position: relative;
+}
+
+#footer-left {
+    margin-left: 4px;
+    margin-right: 80px;
+}
+
+#footer-right {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-right: 28px;
+    
+    svg {
+        fill: #afafaf;
+    }
+    svg:hover {
+        fill: #333;
+    }
 }
 
 #footer-logo {
@@ -91,11 +111,20 @@ footer {
 }
 
 #footer-info {
-    padding-top: 7px;
-    margin-left: 78px;
+    float: left;
+    margin-left: 10px;
     
     p {
         font-size: 14px;
-        line-height: 1em;
+        line-height: 120%;
+        font-family: "Open Sans", sans-serif;
     }
+}
+
+.footer-icon {
+    float: right;
+    margin-left: 8px;
+    margin-top: 12px;
+    width: 40px;
+    height: 40px;
 }
