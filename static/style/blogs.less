@@ -1,4 +1,8 @@
-main h1 {
+article {
+    padding-left: 160px;
+}
+
+article header {
 	margin: 30px 0px;
 	margin-bottom: 10px;
 	font-size: 32pt;
@@ -17,6 +21,14 @@ main img {
 
 main p {
     text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+@media screen and (max-width: 480px) {
+    main p {
+        text-align: left;
+    }
 }
 
 hr {
@@ -28,4 +40,37 @@ hr {
     margin: 0;
     margin-top: 30px;
     padding: 0;
+}
+
+.article-info {
+    width: 160px;
+    border-right: 1px solid #ccc;
+    margin-left: -190px;
+    margin-top: 10px;
+    padding-right: 10px;
+    position: absolute;
+    text-align: right;
+}
+
+.article-info p {
+    display: inline-block;
+    margin: 0;
+}
+
+.avatar {
+    background-image: url('http://i.stack.imgur.com/Dj7eP.jpg');
+
+    /* make a square container */
+    width: 60px;
+    height: 60px;
+
+    /* fill the container, preserving aspect ratio, and cropping to fit */
+    background-size: cover;
+
+    /* center the image vertically and horizontally */
+    background-position: center;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+    float: right;
 }
