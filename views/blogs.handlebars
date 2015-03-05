@@ -1,13 +1,15 @@
 {{#each content.posts}}
     <article>
-        <div class="article-info">
-            <div class="avatar"></div>
-            <p class="article-author">{{name}}</p>
-            <p class="article-date">{{date}}</p>
-        </div>
         <header>{{title}}</header>
         <img src="{{img}}"/>
         <p>{{{description}}}</p>
-        <hr/>
+        <footer>
+            <div class="article-info">
+                <div class="avatar"></div>
+                <p class="article-author">{{name}}</p>
+                <p class="article-date">{{date}}</p>
+            </div>
+        </footer>
+        {{#unless @last}}<hr/>{{/unless}}
     </article>
 {{/each}}

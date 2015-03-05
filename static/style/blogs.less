@@ -1,5 +1,6 @@
 article {
-    padding-left: 160px;
+    position: relative;
+    min-height: 160px;
 }
 
 article header {
@@ -31,23 +32,21 @@ main p {
     }
 }
 
-hr {
-    display: block;
-    box-sizing: content-box;
-    height: 1px;
-    border: 0;
-    border-top: #A2A2A2 1px solid;
-    margin: 0;
-    margin-top: 30px;
-    padding: 0;
+article footer {
+    position: static;
+    font-size: 100%;
 }
 
 .article-info {
     width: 160px;
+    height: 140px;
     border-right: 1px solid #ccc;
-    margin-left: -190px;
+    margin-left: -185px;
     padding-right: 10px;
+    padding-top: 2px;
     position: absolute;
+    top: 0;
+    left: 0;
     text-align: right;
 }
 
@@ -55,27 +54,30 @@ hr {
     display: inline-block;
     margin: 0;
     font-family: "Open Sans", sans-serif;
-    font-weight: 400;
 }
 
 .article-author {
     margin-top: 4px !important;
-    margin-bottom: -6px !important;
+    margin-bottom: -3px !important;
+    font-weight: 600;
 }
 
 .article-date {
     color: #999;
     font-size: 12px;
-    margin-bottom: 22px !important;
+}
+
+.secondary footer .permalink {
+    //left: -24.090909090909%; /* and position it on the edge of the fluid page  */
 }
 
 .avatar {
     background-image: url('http://i.stack.imgur.com/Dj7eP.jpg');
 
     /* make a square container */
-    width: 60px;
-    height: 60px;
-    margin-left: 100px;
+    width: 75px;
+    height: 75px;
+    margin-left: 85px;
 
     /* fill the container, preserving aspect ratio, and cropping to fit */
     background-size: cover;
