@@ -1,12 +1,14 @@
 {{#each content.posts}}
     <article>
-        <header>{{title}}</header>
-        <img src="{{img}}"/>
+        <header>
+            <a href="{{link}}">{{title}}</a>
+        </header>
+        <img src="{{image}}"/>
         <p>{{{description}}}</p>
         <footer>
             <div class="article-info">
-                <div class="avatar"></div>
-                <p class="article-author">{{name}}</p>
+                <div class="avatar" style="background-image: url('{{avatar}}');"></div>
+                <a class="article-author" href="{{site}}">{{author}}</a>
                 <p class="article-date">{{date}}</p>
             </div>
         </footer>

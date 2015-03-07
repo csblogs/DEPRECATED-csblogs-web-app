@@ -126,11 +126,19 @@ hr {
 #footer-info {
     float: left;
     margin-left: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
     
     p {
         font-size: 14px;
         line-height: 120%;
         font-family: "Open Sans", sans-serif;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #footer-info {
+        white-space: normal;
     }
 }
 

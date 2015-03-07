@@ -1,42 +1,42 @@
 {
     "posts": [{
-        "name": "Rob Crocombe",
-        "avatar": "image.jpg",
-        "site": "robcrocombe.com",
+        "author": "Rob Crocombe",
+        "avatar": "http://graph.facebook.com/1794586479/picture?type=large",
+        "site": "http://robcrocombe.com",
         "title": "How to reference with Biblatex and TeXworks",
         "link": "http://robcrocombe.com/?p=1412",
         "description": "I am now at the University of York, studying for a MSc in Advanced Computer Science. It has been interesting to see how different universities do different things. An example of this is report writing. Before York I had never heard of LaTeX (pronounced lay-tech). LaTeX is basically a word processing system that produces high&hellip;",
-        "img": "https://robcrocombe.files.wordpress.com/2014/10/latex1.png",
+        "image": "https://robcrocombe.files.wordpress.com/2014/10/latex1.png",
         "date": "Jan 27, 2015"
     },
     {
-        "name": "Danny Brown",
-        "avatar": "image.jpg",
-        "site": "dannybrown.net",
+        "author": "Danny Brown",
+        "avatar": "http://graph.facebook.com/100008724274686/picture?type=large",
+        "site": "http://dannybrown.net",
         "title": "Introducing CSBlogs.com",
         "link": "http://dannycomputerscientist.wordpress.com/?p=3395",
         "description": "Between studying hard for my masters degree, and applying for jobs for when it ends, I have managed to find some time to set up a new website called CSBlogs.com. People who have been reading this blog for a few years will have seen HullCompSciBlogs.com mentioned a few times, for those that havent&hellip;",
-        "img": "https://dannycomputerscientist.files.wordpress.com/2015/02/screen-shot-2015-02-22-at-03-45-11.png",
+        "image": "https://dannycomputerscientist.files.wordpress.com/2015/02/screen-shot-2015-02-22-at-03-45-11.png",
         "date": "Dec 6, 2014"
     },
     {
-        "name": "Charlotte Godley",
-        "avatar": "image.jpg",
-        "site": "charlottegodley.co.uk",
+        "author": "Charlotte Godley",
+        "avatar": "http://graph.facebook.com/1673261323/picture?type=large",
+        "site": "http://charlottegodley.co.uk",
         "title": "Really Useful Seminar",
         "link": "http://charlottegodley.co.uk/really-useful-seminar/",
         "description": "Today I did a really useful seminar. Basically, these are extra lectures spearheaded by Rob Miles which cover stuff that's generally useful to Computer Science students.</p> <p>Personally, I spoke about my year's industrial placement, with advice on what to do and what not to do in the application process and some other funky stuff&hellip;",
-        "img": "",
+        "image": "",
         "date": "Jul 12, 2014"
     },
     {
-        "name": "Alex Pringle",
-        "avatar": "image.jpg",
-        "site": "alexpringle.co.uk",
+        "author": "Alex Pringle",
+        "avatar": "http://graph.facebook.com/640029533/picture?type=large",
+        "site": "http://alexpringle.co.uk",
         "title": "End Of The Tour",
         "link": "http://www.alexpringle.co.uk/end-of-the-tour.html",
         "description": "My tour of ‘The South’ finally came to a close as I left IBM in August. It's was a truly epic 14 months of nonstop friend making, code writing, landlord ranting, and train journeys. I’ve spent a large amount of time in London, seeing the sights, planning world domination and enjoying conference talks&hellip;",
-        "img": "http://www.alexpringle.co.uk/images/IMG_20140815_081559.jpg",
+        "image": "http://www.alexpringle.co.uk/images/IMG_20140815_081559.jpg",
         "date": "Mar 15, 2013"
     }]
 }
