@@ -16,6 +16,7 @@ Contact [Daniel Brown](mailto:d.t.brown@outlook.com) (project lead) if you requi
 
 ### Guides for setting up the Development Environment
 [Installing CS Blogs and Dependencies on OSX or Linux](http://docs.csblogs.com/v0.1/docs/installing-on-os-x-or-linux)
+
 [Installing CS Blogs and Dependencies on Windows](http://docs.csblogs.com/v0.1/docs/installing-on-windows)
 
 ## Documentation
