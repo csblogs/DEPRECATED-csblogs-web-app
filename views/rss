@@ -1,3 +1,0 @@
-{{#each bloggers}}
-    <p>{{this.rss}}</p>
-{{/each}}

@@ -31,12 +31,13 @@ app.get('/bloggers',function(req, res) {
 app.get('/rss',function(req, res) {
         var query = database.Blogger.find();
         query.select('feed');
-        query.exec(function (err, feeds) {
+        query.lean().exec(function (err, feeds) {
           if (err) {
             console.error('Error fetching feeds');
           }
           else {
-              res.render('rss', {title: 'All Feeds | CS Blogs', bloggers: feeds})
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(JSON.stringify(feeds));
           }
 
         });
