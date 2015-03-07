@@ -1,58 +1,22 @@
 # Computer Science Blogs
-A node.js web application serving the Computer Science blogging community. Hosted at csblogs.com
+The Computer Science blogs open source project works to develop an open source blog aggregation system for Computer Scientists. 
 
-## Get Involved
-CS Blogs is a project in its infancy, and so now is a great time to get involved! There are a few ways in which to do this, and these are outlined in some detail below.
+CS Students, academics and those working in industry can set up a profile and open up their blog posts to a much wider audience.
 
-### Reporting bugs and requesting features
-If something weird has happened when you've been browsing the site, or you would love a certain feature added then please don't hesistate to report it. Both bug reports and feature requests can be added as issues on the issue tracker that is avalible here: https://github.com/csblogs/csblogs/issues.
+They can also subscribe to feeds from certain institutions (e.g. All feeds from University of Hull alumni and students) or by topic (e.g. All feeds about C++).
 
-On the issue tracker simply hit the "New Issue" button and fill in the required fields. With bug reports its often useful to know information such as:
+The site is hosted at [csblogs.com](http://csblogs.com)
 
-* What browser you were using
-* What operating system you were using
-* The URL of the page you were on
+This project is in its infancy, so please do get involved.
 
-So please make sure you include these details! A screenshot can often be really useful too.
+Contact [Daniel Brown](mailto:d.t.brown@outlook.com) (project lead) if you require any information that isn't avaliable in the [documentation](http://docs.csblogs.com). 
 
-If you have a feature request please describe it in detail, describe some possible solutions and consider providing a mockup screenshot.
+# Useful Links for Beginners
+[Getting Started with CS Blogs (aka how to help!)](http://docs.csblogs.com/v0.1/docs/getting-started)
 
-### Writing Code
-If you would like to contribute code to the project (and why wouldn't you!? Its great for the CV) then you should follow the model of the github flow, which is described in detail here: https://guides.github.com/introduction/flow/
+# Guides for setting up the Development Environment
+[Installing CS Blogs and Dependencies on OSX or Linux](http://docs.csblogs.com/v0.1/docs/installing-on-os-x-or-linux)
+[Installing CS Blogs and Dependencies on Windows](http://docs.csblogs.com/v0.1/docs/installing-on-windows)
 
-Its often most useful to start by working on an issue in the issue tracker which has been confirmed as something we would like to fix or implement. Make sure to comment in the issue you would like to resolve to ensure you're not duplicating work someone else is already doing. If you don't write code which resolves an issue it is unlikely to be accepted, we need to know how the application is going to fit together, and accepting random bits of code -- no matter how good -- detract from this.
-
-#### How to set up the development environment
-To be able to develop code you will have to be able to set up the development environment.
-
-##### Download MongoDB and Node.js
-CS Blogs is a Node.js web application so you will have to have the node.js runtime installed. You can install node.js for OS X, Linux or Windows by following the instructions here: http://nodejs.org/download/. We use MongoDB as our database, so you will also have to install that following the instructions here https://www.mongodb.org/downloads
-
-##### Fork and Clone this Repository
-Fork this repository through the Github interface (press the fork button in the top right of the github page above this readme file). Clone your fork of the repository though a command line git interface (advanced) or github for mac or windows (Downloads: http://mac.github.com and http://windows.github.com)
-
-_Note: I reccomend you install both Node.js and MonogoDB through a package manager such as [Homebrew](http://brew.sh) on OS X or apt-get on Ubuntu. (Users of other Linux systems will know their own package manager) This means that you dont have to directly edit your $PATH environmental variable or ensure all your software is up to date yourself. :-)_ 
-
-##### Setup your Local Database
-Open a terminal window if using Linux or OSX or cmd if running windows. Navigate to the directory into which you cloned this repository using the cd command.
-
-If Linux or mac:
-* Make a directory for the database data to be stored. 'mkdir -p ./database'
-* Start the Database daemon, telling it where the database folder you just made is 'mongod --dbpath ./database'
-_NOTE: If you didn't install mongo through a package manager you will have to add mongod to your $PATH variable or call it using its fully qualified location instead of just mongod._
-* Leave this terminal window open and launch another one
-
-If Windows:
-* Make a directory for the database data to be stored. 'md database'
-* Change directory to the location monogodb was installed. Normally this will be 'C:\Program Files\MongoDB 2.6 Standard\bin'
-* Start the database service, telling it the location of the database folder you just made is 'mongod --dbpath [LOCATION OF REPOSITORY]/database'
-* Leave this terminal window open and launch another one
-
-##### Resolve Node Dependencies and Run
-Navigate to the directory into which you cloned this repository using the cd command.
-
-Type 'npm install' to download and install all of the node dependencies required.
-
-Type 'npm start' and press enter. Something along the lines of the following will be displayed: "Website live at http://localhost:3000". Copy the localhost url and paste it into your favourite browser and you should see a completely local version of CSBlogs.com -- magic.
-
-From there, start changing code as you see fit. If you need any help then feel free to contact d.t.brown@outlook.com :-)
+# Documentation
+All other documentation can be found on [docs.csblogs.com](http://docs.csblogs.com).
