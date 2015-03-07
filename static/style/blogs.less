@@ -1,10 +1,20 @@
-main h1 {
-	margin: 30px 0px;
-	margin-bottom: 10px;
-	font-size: 32pt;
+article {
+    position: relative;
+    min-height: 160px;
+}
+
+article header {
+    margin: 30px 0px;
+    margin-bottom: 10px;
+    font-size: 40px;
     font-weight: bold;
     letter-spacing: -1px;
     color: #333;
+}
+
+article header a {
+    color: #333;
+    text-decoration: none;
 }
 
 main img {
@@ -17,15 +27,75 @@ main img {
 
 main p {
     text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
 }
 
-hr {
-    display: block;
-    box-sizing: content-box;
-    height: 1px;
-    border: 0;
-    border-top: #A2A2A2 1px solid;
+@media screen and (max-width: 480px) {
+    main p {
+        text-align: left;
+    }
+    
+    article header {
+        font-size: 34px;
+    }
+}
+
+article footer {
+    position: static;
+    font-size: 100%;
+}
+
+.article-info {
+    width: 160px;
+    height: 140px;
+    //border-right: 1px solid #ccc;
+    margin-left: -185px;
+    padding-right: 10px;
+    padding-top: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.article-info p, .article-info a {
+    display: inline-block;
+    font-family: "Open Sans", sans-serif;
+    min-width: 160px;
+    text-align: right;
+}
+
+.article-author {
+    margin-top: 6px;
+    margin-bottom: 2px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #333;
+}
+
+.article-date {
+    color: #999;
+    font-size: 13px;
     margin: 0;
-    margin-top: 30px;
-    padding: 0;
+}
+
+.secondary footer .permalink {
+    //left: -24.090909090909%; /* and position it on the edge of the fluid page  */
+}
+
+.avatar {
+    /* make a square container */
+    width: 75px;
+    height: 75px;
+    margin-left: 85px;
+
+    /* fill the container, preserving aspect ratio, and cropping to fit */
+    background-size: cover;
+
+    /* center the image vertically and horizontally */
+    background-position: center;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+    float: right;
 }

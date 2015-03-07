@@ -1,8 +1,17 @@
 {{#each content.posts}}
     <article>
-        <h1>{{title}}</h1>
-        <img src="{{img}}"/>
+        <header>
+            <a href="{{link}}">{{title}}</a>
+        </header>
+        <img src="{{image}}"/>
         <p>{{{description}}}</p>
-        <hr/>
+        <footer>
+            <div class="article-info">
+                <div class="avatar" style="background-image: url('{{avatar}}');"></div>
+                <a class="article-author" href="{{site}}">{{author}}</a>
+                <p class="article-date">{{dateFormat date}}</p>
+            </div>
+        </footer>
+        {{#unless @last}}<hr/>{{/unless}}
     </article>
 {{/each}}
