@@ -28,6 +28,20 @@ app.get('/bloggers',function(req, res) {
     })
 })
 
+app.get('/rss',function(req, res) {
+        var query = database.Blogger.find();
+        query.select('feed');
+        query.exec(function (err, feeds) {
+          if (err) {
+            console.error('Error fetching feeds');
+          }
+          else {
+              res.render('rss', {title: 'All Feeds | CS Blogs', bloggers: feeds})
+          }
+
+        });
+})
+
 var port = process.env.PORT || 3000; //process.evn.PORT is required to work on Azure
 var server = app.listen(port, function () {
 
