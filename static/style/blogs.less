@@ -9,11 +9,10 @@ article header {
     font-size: 40px;
     font-weight: bold;
     letter-spacing: -1px;
-    color: #333;
 }
 
 article header a {
-    color: #333;
+    color: @heading-color;
     text-decoration: none;
 }
 
@@ -61,8 +60,8 @@ article footer {
 .article-info p, .article-info a {
     display: inline-block;
     font-family: "Open Sans", sans-serif;
-    min-width: 160px;
     text-align: right;
+    float: right;
 }
 
 .article-author {
@@ -70,32 +69,29 @@ article footer {
     margin-bottom: 2px;
     font-weight: 600;
     text-decoration: none;
-    color: #333;
+    color: @heading-color;
 }
 
 .article-date {
     color: #999;
     font-size: 13px;
     margin: 0;
-}
-
-.secondary footer .permalink {
-    //left: -24.090909090909%; /* and position it on the edge of the fluid page  */
+    clear: both;
 }
 
 .avatar {
-    /* make a square container */
+    // make a square container
     width: 75px;
     height: 75px;
     margin-left: 85px;
 
-    /* fill the container, preserving aspect ratio, and cropping to fit */
+    // fill the container, preserving aspect ratio, and cropping to fit
     background-size: cover;
 
-    /* center the image vertically and horizontally */
+    // center the image vertically and horizontally
     background-position: center;
 
-    /* round the edges to a circle with border radius 1/2 container size */
+    // round the edges to a circle with border radius 1/2 container size
     border-radius: 50%;
     float: right;
 }
