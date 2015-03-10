@@ -1,4 +1,4 @@
-var moment = require('moment')
+var moment = require('moment');
 
 exports.dateFormat = function(datestamp) {
     var date = moment(datestamp);
@@ -10,3 +10,11 @@ exports.dateFormat = function(datestamp) {
         return date.fromNow();
     }
 };
+
+exports.section = function(name, options) {
+    if(!this._sections) {
+        this._sections = {};
+    }
+    this._sections[name] = options.fn(this);
+    return null;
+}
