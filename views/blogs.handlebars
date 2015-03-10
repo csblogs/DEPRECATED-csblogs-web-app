@@ -5,9 +5,9 @@
 {{#each content.posts}}
     <article>
         <header>
-            <a href="{{link}}">{{title}}</a>
+            <h2><a href="{{link}}">{{title}}</a></h2>
         </header>
-        <img src="{{image}}"/>
+        {{#if image}}<img src="{{image}}" alt="Featured Image"/>{{/if}}
         <p>{{{description}}}</p>
         <footer>
             <div class="article-info">
