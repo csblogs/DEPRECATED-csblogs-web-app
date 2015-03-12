@@ -1,17 +1,24 @@
 @import 'reset';
 @import 'vars';
 
-@font-face {
-    font-family: 'klinic_slabbold';
-    src: url('../fonts/KlinicSlab-CS-webfont.eot');
-    src: url('../fonts/KlinicSlab-CS-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/KlinicSlab-CS-webfont.woff2') format('woff2'),
-         url('../fonts/KlinicSlab-CS-webfont.woff') format('woff'),
-         url('../fonts/KlinicSlab-CS-webfont.ttf') format('truetype'),
-         url('../fonts/KlinicSlab-CS-webfont.svg#klinic_slabbold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+//@font-face {
+//    font-family: 'klinic_slabbold';
+//    src: url('../fonts/KlinicSlab-CS-webfont.eot');
+//    src: url('../fonts/KlinicSlab-CS-webfont.eot?#iefix') format('embedded-opentype'),
+//         url('../fonts/KlinicSlab-CS-webfont.woff2') format('woff2'),
+//         url('../fonts/KlinicSlab-CS-webfont.woff') format('woff'),
+//         url('../fonts/KlinicSlab-CS-webfont.ttf') format('truetype'),
+//         url('../fonts/KlinicSlab-CS-webfont.svg#klinic_slabbold') format('svg');
+//    font-weight: normal;
+//    font-style: normal;
+//}
+
+//#cs {
+//    font-family: 'klinic_slabbold';
+//    color: @accent-color;
+//    font-size: 32px;
+//    letter-spacing: -1px;
+//}
 
 body {
 	background: #FFFFFF;
@@ -20,18 +27,47 @@ body {
 }
 
 #masthead {
-	text-align: center;
     background: @masthead-bg-color;
-	border-bottom: 1px solid #e5e5e5;
-    color: @heading-color;
-	height: 42px;
-	padding: 10px;
+	outline: rgba(0,0,0,0.2) solid 1px;
+	height: 62px;
+}
+
+#head-content {
+    max-width: 800px;
+    margin: 0px auto;
+    
+    nav {
+        margin-top: 23px;
+        float: right;
+    }
+    
+    li {
+        float: left;
+        margin-left: 22px; // gap between nav items
+    }
+    
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
 }
 
 #site-title {
 	//display: inline-block;
-    width: 220px;
-    margin-top: 2px;
+    height: 33px;
+    margin-top: 16px;
+}
+
+#addblog-btn {
+    transition: background-color 0.4s ease-out;
+    background-color: rgba(0,0,0,0.18);
+    border-radius: 6px;
+    padding: 5px 14px;
+    margin-left: -7px;
+}
+
+#addblog-btn:hover {
+    background-color: rgba(0,0,0,0.3);
 }
 
 //#masthead h1 {
@@ -43,22 +79,19 @@ body {
 //	font-weight: 700;
 //}
 
-#cs {
-    font-family: 'klinic_slabbold';
-    color: @accent-color;
-    font-size: 32px;
-    letter-spacing: -1px;
-}
-
 main, footer {
 	max-width: 800px;
 	margin: 0px auto;
 	padding: 0px 25px 0px 25px;
-}
-
-a {
-    color: @link-color;
-	text-decoration: underline;
+    
+    a {
+        color: @link-color;
+        text-decoration: underline;
+    }
+    
+    a:hover {
+        color: @accent-color;
+    }
 }
 
 p {
@@ -103,10 +136,11 @@ hr {
     margin-top: 12px;
     
     svg {
+        transition: fill 0.3s ease-out;
         fill: #afafaf;
     }
     svg:hover {
-        fill: #333;
+        fill: @accent-color;
     }
 }
 
