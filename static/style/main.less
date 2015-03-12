@@ -1,40 +1,89 @@
-@masthead-bg-color: #f1f1f1;
-@heading-color: #333;
-@text-color: #3A4145;
-@link-color: #4A4A4A;
-@accent-color: #CF000F;
+@import 'reset';
+@import 'vars';
 
-@font-face {
-    font-family: 'klinic_slabbold';
-    src: url('../fonts/KlinicSlab-CS-webfont.eot');
-    src: url('../fonts/KlinicSlab-CS-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/KlinicSlab-CS-webfont.woff2') format('woff2'),
-         url('../fonts/KlinicSlab-CS-webfont.woff') format('woff'),
-         url('../fonts/KlinicSlab-CS-webfont.ttf') format('truetype'),
-         url('../fonts/KlinicSlab-CS-webfont.svg#klinic_slabbold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+//@font-face {
+//    font-family: 'klinic_slabbold';
+//    src: url('../fonts/KlinicSlab-CS-webfont.eot');
+//    src: url('../fonts/KlinicSlab-CS-webfont.eot?#iefix') format('embedded-opentype'),
+//         url('../fonts/KlinicSlab-CS-webfont.woff2') format('woff2'),
+//         url('../fonts/KlinicSlab-CS-webfont.woff') format('woff'),
+//         url('../fonts/KlinicSlab-CS-webfont.ttf') format('truetype'),
+//         url('../fonts/KlinicSlab-CS-webfont.svg#klinic_slabbold') format('svg');
+//    font-weight: normal;
+//    font-style: normal;
+//}
+
+//#cs {
+//    font-family: 'klinic_slabbold';
+//    color: @accent-color;
+//    font-size: 32px;
+//    letter-spacing: -1px;
+//}
 
 body {
-	background: #FFFFFF;
+	background: #fff;
     font-family: "Open Sans", sans-serif;
     width: 100%;
 }
 
 #masthead {
-	text-align: center;
     background: @masthead-bg-color;
-	border-bottom: 1px solid #e5e5e5;
-    color: @heading-color;
-	height: 42px;
-	padding: 10px;
+	outline: rgba(0,0,0,0.15) solid 2px;
+	height: 62px;
+}
+
+#head-content {
+    max-width: 800px;
+    margin: 0px auto;
+    padding: 0px 25px;
+    
+    nav {
+        float: right;
+        margin-top: 23px;
+    }
+    
+    li {
+        float: left;
+        //margin-left: 22px; // gap between nav items
+        text-align: center;
+    }
+    li:nth-child(1) {
+        width: 80px;
+    }
+    li:nth-child(2) {
+        width: 65px;
+    }
+    li:nth-child(3) {
+        width: 140px;
+    }
+    
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+    a:hover {
+        font-weight: 600;
+    }
 }
 
 #site-title {
 	//display: inline-block;
-    width: 220px;
-    margin-top: 2px;
+    height: 33px;
+    margin-top: 16px;
+}
+
+#addblog-btn {
+    display: block;
+    transition: background 0.4s ease-out;
+    background: rgba(0,0,0,0.18);
+    border-radius: 6px;
+    padding: 7px 0;
+    margin-left: 12px;
+    margin-top: -7px;
+}
+
+#head-content #addblog-btn:hover {
+    background: rgba(0,0,0,0.24);
 }
 
 //#masthead h1 {
@@ -46,22 +95,18 @@ body {
 //	font-weight: 700;
 //}
 
-#cs {
-    font-family: 'klinic_slabbold';
-    color: @accent-color;
-    font-size: 32px;
-    letter-spacing: -1px;
-}
-
 main, footer {
 	max-width: 800px;
 	margin: 0px auto;
-	padding: 0px 25px 0px 25px;
-}
-
-a {
-    color: @link-color;
-	text-decoration: underline;
+	padding: 0px 25px;
+    
+    a {
+        color: @link-color;
+        text-decoration: underline;
+    }
+    a:hover {
+        color: @accent-color;
+    }
 }
 
 p {
@@ -94,7 +139,7 @@ hr {
 
 #footer-left {
     margin-left: 4px;
-    margin-right: 80px;
+    margin-right: 140px;
     margin-top: 12px;
 }
 
@@ -106,10 +151,11 @@ hr {
     margin-top: 12px;
     
     svg {
+        transition: fill 0.3s ease-out;
         fill: #afafaf;
     }
     svg:hover {
-        fill: #333;
+        fill: @accent-color;
     }
 }
 

@@ -14,7 +14,11 @@ var organisation = require('./models/organisation');
 // Initialize app
 var app = express();
 app.use(compression());
-app.use(lessMiddleware(__dirname + '/static', {cacheFile: __dirname + '/static/style/cache.json'}));
+app.use(lessMiddleware('/style', {
+    dest: '/style/css',
+    cacheFile: '/style/css/cache.json',
+    pathRoot: __dirname + '/static'
+}));
 app.use(express.static(__dirname + '/static'));
 app.engine('handlebars', exphbs({defaultLayout: 'main', helpers: helpers}));
 app.set('view engine', 'handlebars');
