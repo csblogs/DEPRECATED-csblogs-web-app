@@ -36,6 +36,11 @@ body {
     max-width: 800px;
     margin: 0px auto;
     padding: 0px 25px;
+    position: relative;
+    
+    #nav-bg {
+        display: none;
+    }
     
     #wide-nav {
         float: right;
@@ -209,9 +214,21 @@ hr {
     }
     
     #head-content {
+        #nav-bg {
+            background: #750008;
+            display: block;
+            position: absolute;
+            top: 55px;
+            left: 0;
+            width: 100%;
+            height: 38px;
+        }
+        
         #wide-nav {
             float: none;
-            margin-top: 11px;
+            position: relative;
+            margin-top: 15px;
+            z-index: 2;
         }
         
         #profile-btn {
@@ -220,6 +237,21 @@ hr {
         #blogger-btn {
             width: calc(100% / 3);
         }
+        #addblog-btn {
+            width: calc(100% / 3);
+            background: none;
+            transition: none;
+            margin: 0;
+            padding: 0;
+        }
+        #addblog-btn:hover {
+            background: none;
+        }
+    }
+}
+
+@media screen and (max-width: 380px) {
+    #head-content {
         #addblog-btn {
             display: none;
         }
