@@ -1,6 +1,6 @@
 var blogger = require("./models/blogger").Blogger;
 
-module.exports = function(app, database) {
+module.exports = function(app) {
   app.get('/', function(req, res) {
       res.render('index', {title: 'Index | CS Blogs'});
   });
@@ -8,7 +8,7 @@ module.exports = function(app, database) {
   app.get('/bloggers',function(req, res) {
       bloggers = blogger.find({}, function(error, allBloggers) {
         if(error) {
-          res.render('error', {title: "Error | CS Blogs"}, error: error);
+          res.render('error', {title: "Error | CS Blogs", error: error});
         }
         else {
           res.render('bloggers', {title: "Bloggers | CS Blogs", bloggers: allBloggers});

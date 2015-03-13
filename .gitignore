@@ -3,4 +3,5 @@ database/
 .idea/**
 *.iml
 *.css
+*.log
 static/style/cache.json

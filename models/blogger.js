@@ -6,6 +6,7 @@ var bloggerSchema = new Schema({
   firstName : String,
   lastName : String,
   emailAddress : String,
+  displayPictureUrl: String,
 
   //Links
   feedUrl : String,

@@ -3,6 +3,7 @@
 {{/section}}
 
 {{#each bloggers}}
+    <img src="{{this.displayPictureUrl}}" alt="{{this.firstName}} {{this.lastName}} Display Picture"/>
     <h2>{{this.firstName}} {{this.lastName}}</h2>
     <i><a href="mailto:{{this.emailAddress}}">{{this.emailAddress}}</a></i>
     <p>{{this.bio}}</p>
