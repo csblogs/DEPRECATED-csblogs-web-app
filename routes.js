@@ -5,6 +5,10 @@ module.exports = function(app) {
       res.render('index', {title: 'Index | CS Blogs'});
   });
 
+  app.get('/profile', function(req, res) {
+      res.render('profile', {title: "Your Profile | CS Blogs"});
+  });
+
   app.get('/bloggers', function(req, res) {
       bloggers = blogger.find({}, function(error, allBloggers) {
         if(error) {
