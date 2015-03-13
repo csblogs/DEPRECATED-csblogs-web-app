@@ -4,6 +4,7 @@ var compression = require('compression');
 var exphbs  = require('express-handlebars');
 var lessMiddleware = require('less-middleware');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser')
 var helpers = require('./helpers');
 var populateDatabase = require('./test-data/populate-database').Populate;
 
@@ -16,6 +17,8 @@ app.use(lessMiddleware('/style', {
     pathRoot: __dirname + '/static'
 }));
 app.use(express.static(__dirname + '/static'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.engine('handlebars', exphbs({defaultLayout: 'main', helpers: helpers}));
 app.set('view engine', 'handlebars');
 
