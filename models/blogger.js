@@ -1,34 +1,26 @@
 var mongoose = require('mongoose')
+var Schema = mongoose.Schema;
 
-// define schema
-exports.Blogger = mongoose.model('Blogger', {name: String, email: String, site: String,feed: String})
+var bloggerSchema = new Schema({
+  //Personal Details
+  firstName : String,
+  lastName : String,
+  emailAddress : String,
 
-// create sample bloggers if none exist
-exports.Blogger.find(function(error,bloggers) {
-    if (error) {
-        console.error('Error fetching bloggers: ' + error)
-    }
-    else if (bloggers.length === 0) {
-        var bloggerError = function (error) {
-            if (error) {
-                console.error('Error saving blogger: ' + error)
-            }
-        }
+  //Links
+  feedUrl : String,
+  blogWebsiteUrl : String,
+  websiteUrl : String,
+  cvUrl : String,
 
-        var pring = new exports.Blogger({
-            name: 'Pring',
-            email: 'alex@alexpringle.co.uk',
-            site: 'alexpringle.co.uk',
-            feed: 'alexpringle.co.uk/atom.xml'
-        })
-        var danny = new exports.Blogger({
-            name: 'Daniel Brown',
-            email: 'd.t.brown@outlook.com',
-            site: 'dannybrown.net',
-            feed: 'dannycomputerscientist.wordpress.com/feed'
-        })
+  //Social
+  githubProfile : String,
+  twitterProfile : String,
+  linkedInProfile : String,
 
-        pring.save(bloggerError)
-        danny.save(bloggerError)
-    }
-})
+  //Profile
+  bio : String,
+  validated : Boolean,
+});
+
+exports.Blogger = mongoose.model('Blogger', bloggerSchema);
