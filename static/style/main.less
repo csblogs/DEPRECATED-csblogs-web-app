@@ -36,24 +36,29 @@ body {
     max-width: 800px;
     margin: 0px auto;
     padding: 0px 25px;
+    position: relative;
     
-    nav {
+    #nav-bg {
+        display: none;
+    }
+    
+    #nav-content {
         float: right;
+        display: block;
         margin-top: 23px;
     }
     
     li {
         float: left;
-        //margin-left: 22px; // gap between nav items
         text-align: center;
     }
-    li:nth-child(1) {
+    #profile-btn {
         width: 80px;
     }
-    li:nth-child(2) {
+    #blogger-btn {
         width: 65px;
     }
-    li:nth-child(3) {
+    #addblog-btn {
         width: 140px;
     }
     
@@ -66,8 +71,7 @@ body {
     }
 }
 
-#site-title {
-	//display: inline-block;
+#site-title img {
     height: 33px;
     margin-top: 16px;
 }
@@ -84,6 +88,10 @@ body {
 
 #head-content #addblog-btn:hover {
     background: rgba(0,0,0,0.24);
+}
+
+#addblog-sml-btn {
+    display: none;
 }
 
 //#masthead h1 {
@@ -178,16 +186,78 @@ hr {
     }
 }
 
-@media screen and (max-width: 400px) {
-    #footer-info {
-        white-space: normal;
-    }
-}
-
 .footer-icon {
     float: right;
     margin-left: 8px;
     margin-top: 12px;
     width: 40px;
     height: 40px;
+}
+
+@media screen and (max-width: 580px) {
+    #footer-info {
+        white-space: normal;
+    }
+    
+    #masthead {
+        height: 93px;
+    }
+    
+    #site-title {
+        display: block;
+        padding-top: 16px;
+        
+        img {
+            display: block;
+            margin: 0px auto;
+        }
+    }
+    
+    #head-content {
+        #nav-bg {
+            background: #750008;
+            display: block;
+            position: absolute;
+            top: 55px;
+            left: 0;
+            width: 100%;
+            height: 38px;
+        }
+        
+        #nav-content {
+            float: none;
+            position: relative;
+            margin-top: 15px;
+            z-index: 2;
+        }
+        
+        #profile-btn {
+            width: calc(100% / 3);
+        }
+        #blogger-btn {
+            width: calc(100% / 3);
+        }
+        #addblog-btn {
+            width: calc(100% / 3);
+            background: none;
+            transition: none;
+            margin: 0;
+            padding: 0;
+        }
+        #addblog-btn:hover {
+            background: none;
+        }
+    }
+}
+
+@media screen and (max-width: 380px) {
+    #head-content {
+        #addblog-btn {
+            display: none;
+        }
+        #addblog-sml-btn {
+            width: calc(100% / 3);
+            display: list-item;
+        }
+    }
 }
