@@ -3,5 +3,13 @@
 {{/section}}
 
 {{#each bloggers}}
-    <p>{{this.name}} has a blog at {{this.site}}, you can contact {{this.name}} at {{this.email}}.</p>
+    <h2>{{this.firstName}} {{this.lastName}}</h2>
+    <i><a href="mailto:{{this.emailAddress}}">{{this.emailAddress}}</a></i>
+    <p>{{this.bio}}</p>
+    <p>Blog Feed: {{this.feedUrl}}</p>
+    <p>Blog Site: {{this.blogWebsiteUrl}}</p>
+    <p>Website: {{this.websiteUrl}}</p>
+    <p><a href="http://github.com/{{this.githubProfile}}">Github/{{this.githubProfile}}</a></p>
+    <p><a href="http://twitter.com/{{this.twitterProfile}}">@{{this.twitterProfile}}</a></p>
+    <p>Linked in name: {{this.linkedInProfile}}</p>
 {{/each}}
