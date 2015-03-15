@@ -26,6 +26,10 @@ body {
     width: 100%;
 }
 
+::selection {
+    background: #fdd4d4;
+}
+
 #masthead {
     background: @masthead-bg-color;
 	outline: rgba(0,0,0,0.15) solid 2px;
@@ -135,6 +139,7 @@ hr {
     margin: 0;
     margin-top: 30px;
     padding: 0;
+    clear: both;
 }
 
 #body-footer {
@@ -205,7 +210,8 @@ hr {
     
     #site-title {
         display: block;
-        padding-top: 16px;
+        padding-top: 12px;
+        padding-bottom: 4px;
         
         img {
             display: block;
@@ -259,5 +265,9 @@ hr {
             width: calc(100% / 3);
             display: list-item;
         }
+    }
+    
+    #footer-left {
+        margin-right: 10px;
     }
 }

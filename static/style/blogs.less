@@ -6,8 +6,7 @@ article {
 }
 
 article header {
-    margin: 30px 0px;
-    margin-bottom: 10px;
+    margin: 30px 0px 20px 0px;
     font-size: 40px;
     font-weight: bold;
     letter-spacing: -1px;
@@ -16,6 +15,10 @@ article header {
         color: @heading-color;
         text-decoration: none;
     }
+}
+
+#space-saver {
+    margin-bottom: -10px;
 }
 
 main img {
@@ -38,7 +41,7 @@ main p {
     }
     
     article header {
-        font-size: 34px;
+        font-size: 28px;
     }
 }
 
@@ -78,7 +81,6 @@ article footer {
     color: #999;
     font-size: 13px;
     margin: 0;
-    clear: both;
 }
 
 .avatar {
@@ -96,4 +98,49 @@ article footer {
     // round the edges to a circle with border radius 1/2 container size
     border-radius: 50%;
     float: right;
+}
+
+@media screen and (max-width: 1130px) {
+    article footer {
+        padding: 0;
+        
+        br {
+            display: none;
+        }
+    }
+    
+    .article-info {
+        position: static;
+        margin-left: 0;
+        width: 100%;
+        height: 40px;
+
+        .article-author {
+            margin-top: 12px;
+            margin-right: 6px;
+            float: left;
+            text-align: left;
+        }
+
+        .article-date {
+            margin-top: 8px;
+            //padding-left: 8px;
+            font-size: 15px;
+            float: left;
+            //border-left: #ccc 1px solid;
+            text-align: left;
+        }
+    }
+        
+    .avatar {
+        margin-left: 0;
+        margin-right: 8px;
+        width: 40px;
+        height: 40px;
+        float: left;
+    }
+    
+    article hr {
+        margin-top: 20px;
+    }
 }
