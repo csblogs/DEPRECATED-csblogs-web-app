@@ -28,9 +28,9 @@ module.exports = function(app) {
       });
   });
 
-  app.route('/add-blog')
+  app.route('/register')
       .get(ensureAuthenticated, function(req, res) {
-        res.render('add-blog-form');
+        res.render('register');
       })
       .post(ensureAuthenticated, function(req, res) {
         newBlogger = new blogger({firstname:          req.body.firstName,
@@ -49,10 +49,10 @@ module.exports = function(app) {
 
         if(newBlogger.isValid(false)) {
           newBlogger.save()
-          res.render('add-blog-success')
+          res.render('register-success')
         }
         else {
-          res.render('add-blog-form', {title: "Add Blog | CS Blogs", issues: newBlogger.isValid(true)})
+          res.render('register', {title: "Add Blog | CS Blogs", issues: newBlogger.isValid(true)})
         }
       })
 
