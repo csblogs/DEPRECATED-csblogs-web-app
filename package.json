@@ -28,6 +28,9 @@
     "less-middleware": "^1.0.4",
     "moment": "^2.9.0",
     "mongoose": "^3.8.23",
+    "passport": "^0.2.1",
+    "passport-github": "^0.1.5",
+    "passport-wordpress": "0.0.3",
     "validator": "^3.33.0"
   }
 }

@@ -1,11 +1,19 @@
 var blogger = require("./models/blogger").Blogger;
+var authentication = require("./authentication");
+var ensureAuthenticated = authentication.ensureAuthenticated;
 
 module.exports = function(app) {
+  authentication.serveOAuthRoutes(app);
+
   app.get('/', function(req, res) {
       res.render('index', {title: 'Index | CS Blogs'});
   });
 
-  app.get('/profile', function(req, res) {
+  app.get('/login', function(req, res) {
+      res.render('login', {title : 'Login | CS Blogs'});
+  });
+
+  app.get('/profile', ensureAuthenticated, function(req, res) {
       res.render('profile', {title: "Your Profile | CS Blogs"});
   });
 
@@ -21,10 +29,10 @@ module.exports = function(app) {
   });
 
   app.route('/add-blog')
-      .get(function(req, res) {
+      .get(ensureAuthenticated, function(req, res) {
         res.render('add-blog-form');
       })
-      .post(function(req, res) {
+      .post(ensureAuthenticated, function(req, res) {
         newBlogger = new blogger({firstname:          req.body.firstName,
                                   lastname:           req.body.lastName,
                                   displayPictureUrl:  req.body.displayPictureUrl,

@@ -6,6 +6,7 @@ var lessMiddleware = require('less-middleware');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
 var helpers = require('./helpers');
+var passport = require('./authentication').Passport;
 var populateDatabase = require('./test-data/populate-database').Populate;
 
 // Initialize app
@@ -16,6 +17,7 @@ app.use(lessMiddleware('/style', {
     cacheFile: '/style/css/cache.json',
     pathRoot: __dirname + '/static'
 }));
+app.use(passport.initialize());
 app.use(express.static(__dirname + '/static'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
