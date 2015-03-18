@@ -55,47 +55,43 @@ body {
     li {
         float: left;
         text-align: center;
-    }
-    #profile-btn {
-        width: 80px;
-    }
-    #blogger-btn {
-        width: 65px;
-    }
-    #addblog-btn {
-        width: 140px;
+        margin-left: 20px;
     }
     
     a {
-        color: #fff;
+        color: rgba(255,255,255,0.8);
         text-decoration: none;
     }
     a:hover {
-        font-weight: 600;
+        color: #fff;
+    }
+    
+    #addblog-btn {
+        display: block;
+        transition: background 0.4s ease-out;
+        background: rgba(0,0,0,0.18);
+        border-radius: 6px;
+        padding: 7px 16px;
+        margin-left: 13px;
+        margin-top: -7px;
+
+        a {
+            color: #fff;
+        }
+    }
+
+    #addblog-btn:hover {
+        background: rgba(0,0,0,0.24);
+    }
+
+    #addblog-sml-btn {
+        display: none;
     }
 }
 
 #site-title img {
     height: 33px;
     margin-top: 16px;
-}
-
-#addblog-btn {
-    display: block;
-    transition: background 0.4s ease-out;
-    background: rgba(0,0,0,0.18);
-    border-radius: 6px;
-    padding: 7px 0;
-    margin-left: 12px;
-    margin-top: -7px;
-}
-
-#head-content #addblog-btn:hover {
-    background: rgba(0,0,0,0.24);
-}
-
-#addblog-sml-btn {
-    display: none;
 }
 
 //#masthead h1 {
@@ -237,18 +233,24 @@ hr {
             z-index: 2;
         }
         
-        #profile-btn {
+        li {
             width: calc(100% / 3);
+            margin: 0;
         }
-        #blogger-btn {
-            width: calc(100% / 3);
-        }
+        
         #addblog-btn {
-            width: calc(100% / 3);
             background: none;
             transition: none;
             margin: 0;
             padding: 0;
+            
+            a {
+                color: rgba(255,255,255,0.8);
+            }
+            
+            a:hover {
+                color: #fff;
+            }
         }
         #addblog-btn:hover {
             background: none;
