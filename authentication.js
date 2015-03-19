@@ -59,29 +59,29 @@ exports.serveOAuthRoutes = function(app) {
   app.get('/auth/github', passport.authenticate('github'));
 
   app.get('/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: '/login' }),
+    passport.authenticate('github', { failureRedirect: '/login/failed' }),
     function(req, res) {
       // Successful authentication
-      res.redirect('/add-blog');
+      res.redirect('/profile');
     });
 
   //Wordpress routes
   app.get('/auth/wordpress', passport.authenticate('wordpress'));
 
   app.get('/auth/wordpress/callback',
-    passport.authenticate('wordpress', { failureRedirect: '/login' }),
+    passport.authenticate('wordpress', { failureRedirect: '/login/failed' }),
     function(req, res) {
       // Successful authentication
-      res.redirect('/add-blog');
+      res.redirect('/profile');
     });
 
   //Stack Exchange routes
   app.get('/auth/stack-exchange', passport.authenticate('stackexchange'));
 
   app.get('/auth/stack-exchange/callback',
-    passport.authenticate('stackexchange', { failureRedirect: '/login' }),
+    passport.authenticate('stackexchange', { failureRedirect: '/login/failed' }),
     function(req, res) {
       // Successful authentication
-      res.redirect('/add-blog');
+      res.redirect('/profile');
     });
 }
