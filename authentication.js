@@ -10,9 +10,8 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://csblogs.com/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("Welcome " + profile.id);
-    user = profile.id;
-    done(null, user);
+    console.log("Github User logged in: " + profile.id);
+    done(null, profile);
   }
 ));
 
@@ -23,9 +22,8 @@ passport.use(new WordpressStrategy({
     callbackURL: "http://csblogs.com/auth/wordpress/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("Welcome " + profile.id);
-    user = profile.id;
-    done(null, user);
+    console.log("Wordpress User logged in: " + profile.id);
+    done(null, profile);
   }
 ));
 
@@ -37,11 +35,18 @@ passport.use(new StackExchangeStrategy({
     key: "B)qtqv9BuljF8MvlPjxbLw(("
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("Welcome " + profile.id);
-    user = profile.id;
-    done(null, user);
+    console.log("Stack Exchange User logged in: " + profile.id);
+    done(null, profile);
   }
 ));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 
 exports.Passport = passport;
 
