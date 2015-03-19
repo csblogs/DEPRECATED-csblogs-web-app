@@ -31,7 +31,7 @@ passport.use(new WordpressStrategy({
 passport.use(new StackExchangeStrategy({
     clientID: "4485",
     clientSecret: "SkkfxnIq2oUb0V1DnjRkyQ((",
-    callbackURL: "http://csblogs.com/auth/wordpress/callback",
+    callbackURL: "http://csblogs.com/auth/stack-exchange/callback",
     key: "B)qtqv9BuljF8MvlPjxbLw(("
   },
   function(accessToken, refreshToken, profile, done) {
