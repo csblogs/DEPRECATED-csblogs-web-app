@@ -1,7 +1,34 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="style/css/login.css">
+{{/section}}
+<!--
 <p> To continue please login using one of the following services: </p>
 <p><em> Hint: We've only enabled public, professional services for login on CSBlogs.com. Remember whatever account you log in with will be the one we use for your profile picture! Make it sensible! </em></p>
-<ul>
-  <a href="/auth/github"><li>Github</li></a>
-  <a href="/auth/wordpress"><li>WordPress.com</li></a>
-  <a href="/auth/stack-exchange"><li>Stack Exchange (Stack overflow etc.)</li></a>
+-->
+<h2>Sign in with a service</h2>
+<ul id="login-selector">
+    <li>
+        <a id="login-wordpress" href="/auth/wordpress">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                <use xlink:href="images/defs.svg#icon-wordpress"></use>
+            </svg>
+            <p>WordPress</p>
+        </a>
+    </li>
+    <li>
+        <a id="login-github" href="/auth/github">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                <use xlink:href="images/defs.svg#icon-github"></use>
+            </svg>
+            <p>GitHub</p>
+        </a>
+    </li>
+    <li>
+        <a id="login-stackex" href="/auth/stack-exchange">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                <use xlink:href="images/defs.svg#icon-stackex"></use>
+            </svg>
+            <p>Stack Exchange</p>
+        </a>
+    </li>
 </ul>
