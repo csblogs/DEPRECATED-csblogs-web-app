@@ -10,7 +10,9 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://csblogs.com/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("Welcome " + profile.id)
+    console.log("Welcome " + profile.id);
+    user = profile.id;
+    done(null, user);
   }
 ));
 
@@ -21,7 +23,9 @@ passport.use(new WordpressStrategy({
     callbackURL: "http://csblogs.com/auth/wordpress/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("Welcome " + profile.id)
+    console.log("Welcome " + profile.id);
+    user = profile.id;
+    done(null, user);
   }
 ));
 
@@ -33,7 +37,9 @@ passport.use(new StackExchangeStrategy({
     key: "B)qtqv9BuljF8MvlPjxbLw(("
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("Welcome " + profile.id)
+    console.log("Welcome " + profile.id);
+    user = profile.id;
+    done(null, user);
   }
 ));
 
