@@ -1,0 +1,67 @@
+@import 'vars';
+
+h2 {
+    font-style: italic;
+    text-align: center;
+    margin-top: 24px;
+    font-size: 24px;
+    font-family: "Merriweather", serif;
+}
+
+#login-selector {
+    margin: 20px auto;
+    width: 435px;
+}
+
+#login-selector:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+#login-selector li {
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 125px;
+    background: #fff;
+    
+    svg {
+        display: block;
+        margin: 0px auto;
+        width: 100px;
+        height: 100px;
+        fill: @link-color;
+    }
+    
+    a {
+        text-decoration: none;
+        text-align: center;
+    }
+    
+    p {
+        margin: 4px 0px;
+        font-family: "Open Sans", sans-serif;
+    }
+}
+
+#login-stackex:hover {
+    svg, p {
+        fill: #f47a20;
+        color: #f47a20;
+    }
+}
+
+#login-github:hover {
+    svg, p {
+        fill: #682a81;
+        color: #682a81;
+    }
+}
+
+#login-wordpress:hover {
+    svg, p {
+        fill: #21759b;
+        color: #21759b;
+    }
+}
