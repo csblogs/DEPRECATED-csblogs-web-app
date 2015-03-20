@@ -36,7 +36,7 @@ function svgfix() {
     function replace() {
         for (var i = 0; i < uses.length; ++i) {
             var svg = uses[i].parentNode;
-            var id = uses[i].getAttribute('xlink:href').split('#')[1];
+            var id = uses[i].getAttributeNS('http://www.w3.org/1999/xlink', 'href').split('#')[1];
             uses[i].setAttribute('xlink:href', '#' + id);
         }
     }
