@@ -1,7 +1,8 @@
 {{#section 'css'}}
-<link rel="stylesheet" href="style/css/index.css">
+<link rel="stylesheet" href="style/css/bloggers.css">
 {{/section}}
 
+<!--
 {{#each bloggers}}
     <img src="{{this.displayPictureUrl}}" alt="{{this.firstName}} {{this.lastName}} Display Picture"/>
     <h2>{{this.firstName}} {{this.lastName}}</h2>
@@ -12,5 +13,16 @@
     <p>Website: {{this.websiteUrl}}</p>
     <p><a href="http://github.com/{{this.githubProfile}}">Github/{{this.githubProfile}}</a></p>
     <p><a href="http://twitter.com/{{this.twitterProfile}}">@{{this.twitterProfile}}</a></p>
-    <p>Linked in name: {{this.linkedInProfile}}</p>
+    <p>Linkedin name: {{this.linkedInProfile}}</p>
+{{/each}}
+-->
+
+{{#each bloggers}}
+<section>
+    <div class="avatar" style="background-image: url('{{displayPictureUrl}}');"></div>
+    <div class="blogger-info">
+        <h2>{{firstName}} {{this.lastName}}</h2>
+        <p>{{bio}}</p>
+    </div>
+</section>
 {{/each}}
