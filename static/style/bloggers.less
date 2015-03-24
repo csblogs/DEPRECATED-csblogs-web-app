@@ -1,36 +1,68 @@
 @import 'vars';
 
-section {
+#searchSvg {
+    width: 200px;
+    height: 36px;
+    margin: 0px auto;
+}
+
+#searchSvg path {
+    stroke: black;
+    stroke-width: 2px;
+    fill: transparent;
+    stroke-dasharray: 75, 200;
+    stroke-dashoffset: 75;
+    stroke-linejoin: round;
+    transition: stroke-dasharray .6s cubic-bezier(0,.5,.5,1), stroke-dashoffset .6s cubic-bezier(0,.5,.5,1);
+}
+
+main ul {
+    max-width: 800px;
     min-height: 75px;
-    margin-top: 18px;
+    margin: 0px auto;
+    margin-top: 24px;
+    overflow: hidden;
+}
+
+main li {
+    float: left;
+    width: 160px;
+    margin-left: 20px;
+    margin-right: 20px;
+    //margin-top: 24px;
+    height: 210px;
+    text-align: center;
 }
 
 h2 {
-    margin-top: 2px;
+    margin-top: 6px;
 	margin-bottom: 4px;
-	font-size: 26px;
-    font-weight: 300;
+	font-size: 18px;
 }
 
-section p {
+main a {
+    max-width: 160px;
+    height: 1.2em;
     margin: 2px 0px;
     font-size: 14px;
-}
-
-.blogger-info {
-    float: left;
-    margin-left: 12px;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    color: #999;
 }
 
 .avatar {
     // make a square container
-    width: 75px;
-    height: 75px;
+    width: 140px;
+    height: 140px;
+    margin: 0px auto;
     // fill the container, preserving aspect ratio, and cropping to fit
     background-size: cover;
     // center the image vertically and horizontally
     background-position: center;
     // round the edges to a circle with border radius 1/2 container size
     border-radius: 50%;
-    float: left;
+    //float: left;
 }

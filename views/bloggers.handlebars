@@ -4,7 +4,7 @@
 
 <!--
 {{#each bloggers}}
-    <img src="{{this.displayPictureUrl}}" alt="{{this.firstName}} {{this.lastName}} Display Picture"/>
+    <img src="{{this.avatarUrl}}" alt="{{this.firstName}} {{this.lastName}} Display Picture"/>
     <h2>{{this.firstName}} {{this.lastName}}</h2>
     <i><a href="mailto:{{this.emailAddress}}">{{this.emailAddress}}</a></i>
     <p>{{this.bio}}</p>
@@ -16,13 +16,24 @@
     <p>Linkedin name: {{this.linkedInProfile}}</p>
 {{/each}}
 -->
-
-{{#each bloggers}}
-<section>
-    <div class="avatar" style="background-image: url('{{displayPictureUrl}}');"></div>
-    <div class="blogger-info">
-        <h2>{{firstName}} {{this.lastName}}</h2>
-        <p>{{bio}}</p>
-    </div>
-</section>
-{{/each}}
+<!--
+<svg id="searchSvg">
+    <path d="M0 30 L200 30 L192 22 a10,10 0 1 0 -1,1 L192 22" />
+</svg>
+-->
+<ul>
+    {{#each bloggers}}
+    <li>
+        <div class="avatar" style="background-image: url('{{avatarUrl}}');"></div>
+        <h2>{{firstName}} {{lastName}}</h2>
+        <a href="{{websiteUrl}}">{{urlFormat websiteUrl}}</a>
+    </li>
+    {{/each}}
+    {{#each bloggers}}
+    <li>
+        <div class="avatar" style="background-image: url('{{avatarUrl}}');"></div>
+        <h2>{{firstName}} {{lastName}}</h2>
+        <a href="{{websiteUrl}}">{{urlFormat websiteUrl}}</a>
+    </li>
+    {{/each}}
+</ul>

@@ -2,7 +2,7 @@ var blogger = require("../models/blogger").Blogger;
 
 exports.Populate = function () {
   var dannybrown = new blogger({firstName:"Danny", lastName: "Brown",
-                                displayPictureUrl: "https://avatars2.githubusercontent.com/u/342035?v=3&s=460",
+                                avatarUrl: "https://avatars2.githubusercontent.com/u/342035?v=3&s=460",
                                 emailAddress:"d.t.brown@outlook.com",
                                 feedUrl: "http://dannycomputerscientist.wordpress.com/feed",
                                 blogWebsiteUrl: "http://dannycomputerscientist.wordpress.com",
@@ -15,7 +15,7 @@ exports.Populate = function () {
                                 validated: true });
 
   var robcrocombe = new blogger({firstName: "Robert", lastName: "Crocombe",
-                                 displayPictureUrl: "https://avatars2.githubusercontent.com/u/4536038?v=3&s=460",
+                                 avatarUrl: "https://avatars2.githubusercontent.com/u/4536038?v=3&s=460",
                                  emailAddress: "Draxfear@hotmail.co.uk",
                                  feedUrl: "http://robcrocombe.com/feed",
                                  blogWebsiteUrl: "http://robcrocombe.com",
@@ -28,7 +28,7 @@ exports.Populate = function () {
                                  validated: false});
 
  var charlottegodley = new blogger({firstName: "Charlotte", lastName: "Godley",
-                                    displayPictureUrl: "https://avatars1.githubusercontent.com/u/4128117?v=3&s=460",
+                                    avatarUrl: "https://avatars1.githubusercontent.com/u/4128117?v=3&s=460",
                                     emailAddress: "charlotte@charlottegodley.co.uk",
                                     feedUrl: "http://charlottegodley.co.uk.com/rss",
                                     blogWebsiteUrl: "http://charlottegodley.co.uk",
