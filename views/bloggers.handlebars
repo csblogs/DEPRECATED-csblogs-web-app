@@ -24,14 +24,14 @@
 <ul>
     {{#each bloggers}}
     <li>
-        <div class="avatar" style="background-image: url('{{avatarUrl}}');"></div>
+        <a class="avatar" href="/u/{{firstName}}{{lastName}}" style="background-image: url('{{avatarUrl}}');"></a>
         <h2>{{firstName}} {{lastName}}</h2>
         <a href="{{websiteUrl}}">{{urlFormat websiteUrl}}</a>
     </li>
     {{/each}}
     {{#each bloggers}}
     <li>
-        <div class="avatar" style="background-image: url('{{avatarUrl}}');"></div>
+        <a class="avatar" href="/u/{{firstName}}{{lastName}}" style="background-image: url('{{avatarUrl}}');"></a>
         <h2>{{firstName}} {{lastName}}</h2>
         <a href="{{websiteUrl}}">{{urlFormat websiteUrl}}</a>
     </li>

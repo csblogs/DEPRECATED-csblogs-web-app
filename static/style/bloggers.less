@@ -41,7 +41,7 @@ h2 {
 }
 
 main a {
-    max-width: 160px;
+    //max-width: 160px;
     height: 1.2em;
     margin: 2px 0px;
     font-size: 14px;
@@ -58,11 +58,38 @@ main a {
     width: 140px;
     height: 140px;
     margin: 0px auto;
+    display: block;
     // fill the container, preserving aspect ratio, and cropping to fit
     background-size: cover;
     // center the image vertically and horizontally
     background-position: center;
     // round the edges to a circle with border radius 1/2 container size
     border-radius: 50%;
-    //float: left;
+}
+
+@media screen and (max-width: 650px) {
+    main {
+        padding: 0px;
+    }
+    
+    main ul {
+        width: 650px;
+    }
+    
+    main li {
+        width: 100px;
+    }
+    
+    main a {
+        font-size: 11px;
+    }
+    
+    h2 {
+        font-size: 14px;
+    }
+    
+    .avatar {
+        width: 100px;
+        height: 100px;
+    }
 }
