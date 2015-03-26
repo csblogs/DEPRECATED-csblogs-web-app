@@ -7,7 +7,7 @@ var bloggerSchema = new Schema({
   firstName : String,
   lastName : String,
   emailAddress : String,
-  displayPictureUrl: String,
+  avatarUrl: String,
 
   //Links
   feedUrl : String,
@@ -23,6 +23,7 @@ var bloggerSchema = new Schema({
   //Profile
   bio : String,
   validated : Boolean,
+  vanityUrl : String,
 });
 
 bloggerSchema.methods.isValid = function(returnIssues) {

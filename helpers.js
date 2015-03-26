@@ -18,3 +18,14 @@ exports.section = function(name, options) {
     this._sections[name] = options.fn(this);
     return null;
 }
+
+exports.urlFormat = function(url) {
+    if (url.lastIndexOf('http://', 0) === 0) {
+        url = url.substring(7);
+        
+        if (url.lastIndexOf('www.', 0) === 0) {
+            url = url.substring(4);
+        }
+    }
+    return url;
+}

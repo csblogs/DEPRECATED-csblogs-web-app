@@ -1,0 +1,66 @@
+@import 'vars';
+
+main {
+    font-size: 16px;
+}
+
+main ul {
+    width: 100%;
+    min-height: 75px;
+    margin: 0px auto;
+    margin-top: 24px;
+    overflow: hidden;
+    text-align: center;
+}
+
+main li {
+    display: inline-block;
+    width: 10.0em; //160px
+    margin-left: 1.150em; //18px
+    margin-right: 1.150em;
+    //margin-top: 24px;
+    height: 13.125em;
+}
+
+h2 {
+    margin-top: 0.375em;
+    margin-bottom: 0.250em;
+    font-size: 1.125em;
+}
+
+main a {
+    height: 1.2em;
+    margin: 2px 0px;
+    font-size: 0.875em;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    color: #999;
+}
+
+.avatar {
+    // make a square container
+    width: 8.750em;
+    height: 8.750em;
+    margin: 0px auto;
+    display: block;
+    // fill the container, preserving aspect ratio, and cropping to fit
+    background-size: cover;
+    // center the image vertically and horizontally
+    background-position: center;
+    // round the edges to a circle with border radius 1/2 container size
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 800px) {
+    main {
+        padding: 0px;
+        font-size: 14px;
+    }
+    
+    main li {
+        margin: 0em 0.50em;
+    }
+}

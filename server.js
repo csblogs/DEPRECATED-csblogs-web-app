@@ -28,23 +28,23 @@ app.set('view engine', 'handlebars');
 var args = process.argv.slice(2);
 
 // Get database connection
-mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || "mongodb://localhost");
+mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://localhost');
 
 var database = mongoose.connection;
 database.on('error', console.error.bind(console, 'MongoDB Connection Error:'));
 database.once('open', function (callback) {
-    console.log("Database connection established successfully.")
+    console.log('Database connection established successfully.')
 
     // Populate database with test data if required by user
-    if(args.indexOf("setup-db") > -1) {
-      console.log("Removing all database entries...")
+    if(args.indexOf('setup-db') > -1) {
+      console.log('Removing all database entries...')
       database.db.dropDatabase();
-      console.log("Will now populate database with new test data...")
+      console.log('Will now populate database with new test data...')
       populateDatabase();
     }
 
     // Import routes (and thus serve the site) if the database connection worked
-    console.log("Now serving all routes!")
+    console.log('Now serving all routes!')
     require('./routes')(app);
 });
 

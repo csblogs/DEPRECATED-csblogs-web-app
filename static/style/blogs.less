@@ -1,5 +1,9 @@
 @import 'vars';
 
+hr {
+    margin-top: 30px;
+}
+
 article {
     position: relative;
     min-height: 160px;
@@ -38,6 +42,8 @@ main p {
 @media screen and (max-width: 480px) {
     main p {
         text-align: left;
+        -webkit-hyphens: none;
+        hyphens: none;
     }
     
     article header {
@@ -62,7 +68,7 @@ article footer {
     left: 0;
 }
 
-.article-info p, .article-info a {
+.article-author, .article-date {
     display: inline-block;
     font-family: "Open Sans", sans-serif;
     text-align: right;
@@ -89,13 +95,10 @@ article footer {
     width: 75px;
     height: 75px;
     margin-left: 85px;
-
     // fill the container, preserving aspect ratio, and cropping to fit
     background-size: cover;
-
     // center the image vertically and horizontally
     background-position: center;
-
     // round the edges to a circle with border radius 1/2 container size
     border-radius: 50%;
     float: right;
