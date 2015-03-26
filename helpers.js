@@ -27,6 +27,5 @@ exports.urlFormat = function(url) {
             url = url.substring(4);
         }
     }
-    
     return url;
 }

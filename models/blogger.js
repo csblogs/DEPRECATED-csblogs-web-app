@@ -23,6 +23,7 @@ var bloggerSchema = new Schema({
   //Profile
   bio : String,
   validated : Boolean,
+  vanityUrl : String,
 });
 
 bloggerSchema.methods.isValid = function(returnIssues) {

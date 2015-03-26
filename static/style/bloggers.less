@@ -1,50 +1,37 @@
 @import 'vars';
 
-#searchSvg {
-    width: 200px;
-    height: 36px;
-    margin: 0px auto;
-}
-
-#searchSvg path {
-    stroke: black;
-    stroke-width: 2px;
-    fill: transparent;
-    stroke-dasharray: 75, 200;
-    stroke-dashoffset: 75;
-    stroke-linejoin: round;
-    transition: stroke-dasharray .6s cubic-bezier(0,.5,.5,1), stroke-dashoffset .6s cubic-bezier(0,.5,.5,1);
+main {
+    font-size: 16px;
 }
 
 main ul {
-    max-width: 800px;
+    width: 100%;
     min-height: 75px;
     margin: 0px auto;
     margin-top: 24px;
     overflow: hidden;
-}
-
-main li {
-    float: left;
-    width: 160px;
-    margin-left: 20px;
-    margin-right: 20px;
-    //margin-top: 24px;
-    height: 210px;
     text-align: center;
 }
 
+main li {
+    display: inline-block;
+    width: 10.0em; //160px
+    margin-left: 1.150em; //18px
+    margin-right: 1.150em;
+    //margin-top: 24px;
+    height: 13.125em;
+}
+
 h2 {
-    margin-top: 6px;
-	margin-bottom: 4px;
-	font-size: 18px;
+    margin-top: 0.375em;
+    margin-bottom: 0.250em;
+    font-size: 1.125em;
 }
 
 main a {
-    //max-width: 160px;
     height: 1.2em;
     margin: 2px 0px;
-    font-size: 14px;
+    font-size: 0.875em;
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
@@ -55,8 +42,8 @@ main a {
 
 .avatar {
     // make a square container
-    width: 140px;
-    height: 140px;
+    width: 8.750em;
+    height: 8.750em;
     margin: 0px auto;
     display: block;
     // fill the container, preserving aspect ratio, and cropping to fit
@@ -67,29 +54,13 @@ main a {
     border-radius: 50%;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 800px) {
     main {
         padding: 0px;
-    }
-    
-    main ul {
-        width: 650px;
-    }
-    
-    main li {
-        width: 100px;
-    }
-    
-    main a {
-        font-size: 11px;
-    }
-    
-    h2 {
         font-size: 14px;
     }
     
-    .avatar {
-        width: 100px;
-        height: 100px;
+    main li {
+        margin: 0em 0.50em;
     }
 }

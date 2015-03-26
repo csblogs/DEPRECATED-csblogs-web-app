@@ -12,7 +12,8 @@ exports.Populate = function () {
                                 twitterProfile: "DanTonyBrown",
                                 linkedInProfile: "DanTonyBrown",
                                 bio: "A Computer Science Student at The University of York",
-                                validated: true });
+                                validated: true,
+                                vanityUrl: "dannybrown"});
 
   var robcrocombe = new blogger({firstName: "Robert", lastName: "Crocombe",
                                  avatarUrl: "https://avatars2.githubusercontent.com/u/4536038?v=3&s=460",
@@ -25,7 +26,8 @@ exports.Populate = function () {
                                  twitterProfile: "draxfear",
                                  linkedInProfile: "robcrocombe",
                                  bio: "York Comp Sci Student. Windows Phone Fanatic.",
-                                 validated: false});
+                                 validated: false,
+                                 vanityUrl: "robcrocombe"});
 
  var charlottegodley = new blogger({firstName: "Charlotte", lastName: "Godley",
                                     avatarUrl: "https://avatars1.githubusercontent.com/u/4128117?v=3&s=460",
@@ -38,7 +40,8 @@ exports.Populate = function () {
                                     twitterProfile: "charwarz",
                                     linkedInProfile: "charlotte godley",
                                     bio: "Hull Comp Sci Student. Raspberry Pi Fanatic.",
-                                    validated: true});
+                                    validated: true,
+                                    vanityUrl: "charwarz"});
 
   var bloggersToAdd = [dannybrown, robcrocombe, charlottegodley];
 
