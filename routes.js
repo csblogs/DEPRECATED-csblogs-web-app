@@ -45,16 +45,16 @@ module.exports = function(app) {
                                   twitterProfile:     req.body.twitterProfile,
                                   linkedInProfile:    req.body.linkedInProfile,
                                   bio:                req.body.bio,
-                                  validated:          false})
+                                  validated:          false});
 
         if(newBlogger.isValid(false)) {
-          newBlogger.save()
-          res.render('register-success')
+          newBlogger.save();
+          res.render('register-success');
         }
         else {
-          res.render('register', {title: 'Add Blog / CS Blogs', issues: newBlogger.isValid(true)})
+          res.render('register', {title: 'Register / CS Blogs', issues: newBlogger.isValid(true)});
         }
-      })
+      });
 
   app.get('/blogs', function(req, res) {
       var blogs = require('./test-data/blogs.json');
