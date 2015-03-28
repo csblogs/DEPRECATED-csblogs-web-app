@@ -1,0 +1,42 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="style/css/register.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+{{/section}}
+
+<div id="body-content">
+    <div class="avatar" style="background-image: url('https://pbs.twimg.com/profile_images/456127139/UK_Train_400x400.jpg');"></div>
+    
+    <form>
+        <div class="row">
+            <div class="input-field column">
+                <input id="first_name" type="text">
+                <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field column">
+                <input id="last_name" type="text">
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="input-field">
+            <input id="email" type="email">
+            <label for="email">Email Address</label>
+        </div>
+        <div class="input-field">
+            <input id="feed_url" type="url">
+            <label for="feed_url">Blog Feed URL</label>
+        </div>
+    </form>
+</div>
+
+<script>
+    var inputSelector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], textarea';
+    $(document).on('focus', inputSelector, function() {
+        $(this).siblings('label').addClass('active');
+    });
+    $(document).on('blur', inputSelector, function() {
+        if ($(this).val().length === 0 && $(this).attr('placeholder') === undefined) {
+            $(this).siblings('label').removeClass('active');
+        }
+        //validateField($(this));
+    });
+</script>
