@@ -78,25 +78,25 @@ h2 {
     transform-origin: left top;
 }
 
-.input-field input:focus + label {
+.input-field input:not([type=submit]):focus + label {
     color: #bd030c;
 }
 
-.input-field input.valid {
+.input-field input:not([type=submit]).valid {
     border-bottom: 1px solid #4CAF50;
     -webkit-box-shadow: 0 1px 0 0 #4CAF50;
     -moz-box-shadow: 0 1px 0 0 #4CAF50;
     box-shadow: 0 1px 0 0 #4CAF50;
 }
 
-.input-field input.invalid {
+.input-field input:not([type=submit]).invalid {
     border-bottom: 1px solid #F44336;
     -webkit-box-shadow: 0 1px 0 0 #F44336;
     -moz-box-shadow: 0 1px 0 0 #F44336;
     box-shadow: 0 1px 0 0 #F44336;
 }
 
-input {
+input:not([type=submit]) {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #999;
@@ -121,7 +121,7 @@ input {
     transition: 0.3s;
 }
 
-input:focus {
+input:not([type=submit]):focus {
     border-bottom: 1px solid @accent-color;
     -webkit-box-shadow: 0 1px 0 0 @accent-color;
     -moz-box-shadow: 0 1px 0 0 @accent-color;
@@ -141,6 +141,17 @@ input:focus {
     background-position: center;
     // round the edges to a circle with border radius 1/2 container size
     border-radius: 50%;
+}
+
+#submit-button {
+    background: @accent-color;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 7px 16px;
+    width: 200px;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 450px) {
