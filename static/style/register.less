@@ -18,7 +18,8 @@ main form {
 
 .column {
     float: left;
-    
+    margin-top: 6px;
+
     &:first-child {
         width: 190px;
         margin-right: 10px;
@@ -52,7 +53,7 @@ h2 {
 .input-field label {
     color: #999;
     position: absolute;
-    top: 0.8em;
+    top: 0.6em;
     //left: 0.75em;
     left: 0;
     font-size: 1em;
@@ -66,11 +67,11 @@ h2 {
 
 .input-field label.active {
     /*font-size: 0.8em;*/
-    -webkit-transform: translateY(-112%) scale(0.82);
+    -webkit-transform: translateY(-130%) scale(0.82);
     -moz-transform: translateY(-112%) scale(0.82);
     -ms-transform: translateY(-112%) scale(0.82);
     -o-transform: translateY(-112%) scale(0.82);
-    transform: translateY(-112%) scale(0.82);
+    transform: translateY(-130%) scale(0.82);
     -webkit-transform-origin: left top;
     -moz-transform-origin: left top;
     -ms-transform-origin: left top;
@@ -96,6 +97,10 @@ h2 {
     box-shadow: 0 1px 0 0 #F44336;
 }
 
+input {
+    font-family: 'Open Sans', sans-serif;
+}
+
 input:not([type=submit]) {
     background-color: transparent;
     border: none;
@@ -103,7 +108,7 @@ input:not([type=submit]) {
     color: @text-color;
     outline: none;
     line-height: 1.2em;
-    height: 3em;
+    height: 2.4em;
     width: 100%;
     font-size: 1em;
     margin: 0 0 15px 0;
@@ -152,12 +157,17 @@ input:not([type=submit]):focus {
     width: 200px;
     font-size: 20px;
     cursor: pointer;
+    transition: background 0.4s ease-out;
+}
+
+#submit-button:hover {
+    background: #d6040f;
 }
 
 @media screen and (max-width: 450px) {
     .column {
         float: none;
-        
+
         &:first-child {
             width: 100%;
             margin-right: 0;
