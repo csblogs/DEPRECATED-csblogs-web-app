@@ -50,7 +50,7 @@ h2 {
     margin-bottom: 1em;
 }
 
-.input-field label {
+label {
     color: #858585;
     position: absolute;
     top: 0.6em;
@@ -63,7 +63,7 @@ h2 {
     -o-transition: 0.2s ease-out;
     -ms-transition: 0.2s ease-out;
     transition: 0.2s ease-out;
-    
+
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -72,7 +72,7 @@ h2 {
     user-select: none;
 }
 
-.input-field label.active {
+label.active {
     /*font-size: 0.8em;*/
     -webkit-transform: translateY(-130%) scale(0.82);
     -moz-transform: translateY(-112%) scale(0.82);
@@ -86,18 +86,18 @@ h2 {
     transform-origin: left top;
 }
 
-.input-field input:not([type=submit]):focus + label {
+input:not([type=submit]):focus + label, textarea:focus + label {
     color: #bd030c;
 }
 
-.input-field input:not([type=submit]).valid {
+input:not([type=submit]).valid, textarea.valid {
     border-bottom: 1px solid #4CAF50;
     -webkit-box-shadow: 0 1px 0 0 #4CAF50;
     -moz-box-shadow: 0 1px 0 0 #4CAF50;
     box-shadow: 0 1px 0 0 #4CAF50;
 }
 
-.input-field input:not([type=submit]).invalid {
+input:not([type=submit]).invalid, textarea.invalid {
     border-bottom: 1px solid #F44336;
     -webkit-box-shadow: 0 1px 0 0 #F44336;
     -moz-box-shadow: 0 1px 0 0 #F44336;
@@ -108,7 +108,7 @@ input {
     font-family: 'Open Sans', sans-serif;
 }
 
-input:not([type=submit]) {
+input:not([type=submit]), textarea {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #858585;
@@ -126,6 +126,9 @@ input:not([type=submit]) {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
+}
+
+input:not([type=submit]) {
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
     -o-transition: 0.3s;
@@ -133,11 +136,23 @@ input:not([type=submit]) {
     transition: 0.3s;
 }
 
-input:not([type=submit]):focus {
+input:not([type=submit]):focus, textarea:focus {
     border-bottom: 1px solid @accent-color;
     -webkit-box-shadow: 0 1px 0 0 @accent-color;
     -moz-box-shadow: 0 1px 0 0 @accent-color;
     box-shadow: 0 1px 0 0 @accent-color;
+}
+
+textarea {
+    height: 1.5em;
+    overflow: auto;
+    padding-top: 0.6em;
+    padding-bottom: 0.3em;
+    resize: none;
+}
+
+#bio-desc {
+    margin-top: -2.15em;
 }
 
 .avatar {
