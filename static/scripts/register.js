@@ -29,4 +29,16 @@ $(document).ready(function() {
             $(this).siblings('label').removeClass('active');
         }
     });
+    
+    // Resize textareas automatically
+    // http://stephanwagner.me/auto-resizing-textarea
+    jQuery.each(jQuery('textarea[autoresize]'), function() {
+        var offset = this.offsetHeight - this.clientHeight;
+
+        var resizeTextarea = function(el) {
+            jQuery(el).css('height', '2.4em').css('height', el.scrollHeight + offset);
+        };
+        jQuery(this).on('keyup input', function() { resizeTextarea(this); }).removeAttr('autoresize');
+        resizeTextarea(this);
+    });
 });
