@@ -1,5 +1,6 @@
 // Express.js and Middleware
 var express = require('express');
+var session = require('express-session');
 var compression = require('compression');
 var exphbs  = require('express-handlebars');
 var lessMiddleware = require('less-middleware');
@@ -17,9 +18,10 @@ app.use(lessMiddleware('/style', {
     cacheFile: '/style/css/cache.json',
     pathRoot: __dirname + '/static'
 }));
-app.use(express.session({ secret: 'dijkstraconsidersgotoharmful' }));
+app.use(session({ secret: 'dijkstraconsidersgotoharmful', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
-app.use(passport.session());app.use(express.static(__dirname + '/static'));
+app.use(passport.session());
+app.use(express.static(__dirname + '/static'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.engine('handlebars', exphbs({defaultLayout: 'main', helpers: helpers}));
