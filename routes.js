@@ -29,7 +29,7 @@ module.exports = function(app) {
   });
 
   app.get('/register', ensureAuthenticated, function(req, res) {
-      res.render('register', {title: 'Register / CS Blogs'}, user: req.user);
+      res.render('register', {title: 'Register / CS Blogs', user: req.user});
   });
 
   app.get('/blogs', function(req, res) {
