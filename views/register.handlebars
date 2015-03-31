@@ -19,12 +19,12 @@
             </div>
         </div>
         <div class="input-field">
-            <input id="email" type="email">
-            <label for="email" value="{{user._json.email}}">Email Address</label>
+            <input id="email" type="email" value="{{user._json.email}}">
+            <label for="email">Email Address</label>
         </div>
         <div class="input-field">
-            <textarea id="bio" maxlength="120"></textarea>
-            <label for="bio" value="{{user._json.bio}}">About You</label>
+            <textarea id="bio" maxlength="120">{{user._json.bio}}</textarea>
+            <label for="bio">About You</label>
         </div>
         <p id="bio-desc">A short bio about yourself, up to 120 characters.</p>
         <div class="input-field">
@@ -51,8 +51,8 @@
         </div>
         <h2>Social Links</h2>
         <div class="input-field">
-            <input id="github_name" type="text">
-            <label for="github_name" value="{{user._json.login}}">GitHub Name</label>
+            <input id="github_name" type="text" value="{{user._json.login}}">
+            <label for="github_name">GitHub Name</label>
         </div>
         <div class="input-field">
             <input id="twitter_name" type="text">
