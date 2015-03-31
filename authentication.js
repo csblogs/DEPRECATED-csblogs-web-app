@@ -51,10 +51,13 @@ passport.deserializeUser(function(obj, done) {
 exports.Passport = passport;
 
 exports.ensureAuthenticated = function(req, res, next) {
+  console.log("USER LOGGED IN : %j", req.user)
+
   if(req.isAuthenticated()) {
     return next();
   }
   else {
+    console.log("Not logged in")
     res.redirect('/login');
   }
 }
@@ -64,29 +67,23 @@ exports.serveOAuthRoutes = function(app) {
   app.get('/auth/github', passport.authenticate('github'));
 
   app.get('/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: '/login/failed' }),
-    function(req, res) {
-      // Successful authentication
-      res.redirect('/profile');
-    });
+    passport.authenticate('github', { successRedirect: '/',
+                                      failureRedirect: '/login',
+                                      failureFlash: true }));
 
   //Wordpress routes
   app.get('/auth/wordpress', passport.authenticate('wordpress'));
 
   app.get('/auth/wordpress/callback',
-    passport.authenticate('wordpress', { failureRedirect: '/login/failed' }),
-    function(req, res) {
-      // Successful authentication
-      res.redirect('/profile');
-    });
+    passport.authenticate('wordpress', { successRedirect: '/',
+                                         failureRedirect: '/login',
+                                         failureFlash: true }));
 
   //Stack Exchange routes
   app.get('/auth/stack-exchange', passport.authenticate('stackexchange'));
 
   app.get('/auth/stack-exchange/callback',
-    passport.authenticate('stackexchange', { failureRedirect: '/login/failed' }),
-    function(req, res) {
-      // Successful authentication
-      res.redirect('/profile');
-    });
+    passport.authenticate('stackexchange', { successRedirect: '/',
+                                             failureRedirect: '/login',
+                                             failureFlash: true }));
 }
