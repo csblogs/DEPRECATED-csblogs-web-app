@@ -144,15 +144,17 @@ input:not([type=submit]):focus, textarea:focus {
 }
 
 textarea {
-    height: 1.5em;
-    overflow: auto;
+    //height: 1.5em;
+    overflow: hidden;
     padding-top: 0.6em;
-    padding-bottom: 0.3em;
+    padding-bottom: 0.6em;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     resize: none;
 }
 
 #bio-desc {
-    margin-top: -2.15em;
+    margin-top: -2.16em;
 }
 
 .avatar {

@@ -23,7 +23,7 @@
             <label for="email">Email Address</label>
         </div>
         <div class="input-field">
-            <textarea id="bio" maxlength="120">{{user._json.bio}}</textarea>
+            <textarea id="bio" maxlength="120" autoresize>{{user._json.bio}}</textarea>
             <label for="bio">About You</label>
         </div>
         <p id="bio-desc">A short bio about yourself, up to 120 characters.</p>
@@ -62,7 +62,7 @@
             <input id="linkedIn_name" type="text">
             <label for="linkedIn_name">LinkedIn Name</label>
         </div>
-        <input id="submit-button" type="submit" value="Add your blog">
+        <input id="submit-button" type="submit" value="{{submitText}}">
     </form>
 </div>
 <script src="scripts/register.min.js" type="text/javascript"></script>

@@ -32,11 +32,11 @@ module.exports = function(app) {
       var usersName = req.user.displayName.split(' ');
       req.user.firstname = usersName[0];
       req.user.lastName = usersName[1];
-      res.render('register', {title: 'Register / CS Blogs', user: req.user});
+      res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog', user: req.user});
   });
     
     app.get('/debugreg', function(req, res) {
-        res.render('register', {title: 'Register / CS Blogs'});
+        res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog'});
     });
 
   app.get('/blogs', function(req, res) {
