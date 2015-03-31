@@ -70,6 +70,10 @@ body {
     
     #addblog-btn {
         display: block;
+        -webkit-transition: background 0.4s ease-out;
+        -moz-transition: background 0.4s ease-out;
+        -o-transition: background 0.4s ease-out;
+        -ms-transition: background 0.4s ease-out;
         transition: background 0.4s ease-out;
         background: rgba(0,0,0,0.18);
         border-radius: 6px;
@@ -237,7 +241,7 @@ hr {
         }
         
         li {
-            width: calc(100% / 3);
+            width: 100% / 3;
             margin: 0;
         }
         
@@ -267,7 +271,7 @@ hr {
             display: none;
         }
         #addblog-sml-btn {
-            width: calc(100% / 3);
+            width: 100% / 3;
             display: list-item;
         }
     }

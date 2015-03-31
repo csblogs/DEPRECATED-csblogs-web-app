@@ -1,0 +1,211 @@
+@import 'vars';
+
+main {
+    font-size: 16px;
+}
+
+#body-content {
+    margin: 0px auto;
+    margin-top: 24px;
+    text-align: center;
+}
+
+main form {
+    margin: 0px auto;
+    margin-bottom: 2em;
+    max-width: 400px;
+}
+
+.column {
+    float: left;
+    margin-top: 6px;
+
+    &:first-child {
+        width: 190px;
+        margin-right: 10px;
+    }
+    &:last-child {
+        width: 190px;
+        margin-left: 10px;
+    }
+}
+
+.row:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+h2 {
+    font-style: italic;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    font-size: 24px;
+    font-family: "Merriweather", serif;
+}
+
+.input-field {
+    position: relative;
+    margin-bottom: 1em;
+}
+
+label {
+    color: #858585;
+    position: absolute;
+    top: 0.6em;
+    //left: 0.75em;
+    left: 0;
+    font-size: 1em;
+    cursor: text;
+    -webkit-transition: 0.2s ease-out;
+    -moz-transition: 0.2s ease-out;
+    -o-transition: 0.2s ease-out;
+    -ms-transition: 0.2s ease-out;
+    transition: 0.2s ease-out;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+label.active {
+    /*font-size: 0.8em;*/
+    -webkit-transform: translateY(-130%) scale(0.82);
+    -moz-transform: translateY(-112%) scale(0.82);
+    -ms-transform: translateY(-112%) scale(0.82);
+    -o-transform: translateY(-112%) scale(0.82);
+    transform: translateY(-130%) scale(0.82);
+    -webkit-transform-origin: left top;
+    -moz-transform-origin: left top;
+    -ms-transform-origin: left top;
+    -o-transform-origin: left top;
+    transform-origin: left top;
+}
+
+input:not([type=submit]):focus + label, textarea:focus + label {
+    color: #bd030c;
+}
+
+input:not([type=submit]).valid, textarea.valid {
+    border-bottom: 1px solid #4CAF50;
+    -webkit-box-shadow: 0 1px 0 0 #4CAF50;
+    -moz-box-shadow: 0 1px 0 0 #4CAF50;
+    box-shadow: 0 1px 0 0 #4CAF50;
+}
+
+input:not([type=submit]).invalid, textarea.invalid {
+    border-bottom: 1px solid #F44336;
+    -webkit-box-shadow: 0 1px 0 0 #F44336;
+    -moz-box-shadow: 0 1px 0 0 #F44336;
+    box-shadow: 0 1px 0 0 #F44336;
+}
+
+input {
+    font-family: 'Open Sans', sans-serif;
+}
+
+input:not([type=submit]), textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #858585;
+    color: #000;
+    outline: none;
+    line-height: 1.2em;
+    height: 2.4em;
+    width: 100%;
+    font-size: 1em;
+    margin: 0 0 15px 0;
+    padding: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+input:not([type=submit]) {
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -ms-transition: 0.3s;
+    transition: 0.3s;
+}
+
+input:not([type=submit]):focus, textarea:focus {
+    border-bottom: 1px solid @accent-color;
+    -webkit-box-shadow: 0 1px 0 0 @accent-color;
+    -moz-box-shadow: 0 1px 0 0 @accent-color;
+    box-shadow: 0 1px 0 0 @accent-color;
+}
+
+textarea {
+    height: 1.5em;
+    overflow: auto;
+    padding-top: 0.6em;
+    padding-bottom: 0.3em;
+    resize: none;
+}
+
+#bio-desc {
+    margin-top: -2.15em;
+}
+
+.avatar {
+    // make a square container
+    width: 140px;
+    height: 140px;
+    margin: 0px auto;
+    margin-bottom: 25px;
+    display: block;
+    // fill the container, preserving aspect ratio, and cropping to fit
+    background-size: cover;
+    // center the image vertically and horizontally
+    background-position: center;
+    // round the edges to a circle with border radius 1/2 container size
+    border-radius: 50%;
+}
+
+#submit-button {
+    background: @accent-color;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 7px 16px;
+    width: 200px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.4s ease-out;
+}
+
+#submit-button:hover {
+    background: #d6040f;
+}
+
+form p {
+    color: #858585;
+    font-style: italic;
+    font-size: 12px;
+    text-align: left;
+    margin-top: -2em;
+    margin-bottom: 1.8em;
+}
+
+@media screen and (max-width: 450px) {
+    .column {
+        float: none;
+
+        &:first-child {
+            width: 100%;
+            margin-right: 0;
+        }
+        &:last-child {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+}

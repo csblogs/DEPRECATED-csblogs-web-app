@@ -28,33 +28,37 @@ module.exports = function(app) {
       });
   });
 
-  app.route('/register')
-      .get(ensureAuthenticated, function(req, res) {
-        res.render('register');
-      })
-      .post(ensureAuthenticated, function(req, res) {
-        newBlogger = new blogger({firstname:          req.body.firstName,
-                                  lastname:           req.body.lastName,
-                                  displayPictureUrl:  req.body.displayPictureUrl,
-                                  emailAddress:       req.body.emailAddress,
-                                  feedUrl:            req.body.feedUrl,
-                                  blogWebsiteUrl:     req.body.blogWebsiteUrl,
-                                  websiteUrl:         req.body.websiteUrl,
-                                  cvUrl:              req.body.cvUrl,
-                                  githubProfile:      req.body.githubProfile,
-                                  twitterProfile:     req.body.twitterProfile,
-                                  linkedInProfile:    req.body.linkedInProfile,
-                                  bio:                req.body.bio,
-                                  validated:          false})
-
-        if(newBlogger.isValid(false)) {
-          newBlogger.save()
-          res.render('register-success')
-        }
-        else {
-          res.render('register', {title: 'Add Blog / CS Blogs', issues: newBlogger.isValid(true)})
-        }
-      })
+//  app.route('/register')
+//      .get(ensureAuthenticated, function(req, res) {
+//        res.render('register');
+//      })
+//      .post(ensureAuthenticated, function(req, res) {
+//        newBlogger = new blogger({firstname:          req.body.firstName,
+//                                  lastname:           req.body.lastName,
+//                                  displayPictureUrl:  req.body.displayPictureUrl,
+//                                  emailAddress:       req.body.emailAddress,
+//                                  feedUrl:            req.body.feedUrl,
+//                                  blogWebsiteUrl:     req.body.blogWebsiteUrl,
+//                                  websiteUrl:         req.body.websiteUrl,
+//                                  cvUrl:              req.body.cvUrl,
+//                                  githubProfile:      req.body.githubProfile,
+//                                  twitterProfile:     req.body.twitterProfile,
+//                                  linkedInProfile:    req.body.linkedInProfile,
+//                                  bio:                req.body.bio,
+//                                  validated:          false});
+//
+//        if(newBlogger.isValid(false)) {
+//          newBlogger.save();
+//          res.render('register-success');
+//        }
+//        else {
+//          res.render('register', {title: 'Register / CS Blogs', issues: newBlogger.isValid(true)});
+//        }
+//      });
+    
+    app.get('/register', function(req, res) {
+        res.render('register', {title: 'Register / CS Blogs'});
+    });
 
   app.get('/blogs', function(req, res) {
       var blogs = require('./test-data/blogs.json');
