@@ -65,16 +65,4 @@
         <input id="submit-button" type="submit" value="Add your blog">
     </form>
 </div>
-
-<script>
-    var inputSelector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], textarea';
-    $(document).on('focus', inputSelector, function() {
-        $(this).siblings('label').addClass('active');
-    });
-    $(document).on('blur', inputSelector, function() {
-        if ($(this).val().length === 0 && $(this).attr('placeholder') === undefined) {
-            $(this).siblings('label').removeClass('active');
-        }
-        //validateField($(this));
-    });
-</script>
+<script src="scripts/register.min.js" type="text/javascript"></script>
