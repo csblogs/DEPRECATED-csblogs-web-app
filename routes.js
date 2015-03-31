@@ -34,6 +34,10 @@ module.exports = function(app) {
       req.user.lastName = usersName[1];
       res.render('register', {title: 'Register / CS Blogs', user: req.user});
   });
+    
+    app.get('/debugreg', function(req, res) {
+        res.render('register', {title: 'Register / CS Blogs'});
+    });
 
   app.get('/blogs', function(req, res) {
       var blogs = require('./test-data/blogs.json');
