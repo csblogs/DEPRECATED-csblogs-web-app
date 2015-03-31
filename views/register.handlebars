@@ -10,25 +10,25 @@
         <h2>Your Profile</h2>
         <div class="row">
             <div class="input-field column">
-                <input id="first_name" type="text">
+                <input id="first_name" type="text" value="{{user.firstname}}">
                 <label for="first_name">First Name</label>
             </div>
             <div class="input-field column">
-                <input id="last_name" type="text">
+                <input id="last_name" type="text" value="{{user.lastname}}">
                 <label for="last_name">Last Name</label>
             </div>
         </div>
         <div class="input-field">
             <input id="email" type="email">
-            <label for="email">Email Address</label>
+            <label for="email" value="{{user.emails[0]}}">Email Address</label>
         </div>
         <div class="input-field">
             <textarea id="bio" maxlength="120"></textarea>
-            <label for="bio">About You</label>
+            <label for="bio" value="{{user._json.bio}}">About You</label>
         </div>
         <p id="bio-desc">A short bio about yourself, up to 120 characters.</p>
         <div class="input-field">
-            <input id="vanity_url" type="text">
+            <input id="vanity_url" type="text" value="{{user.username}}">
             <label for="vanity_url">Profile Name</label>
         </div>
         <p>This will be used in your profile URL (e.g. csblogs.com/yourname)</p>
@@ -38,7 +38,7 @@
             <label for="feed_url">Blog Feed URL</label>
         </div>
         <div class="input-field">
-            <input id="blog_url" type="url">
+            <input id="blog_url" type="url" value="{{user._json.blog}}">
             <label for="blog_url">Blog Website URL</label>
         </div>
         <div class="input-field">
@@ -52,7 +52,7 @@
         <h2>Social Links</h2>
         <div class="input-field">
             <input id="github_name" type="text">
-            <label for="github_name">GitHub Name</label>
+            <label for="github_name" value="{{user._json.login}}">GitHub Name</label>
         </div>
         <div class="input-field">
             <input id="twitter_name" type="text">

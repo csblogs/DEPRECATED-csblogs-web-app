@@ -29,6 +29,9 @@ module.exports = function(app) {
   });
 
   app.get('/register', ensureAuthenticated, function(req, res) {
+      var usersName = req.user.displayName.split(' ');
+      req.user.firstname = usersName[0];
+      req.user.lastName = usersName[1];
       res.render('register', {title: 'Register / CS Blogs', user: req.user});
   });
 
