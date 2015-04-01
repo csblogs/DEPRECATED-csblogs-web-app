@@ -31,7 +31,7 @@ module.exports = function(app) {
   app.get('/register', ensureAuthenticated, function(req, res) {
       var usersName = req.user.displayName.split(' ');
       req.user.firstname = usersName[0];
-      req.user.lastName = usersName[1];
+      req.user.lastname = usersName[1];
       res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog', user: req.user});
   });
     
