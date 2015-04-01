@@ -6,60 +6,60 @@
 <div id="body-content">
     <div class="avatar" style="background-image: url('{{user._json.avatar_url}}');"></div>
 
-    <form method="POST" action="/register">
+    <form method="post" action="/register">
         <h2>Your Profile</h2>
         <div class="row">
             <div class="input-field column">
-                <input id="first_name" type="text" value="{{user.firstname}}">
+                <input id="first_name" name="first_name" type="text" value="{{user.firstname}}">
                 <label for="first_name">First Name</label>
             </div>
             <div class="input-field column">
-                <input id="last_name" type="text" value="{{user.lastname}}">
+                <input id="last_name" name="last_name" type="text" value="{{user.lastname}}">
                 <label for="last_name">Last Name</label>
             </div>
         </div>
         <div class="input-field">
-            <input id="email" type="email" value="{{user._json.email}}">
+            <input id="email" name="email" type="email" value="{{user._json.email}}">
             <label for="email">Email Address</label>
         </div>
         <div class="input-field">
-            <textarea id="bio" maxlength="120" autoresize>{{user._json.bio}}</textarea>
+            <textarea id="bio" name="bio" maxlength="120" autoresize>{{user._json.bio}}</textarea>
             <label for="bio">About You</label>
         </div>
         <p id="bio-desc">A short bio about yourself, up to 120 characters.</p>
         <div class="input-field">
-            <input id="vanity_url" type="text" value="{{user.username}}">
+            <input id="vanity_url" name="vanity_url" type="text" value="{{user.username}}">
             <label for="vanity_url">Profile Name</label>
         </div>
         <p>This will be used in your profile URL (e.g. csblogs.com/yourname)</p>
         <h2>Your Content</h2>
         <div class="input-field">
-            <input id="feed_url" type="url">
+            <input id="feed_url" name="feed_url" type="url">
             <label for="feed_url">Blog Feed URL</label>
         </div>
         <div class="input-field">
-            <input id="blog_url" type="url" value="{{user._json.blog}}">
+            <input id="blog_url" name="blog_url" type="url" value="{{user._json.blog}}">
             <label for="blog_url">Blog Website URL</label>
         </div>
         <div class="input-field">
-            <input id="site_url" type="url">
+            <input id="site_url" name="site_url" type="url">
             <label for="site_url">Website URL</label>
         </div>
         <div class="input-field">
-            <input id="cv_url" type="url">
+            <input id="cv_url" name="cv_url" type="url">
             <label for="cv_url">Curriculum Vitae URL</label>
         </div>
         <h2>Social Links</h2>
         <div class="input-field">
-            <input id="github_name" type="text" value="{{user._json.login}}">
+            <input id="github_name" name="github_name" type="text" value="{{user._json.login}}">
             <label for="github_name">GitHub Name</label>
         </div>
         <div class="input-field">
-            <input id="twitter_name" type="text">
+            <input id="twitter_name" name="twitter_name" type="text">
             <label for="twitter_name">Twitter Name</label>
         </div>
         <div class="input-field">
-            <input id="linkedIn_name" type="text">
+            <input id="linkedIn_name" name="linkedIn_name" type="text">
             <label for="linkedIn_name">LinkedIn Name</label>
         </div>
         <input id="submit-button" type="submit" value="{{submitText}}">
