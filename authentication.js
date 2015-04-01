@@ -67,7 +67,7 @@ exports.serveOAuthRoutes = function(app) {
   app.get('/auth/github', passport.authenticate('github'));
 
   app.get('/auth/github/callback',
-    passport.authenticate('github', { successRedirect: '/',
+    passport.authenticate('github', { successRedirect: '/profile',
                                       failureRedirect: '/login',
                                       failureFlash: true }));
 
@@ -75,7 +75,7 @@ exports.serveOAuthRoutes = function(app) {
   app.get('/auth/wordpress', passport.authenticate('wordpress'));
 
   app.get('/auth/wordpress/callback',
-    passport.authenticate('wordpress', { successRedirect: '/',
+    passport.authenticate('wordpress', { successRedirect: '/profile',
                                          failureRedirect: '/login',
                                          failureFlash: true }));
 
@@ -83,7 +83,7 @@ exports.serveOAuthRoutes = function(app) {
   app.get('/auth/stack-exchange', passport.authenticate('stackexchange'));
 
   app.get('/auth/stack-exchange/callback',
-    passport.authenticate('stackexchange', { successRedirect: '/',
+    passport.authenticate('stackexchange', { successRedirect: '/profile',
                                              failureRedirect: '/login',
                                              failureFlash: true }));
 }
