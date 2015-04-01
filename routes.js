@@ -34,7 +34,7 @@ module.exports = function(app) {
       req.user.firstname = usersName[0];
       req.user.lastname = usersName[1];
       res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog', user: req.user});
-  	});
+  	})
 	.post(ensureAuthenticated, function(req, res) {
 		newBlogger = new blogger({firstname:          req.body.first_name,
 		                          lastname:           req.body.last_name,
@@ -48,7 +48,7 @@ module.exports = function(app) {
 		                          twitterProfile:     req.body.twitter_name,
 		                          linkedInProfile:    req.body.linkedIn_name,
 		                          bio:                req.body.bio,
-								   vanityUrl: 		  req.body.vanity_url,  
+								  vanityUrl: 		  req.body.vanity_url,  
 		                          validated:          false});
 		newBlogger.save();
 		res.redirect('/profile');
