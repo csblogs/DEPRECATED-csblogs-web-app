@@ -31,7 +31,7 @@ module.exports = function(app) {
 
   app.get('/bloggers/:vanityurl', function(req, res){
     userVanityUrl = req.param("vanityurl");
-    res.render('blogger', {title: 'Blogger / CS Blogs'});
+    res.render('blogger', {title: 'Blogger / CS Blogs', userVanityUrl: userVanityUrl});
   });
 
   app.route('/register')
