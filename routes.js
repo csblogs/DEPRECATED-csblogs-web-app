@@ -38,9 +38,9 @@ module.exports = function(app) {
 	.post(ensureAuthenticated, function(req, res) {
     console.log("Blogger POSTED: %j", req.body);
 
-		newBlogger = new blogger({firstname:          req.body.first_name,
-		                          lastname:           req.body.last_name,
-		                          displayPictureUrl:  req.user._json.avatar_url,
+		newBlogger = new blogger({firstName:          req.body.first_name,
+		                          lastName:           req.body.last_name,
+                              avatarUrl:          req.user._json.avatar_url,
 		                          emailAddress:       req.body.email,
 		                          feedUrl:            req.body.feed_url,
 		                          blogWebsiteUrl:     req.body.blog_url,
