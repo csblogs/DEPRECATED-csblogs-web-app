@@ -19,7 +19,7 @@ module.exports = function(app) {
   });
 
   app.get('/bloggers', function(req, res) {
-      bloggers = blogger.find({}, function(error, allBloggers) {
+      blogger.find({}, function(error, allBloggers) {
         if(error) {
           res.render('error', {title: 'Error / CS Blogs', error: error});
         }
@@ -30,14 +30,25 @@ module.exports = function(app) {
   });
 
   app.get('/bloggers/:vanityurl', function(req, res) {
-    userVanityUrl = req.params.vanityurl;
-    res.render('blogger', {title: 'Blogger / CS Blogs', userVanityUrl: userVanityUrl});
+      renderBlogger(req, res);
   });
 
   app.get('/b/:vanityurl', function(req, res) {
-      userVanityUrl = req.params.vanityurl;
-      res.render('blogger', {title: 'Blogger / CS Blogs', userVanityUrl: userVanityUrl});
+      renderBlogger(req, res);
   });
+
+  function renderBlogger(req, res) {
+      var userVanityUrl = req.params.vanityurl;
+
+      blogger.findOne({vanityUrl: userVanityUrl}, function(error, profile) {
+          if (error || !profile) {
+              res.render('error', {title: 'Error / CS Blogs', error: error});
+          }
+          else {
+              res.render('blogger', {title: profile.firstName + profile.lastName + ' / CS Blogs', blogger: profile});
+          }
+      });
+  }
 
   app.route('/register')
   	.get(ensureAuthenticated, function(req, res) {
