@@ -29,9 +29,14 @@ module.exports = function(app) {
       });
   });
 
-  app.get('/bloggers/:vanityurl', function(req, res){
-    userVanityUrl = req.param("vanityurl");
+  app.get('/bloggers/:vanityurl', function(req, res) {
+    userVanityUrl = req.params.vanityurl;
     res.render('blogger', {title: 'Blogger / CS Blogs', userVanityUrl: userVanityUrl});
+  });
+
+  app.get('/b/:vanityurl', function(req, res) {
+      userVanityUrl = req.params.vanityurl;
+      res.render('blogger', {title: 'Blogger / CS Blogs', userVanityUrl: userVanityUrl});
   });
 
   app.route('/register')
