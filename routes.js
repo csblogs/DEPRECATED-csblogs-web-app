@@ -14,6 +14,7 @@ module.exports = function(app) {
   });
 
   app.get('/profile', function(req, res) {
+      // Use provider id to get user from database
       res.render('profile', {title: 'Your Profile / CS Blogs'});
   });
 
@@ -28,6 +29,11 @@ module.exports = function(app) {
       });
   });
 
+  app.get('/bloggers/:vanityurl', function(req, res){
+    userVanityUrl = req.param("vanityurl");
+    res.render('blogger', {title: 'Blogger / CS Blogs'});
+  });
+
   app.route('/register')
   	.get(ensureAuthenticated, function(req, res) {
       var usersName = req.user.displayName.split(' ');
@@ -36,8 +42,6 @@ module.exports = function(app) {
       res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog', user: req.user});
   	})
 	.post(ensureAuthenticated, function(req, res) {
-    console.log("Blogger POSTED: %j", req.body);
-
 		newBlogger = new blogger({firstName:          req.body.first_name,
 		                          lastName:           req.body.last_name,
                               avatarUrl:          req.user._json.avatar_url,
@@ -53,15 +57,9 @@ module.exports = function(app) {
 								              vanityUrl: 		      req.body.vanity_url,
 		                          validated:          false});
 
-    console.log("NEW Blogger: %j", newBlogger);
-
     newBlogger.save();
 		res.redirect('/profile');
 	});
-
-    app.get('/debugreg', function(req, res) {
-        res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog'});
-    });
 
   app.get('/blogs', function(req, res) {
       var blogs = require('./test-data/blogs.json');
