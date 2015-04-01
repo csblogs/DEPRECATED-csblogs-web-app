@@ -20,12 +20,14 @@ exports.section = function(name, options) {
 }
 
 exports.urlFormat = function(url) {
-    if (url.lastIndexOf('http://', 0) === 0) {
-        url = url.substring(7);
+	if(typeof url !== "undefined" && url != null) {
+	    if (url.lastIndexOf('http://', 0) === 0) {
+	        url = url.substring(7);
         
-        if (url.lastIndexOf('www.', 0) === 0) {
-            url = url.substring(4);
-        }
-    }
-    return url;
+	        if (url.lastIndexOf('www.', 0) === 0) {
+	            url = url.substring(4);
+	        }
+	    }
+	    return url;
+	} 
 }
