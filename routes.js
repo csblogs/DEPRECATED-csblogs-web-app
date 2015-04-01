@@ -27,7 +27,7 @@ module.exports = function(app) {
         }
       });
   });
-  
+
   app.route('/register')
   	.get(ensureAuthenticated, function(req, res) {
       var usersName = req.user.displayName.split(' ');
@@ -36,6 +36,8 @@ module.exports = function(app) {
       res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog', user: req.user});
   	})
 	.post(ensureAuthenticated, function(req, res) {
+    console.log("Blogger POSTED: %j", req.body);
+
 		newBlogger = new blogger({firstname:          req.body.first_name,
 		                          lastname:           req.body.last_name,
 		                          displayPictureUrl:  req.user._json.avatar_url,
@@ -48,12 +50,15 @@ module.exports = function(app) {
 		                          twitterProfile:     req.body.twitter_name,
 		                          linkedInProfile:    req.body.linkedIn_name,
 		                          bio:                req.body.bio,
-								  vanityUrl: 		  req.body.vanity_url,  
+								              vanityUrl: 		      req.body.vanity_url,
 		                          validated:          false});
-		newBlogger.save();
+
+    console.log("NEW Blogger: %j", newBlogger);
+
+    newBlogger.save();
 		res.redirect('/profile');
 	});
-    
+
     app.get('/debugreg', function(req, res) {
         res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog'});
     });
