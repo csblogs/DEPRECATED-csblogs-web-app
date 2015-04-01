@@ -13,7 +13,7 @@ module.exports = function(app) {
       res.render('login', {title : 'Login / CS Blogs'});
   });
 
-  app.get('/profile', ensureAuthenticated, function(req, res) {
+  app.get('/profile', function(req, res) {
       res.render('profile', {title: 'Your Profile / CS Blogs'});
   });
 
