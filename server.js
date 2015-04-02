@@ -39,7 +39,7 @@ database.once('open', function (callback) {
     console.log('Database connection established successfully.')
 
     // Populate database with test data if required by user
-    if(args.indexOf('setup-db') > -1) {
+    if (args.indexOf('setup-db') > -1) {
       console.log('Removing all database entries...')
       database.db.dropDatabase();
       console.log('Will now populate database with new test data...')

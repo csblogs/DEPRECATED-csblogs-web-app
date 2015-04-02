@@ -20,7 +20,7 @@ module.exports = function(app) {
 
   app.get('/bloggers', function(req, res) {
       blogger.find({}, function(error, allBloggers) {
-        if(error) {
+        if (error || !allBloggers) {
           res.render('error', {title: 'Error / CS Blogs', error: error});
         }
         else {
@@ -45,7 +45,8 @@ module.exports = function(app) {
               res.render('error', {title: 'Error / CS Blogs', error: error});
           }
           else {
-              res.render('blogger', {title: profile.firstName + profile.lastName + ' / CS Blogs', blogger: profile});
+              var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
+              res.render('blogger', {title: nameTitle, blogger: profile});
           }
       });
   }
@@ -77,8 +78,20 @@ module.exports = function(app) {
 		res.redirect('/profile');
 	});
 
-  app.get('/blogs', function(req, res) {
+    app.get('/blogs', function(req, res) {
       var blogs = require('./test-data/blogs.json');
       res.render('blogs', {title: 'Blogs / CS Blogs', content: blogs});
-  });
+    });
+    
+    // Handle error 404
+    app.use(function(req, res) {
+        res.status(400);
+        res.render('error', {title: 'Error / CS Blogs', error: '404 Not Found'});
+    });
+    
+    // Handle error 500
+    app.use(function(error, req, res, next) {
+        res.status(500);
+        res.render('error', {title: 'Error / CS Blogs', error: error});
+    });
 }
