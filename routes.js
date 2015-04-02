@@ -19,8 +19,8 @@ module.exports = function(app) {
   });
 
   app.get('/bloggers', function(req, res) {
-      bloggers = blogger.find({}, function(error, allBloggers) {
-        if(error) {
+      blogger.find({}, function(error, allBloggers) {
+        if (error || !allBloggers) {
           res.render('error', {title: 'Error / CS Blogs', error: error});
         }
         else {
@@ -29,10 +29,27 @@ module.exports = function(app) {
       });
   });
 
-  app.get('/bloggers/:vanityurl', function(req, res){
-    userVanityUrl = req.param("vanityurl");
-    res.render('blogger', {title: 'Blogger / CS Blogs', userVanityUrl: userVanityUrl});
+  app.get('/bloggers/:vanityurl', function(req, res) {
+      renderBlogger(req, res);
   });
+
+  app.get('/b/:vanityurl', function(req, res) {
+      renderBlogger(req, res);
+  });
+
+  function renderBlogger(req, res) {
+      var userVanityUrl = req.params.vanityurl;
+
+      blogger.findOne({vanityUrl: userVanityUrl}, function(error, profile) {
+          if (error || !profile) {
+              res.render('error', {title: 'Error / CS Blogs', error: error});
+          }
+          else {
+              var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
+              res.render('blogger', {title: nameTitle, blogger: profile});
+          }
+      });
+  }
 
   app.route('/register')
   	.get(ensureAuthenticated, function(req, res) {
@@ -61,8 +78,20 @@ module.exports = function(app) {
 		res.redirect('/profile');
 	});
 
-  app.get('/blogs', function(req, res) {
+    app.get('/blogs', function(req, res) {
       var blogs = require('./test-data/blogs.json');
       res.render('blogs', {title: 'Blogs / CS Blogs', content: blogs});
-  });
+    });
+    
+    // Handle error 404
+    app.use(function(req, res) {
+        res.status(400);
+        res.render('error', {title: 'Error / CS Blogs', error: '404 Not Found'});
+    });
+    
+    // Handle error 500
+    app.use(function(error, req, res, next) {
+        res.status(500);
+        res.render('error', {title: 'Error / CS Blogs', error: error});
+    });
 }
