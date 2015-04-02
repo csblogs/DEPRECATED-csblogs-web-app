@@ -21,10 +21,10 @@ module.exports = function(app) {
   app.get('/bloggers', function(req, res) {
       blogger.find({}, function(error, allBloggers) {
         if (error || !allBloggers) {
-          res.render('error', {title: 'Error / CS Blogs', error: error});
+            internalError(res, error ? error : "No bloggers found.");
         }
         else {
-          res.render('bloggers', {title: 'Bloggers / CS Blogs', bloggers: allBloggers});
+            res.render('bloggers', {title: 'Bloggers / CS Blogs', bloggers: allBloggers});
         }
       });
   });
@@ -42,7 +42,7 @@ module.exports = function(app) {
 
       blogger.findOne({vanityUrl: userVanityUrl}, function(error, profile) {
           if (error || !profile) {
-              res.render('error', {title: 'Error / CS Blogs', error: error});
+              internalError(res, error ? error : "Blogger profile not found.");
           }
           else {
               var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
@@ -53,15 +53,15 @@ module.exports = function(app) {
 
   app.route('/register')
   	.get(ensureAuthenticated, function(req, res) {
-      var usersName = req.user.displayName.split(' ');
-      req.user.firstname = usersName[0];
-      req.user.lastname = usersName[1];
-      res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog', user: req.user});
+        var usersName = req.user.displayName.split(' ');
+        req.user.firstname = usersName[0];
+        req.user.lastname = usersName[1];
+        res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog', user: req.user});
   	})
 	.post(ensureAuthenticated, function(req, res) {
 		newBlogger = new blogger({firstName:          req.body.first_name,
 		                          lastName:           req.body.last_name,
-                              avatarUrl:          req.user._json.avatar_url,
+                                  avatarUrl:          req.user._json.avatar_url,
 		                          emailAddress:       req.body.email,
 		                          feedUrl:            req.body.feed_url,
 		                          blogWebsiteUrl:     req.body.blog_url,
@@ -71,10 +71,9 @@ module.exports = function(app) {
 		                          twitterProfile:     req.body.twitter_name,
 		                          linkedInProfile:    req.body.linkedIn_name,
 		                          bio:                req.body.bio,
-								              vanityUrl: 		      req.body.vanity_url,
+								  vanityUrl: 		  req.body.vanity_url,
 		                          validated:          false});
-
-    newBlogger.save();
+        newBlogger.save();
 		res.redirect('/profile');
 	});
 
@@ -85,13 +84,17 @@ module.exports = function(app) {
     
     // Handle error 404
     app.use(function(req, res) {
-        res.status(400);
-        res.render('error', {title: 'Error / CS Blogs', error: '404 Not Found'});
+        res.status(404);
+        res.render('error', {title: 'Error 404 / CS Blogs', errorCode: 404, errorMessage: 'Page Not Found'});
     });
     
     // Handle error 500
     app.use(function(error, req, res, next) {
-        res.status(500);
-        res.render('error', {title: 'Error / CS Blogs', error: error});
+        internalError(res, error);
     });
+    
+    function internalError(res, errorMessage) {
+        res.status(500);
+        res.render('error', {title: 'Error 500 / CS Blogs', errorCode: 500, errorMessage: errorMessage});
+    }
 }
