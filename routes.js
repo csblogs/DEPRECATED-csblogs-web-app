@@ -46,7 +46,7 @@ module.exports = function(app) {
           }
           else {
               var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
-              res.render('blogger', {title: nameTitle, blogger: profile});
+              res.render('profile', {title: nameTitle, blogger: profile});
           }
       });
   }

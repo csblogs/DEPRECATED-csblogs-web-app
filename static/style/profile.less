@@ -2,14 +2,43 @@
 
 .avatar {
     // make a square container
-    width: 8.750em;
-    height: 8.750em;
+    width: 140px;
+    height: 140px;
     margin: 0px auto;
+    margin-top: 16px;
     display: block;
-    // fill the container, preserving aspect ratio, and cropping to fit
-    background-size: cover;
-    // center the image vertically and horizontally
-    background-position: center;
-    // round the edges to a circle with border radius 1/2 container size
-    border-radius: 50%;
+}
+
+h2 {
+    margin: 8px 0px;
+    color: @heading-color;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.button {
+    width: 130px;
+    height: 35px;
+    display: inline-block;
+    position: relative;
+    background: #e6e6e6;
+    border-radius: 35px;
+    margin-right: 8px;
+    cursor: pointer;
+    
+    svg {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        fill: #999;
+    }
+    
+    a {
+        position: absolute;
+        top: 10px;
+        left: 42px;
+        text-decoration: none;
+        margin-bottom: 6px;
+    }
 }
