@@ -19,26 +19,33 @@
 -->
 
 <div>
-    <div class="avatar" style="background-image: url('{{blogger.avatarUrl}}');"></div>
-    <h2>{{blogger.firstName}} {{blogger.lastName}}</h2>
-    <div>
-        <div class="button">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                <use xlink:href="/images/defs.svg#icon-github"></use>
-            </svg>
-            <a>GitHub</a>
-        </div>
-        <div class="button">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                <use xlink:href="/images/defs.svg#icon-email"></use>
-            </svg>
-            <a>Email</a>
-        </div>
-        <div class="button">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                <use xlink:href="/images/defs.svg#icon-twitter"></use>
-            </svg>
-            <a>Twitter</a>
+    <div id="profile-header">
+        <div class="avatar" style="background-image: url('{{blogger.avatarUrl}}');"></div>
+        <h2>{{blogger.firstName}} {{blogger.lastName}}</h2>
+    </div>
+    <div id="profile-body">
+        <div>
+            <div class="button">
+                <div class="button-bg"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                    <use xlink:href="/images/defs.svg#icon-github"></use>
+                </svg>
+                <a>GitHub</a>
+            </div>
+            <div class="button">
+                <div class="button-bg"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                    <use xlink:href="/images/defs.svg#icon-email"></use>
+                </svg>
+                <a>Email</a>
+            </div>
+            <div class="button">
+                <div class="button-bg"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                    <use xlink:href="/images/defs.svg#icon-twitter"></use>
+                </svg>
+                <a>Twitter</a>
+            </div>
         </div>
     </div>
 </div>
