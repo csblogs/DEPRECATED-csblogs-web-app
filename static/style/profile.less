@@ -6,6 +6,8 @@
     height: 140px;
     margin: 0px auto;
     display: block;
+    box-shadow: 0 0 0 10px rgba(255,255,255,0.2);
+    float: left;
 }
 
 #masthead {
@@ -20,8 +22,39 @@ main {
 #profile-header {
     background: @accent-color;
     width: 100%;
-    padding: 20px 0px;
+    padding-top: 12px;
+    padding-bottom: 25px;
     margin-bottom: 12px;
+}
+
+#profile-header-content {
+    max-width: 800px;
+    margin: 0px auto;
+    padding: 0px 25px;
+}
+
+#profile-header-title {
+    float: left;
+    margin-top: 40px;
+    margin-left: 20px;
+    height: 100%;
+    
+    p {
+        color: #fff;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        margin: 0px;
+    }
+    
+    em {
+        font-weight: 400;
+    }
+}
+
+#profile-header-content:after {
+    content: '';
+    clear: both;
+    display: block;
 }
 
 #profile-body {
@@ -31,10 +64,10 @@ main {
 }
 
 h2 {
-    margin: 8px 0px;
+    float: left;
     color: #fff;
-    text-align: center;
-    font-size: 28px;
+    text-align: left;
+    font-size: 36px;
     font-weight: 400;
 }
 
@@ -85,5 +118,26 @@ h2 {
     
     #nav-bg {
         visibility: hidden;
+    }
+    
+    #profile-header-title {
+        float: none;
+        margin: 0px auto;
+        
+        h2 {
+            margin-top: 20px;
+            margin-bottom: 2px;
+            text-align: center;
+            float: none;
+        }
+        
+        p {
+            text-align: center;
+        }
+    }
+    
+    .avatar {
+        margin-top: 15px;
+        float: none;
     }
 }

@@ -20,8 +20,13 @@
 
 <div>
     <div id="profile-header">
-        <div class="avatar" style="background-image: url('{{blogger.avatarUrl}}');"></div>
-        <h2>{{blogger.firstName}} {{blogger.lastName}}</h2>
+        <div id="profile-header-content">
+            <div class="avatar" style="background-image: url('{{blogger.avatarUrl}}');"></div>
+            <div id="profile-header-title">
+                <h2>{{blogger.firstName}} {{blogger.lastName}}</h2>
+                <p>Member of <em>University of Hull</em></p>
+            </div>
+        </div>
     </div>
     <div id="profile-body">
         <div>
