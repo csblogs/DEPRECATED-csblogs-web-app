@@ -30,13 +30,16 @@
     </div>
     <div id="profile-body">
         <div>
-            <div class="button">
-                <div class="button-bg"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                    <use xlink:href="/images/defs.svg#icon-github"></use>
-                </svg>
-                <a>GitHub</a>
-            </div>
+            {{#if blogger.githubProfile}}
+                <div class="button">
+                    <div class="button-bg"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                        <use xlink:href="/images/defs.svg#icon-github"></use>
+                    </svg>
+                    <a>GitHub</a>
+                </div>
+            {{/if}}
+            {{#if blogger.linkedInProfile}}
             <div class="button">
                 <div class="button-bg"></div>
                 <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
@@ -44,6 +47,8 @@
                 </svg>
                 <a>Email</a>
             </div>
+            {{/if}}
+            {{#if blogger.twitterProfile}}
             <div class="button">
                 <div class="button-bg"></div>
                 <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
@@ -51,6 +56,7 @@
                 </svg>
                 <a>Twitter</a>
             </div>
+            {{/if}}
         </div>
     </div>
 </div>
