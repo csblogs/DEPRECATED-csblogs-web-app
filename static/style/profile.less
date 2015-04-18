@@ -36,15 +36,18 @@ main {
 
 #profile-header-title {
     float: left;
-    margin-top: 40px;
+    margin-top: 22px;
     margin-left: 20px;
     height: 100%;
     
-    p {
+    p, a {
+        display: block;
         color: #fff;
         font-family: 'Open Sans', sans-serif;
         font-weight: 300;
         margin: 0px;
+        margin-left: 2px;
+        line-height: 1em;
     }
     
     em {
@@ -53,6 +56,16 @@ main {
     }
     
     em:hover {
+        text-decoration: underline;
+    }
+    
+    #ph-site {
+        margin: 6px 0px 10px 2px;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    #ph-site:hover {
         text-decoration: underline;
     }
 }
@@ -66,15 +79,22 @@ main {
 #profile-body {
     max-width: 800px;
     margin: 0px auto;
+    margin-top: 18px;
     padding: 0px 25px;
 }
 
 h2 {
-    float: left;
     color: #fff;
     text-align: left;
     font-size: 36px;
     font-weight: 400;
+}
+
+h3 {
+    font-style: italic;
+    margin: 16px 0px 0px 0px;
+    font-size: 26px;
+    font-family: "Merriweather", serif;
 }
 
 .button {
@@ -84,7 +104,8 @@ h2 {
     position: relative;
     background: #e6e6e6;
     border-radius: 35px;
-    margin-right: 8px;
+    margin-right: 2px;
+    margin-bottom: 8px;
     cursor: pointer;
     z-index: 0;
     
@@ -129,6 +150,42 @@ h2 {
     background: white;
 }
 
+h4 {
+    margin: 14px 0px 6px 0px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1px;
+
+    a {
+        color: @heading-color;
+        text-decoration: none;
+    }
+}
+
+article {
+    img {
+        max-width: 100%;
+        max-height: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.article-date {
+    display: inline-block;
+    font-family: "Open Sans", sans-serif;
+    text-align: left;
+    color: #999;
+    font-size: 13px;
+    margin: 0px;
+    margin-bottom: 6px;
+}
+
+hr {
+    margin-top: 16px;
+}
+
 @media screen and (max-width: 580px) {
     #masthead {
         background: #9F0714;
@@ -149,9 +206,10 @@ h2 {
             float: none;
         }
         
-        p {
+        p, a {
             text-align: center;
             padding: 0 15%;
+            margin-left: 0px;
         }
     }
     
@@ -159,5 +217,9 @@ h2 {
         margin-top: 15px;
         margin-left: auto;
         float: none;
+    }
+    
+    article p {
+        font-size: 14px;
     }
 }

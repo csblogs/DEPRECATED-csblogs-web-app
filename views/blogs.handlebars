@@ -14,7 +14,7 @@
             <div class="article-info">
                 <a class="avatar" href="{{site}}" style="background-image: url('{{avatar}}');"></a>
                 <a class="article-author" href="{{site}}">{{author}}</a><br/>
-                <p class="article-date">{{dateFormat date}}</p>
+                <p class="article-date">{{formatDateShort date}}</p>
             </div>
         </footer>
         {{#unless @last}}<hr/>{{/unless}}

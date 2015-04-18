@@ -24,39 +24,77 @@
             <div class="avatar" style="background-image: url('{{blogger.avatarUrl}}');"></div>
             <div id="profile-header-title">
                 <h2>{{blogger.firstName}} {{blogger.lastName}}</h2>
-                <p>Member of <em>University of Hull</em></p>
+                <a id="ph-site" href="{{blogger.websiteUrl}}">{{urlFormat blogger.websiteUrl}}</a>
+                <p id="ph-orgs">Member of <em>University of Hull</em></p>
             </div>
         </div>
     </div>
     <div id="profile-body">
         <div>
-            {{#if blogger.githubProfile}}
-            <div class="button">
-                <div class="button-bg"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                    <use xlink:href="/images/defs.svg#icon-github"></use>
-                </svg>
-                <p>GitHub</p>
+            <h3>About</h3>
+            <p>{{blogger.bio}}</p>
+            <div>
+                {{#if blogger.githubProfile}}
+                <a class="button" href="http://github.com/{{blogger.githubProfile}}">
+                    <div class="button-bg"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                        <use xlink:href="/images/defs.svg#icon-github"></use>
+                    </svg>
+                    <p>GitHub</p>
+                </a>
+                {{/if}}
+                {{#if blogger.twitterProfile}}
+                <a class="button" href="http://twitter.com/{{blogger.twitterProfile}}">
+                    <div class="button-bg"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                        <use xlink:href="/images/defs.svg#icon-twitter"></use>
+                    </svg>
+                    <p>Twitter</p>
+                </a>
+                {{/if}}
+                {{#if blogger.linkedInProfile}}
+                <a class="button" href="http://linkedin.com/in/{{blogger.linkedInProfile}}">
+                    <div class="button-bg"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                        <use xlink:href="/images/defs.svg#icon-linkedin"></use>
+                    </svg>
+                    <p>LinkedIn</p>
+                </a>
+                {{/if}}
+                {{#if blogger.cvUrl}}
+                <a class="button" href="{{blogger.cvUrl}}">
+                    <div class="button-bg"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                        <use xlink:href="/images/defs.svg#icon-cv"></use>
+                    </svg>
+                    <p>CV</p>
+                </a>
+                {{/if}}
             </div>
-            {{/if}}
-            {{#if blogger.linkedInProfile}}
-            <div class="button">
-                <div class="button-bg"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                    <use xlink:href="/images/defs.svg#icon-email"></use>
-                </svg>
-                <p>Email</p>
-            </div>
-            {{/if}}
-            {{#if blogger.twitterProfile}}
-            <div class="button">
-                <div class="button-bg"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                    <use xlink:href="/images/defs.svg#icon-twitter"></use>
-                </svg>
-                <p>Twitter</p>
-            </div>
-            {{/if}}
-        </div>
+            <h3>Blog posts</h3>
+<!--
+            {{#each content.posts}}
+            <article>
+                <h4><a href="{{link}}">{{title}}</a></h4>
+                <p class="article-date">{{formatDateLong date}}</p>
+                {{#if image}}<img src="{{image}}" alt="Featured Image"/>{{/if}}
+                <p>{{{description}}}</p>
+                {{#unless @last}}<hr/>{{/unless}}
+            </article>
+            {{/each}}
+-->
+            <article>
+                <h4><a href="/">Example blog post one</a></h4>
+                <p class="article-date">January 17, 1970 1:02 pm</p>
+                <img src="http://placehold.it/400x200" alt="Featured Image"/>
+                <p>Here's the description of this thrilling article. Pretty good in my opinion&hellip;</p>
+                <hr/>
+            </article>
+            <article>
+                <h4><a href="/">Example blog post two</a></h4>
+                <p class="article-date">January 17, 1970 1:02 pm</p>
+                <img src="http://placehold.it/400x200" alt="Featured Image"/>
+                <p>Wow, another one? This joke is getting old now&hellip;</p>
+            </article>
     </div>
 </div>
