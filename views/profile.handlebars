@@ -30,71 +30,70 @@
         </div>
     </div>
     <div id="profile-body">
+        <h3>About</h3>
+        <p>{{blogger.bio}}</p>
         <div>
-            <h3>About</h3>
-            <p>{{blogger.bio}}</p>
-            <div>
-                {{#if blogger.githubProfile}}
-                <a class="button" href="http://github.com/{{blogger.githubProfile}}">
-                    <div class="button-bg"></div>
-                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                        <use xlink:href="/images/defs.svg#icon-github"></use>
-                    </svg>
-                    <p>GitHub</p>
-                </a>
-                {{/if}}
-                {{#if blogger.twitterProfile}}
-                <a class="button" href="http://twitter.com/{{blogger.twitterProfile}}">
-                    <div class="button-bg"></div>
-                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                        <use xlink:href="/images/defs.svg#icon-twitter"></use>
-                    </svg>
-                    <p>Twitter</p>
-                </a>
-                {{/if}}
-                {{#if blogger.linkedInProfile}}
-                <a class="button" href="http://linkedin.com/in/{{blogger.linkedInProfile}}">
-                    <div class="button-bg"></div>
-                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                        <use xlink:href="/images/defs.svg#icon-linkedin"></use>
-                    </svg>
-                    <p>LinkedIn</p>
-                </a>
-                {{/if}}
-                {{#if blogger.cvUrl}}
-                <a class="button" href="{{blogger.cvUrl}}">
-                    <div class="button-bg"></div>
-                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
-                        <use xlink:href="/images/defs.svg#icon-cv"></use>
-                    </svg>
-                    <p>CV</p>
-                </a>
-                {{/if}}
-            </div>
-            <h3>Blog posts</h3>
+            {{#if blogger.githubProfile}}
+            <a class="button" href="http://github.com/{{blogger.githubProfile}}">
+                <div class="button-bg"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                    <use xlink:href="/images/defs.svg#icon-github"></use>
+                </svg>
+                <p>GitHub</p>
+            </a>
+            {{/if}}
+            {{#if blogger.twitterProfile}}
+            <a class="button" href="http://twitter.com/{{blogger.twitterProfile}}">
+                <div class="button-bg"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                    <use xlink:href="/images/defs.svg#icon-twitter"></use>
+                </svg>
+                <p>Twitter</p>
+            </a>
+            {{/if}}
+            {{#if blogger.linkedInProfile}}
+            <a class="button" href="http://linkedin.com/in/{{blogger.linkedInProfile}}">
+                <div class="button-bg"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                    <use xlink:href="/images/defs.svg#icon-linkedin"></use>
+                </svg>
+                <p>LinkedIn</p>
+            </a>
+            {{/if}}
+            {{#if blogger.cvUrl}}
+            <a class="button" href="{{blogger.cvUrl}}">
+                <div class="button-bg"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 42 42" version="1.1">
+                    <use xlink:href="/images/defs.svg#icon-cv"></use>
+                </svg>
+                <p>CV</p>
+            </a>
+            {{/if}}
+        </div>
+        <h3>Blog posts</h3>
 <!--
-            {{#each content.posts}}
-            <article>
-                <h4><a href="{{link}}">{{title}}</a></h4>
-                <p class="article-date">{{formatDateLong date}}</p>
-                {{#if image}}<img src="{{image}}" alt="Featured Image"/>{{/if}}
-                <p>{{{description}}}</p>
-                {{#unless @last}}<hr/>{{/unless}}
-            </article>
-            {{/each}}
+        {{#each content.posts}}
+        <article>
+            <h4><a href="{{link}}">{{title}}</a></h4>
+            <p class="article-date">{{formatDateLong date}}</p>
+            {{#if image}}<img src="{{image}}" alt="Featured Image"/>{{/if}}
+            <p>{{{description}}}</p>
+            {{#unless @last}}<hr/>{{/unless}}
+        </article>
+        {{/each}}
 -->
-            <article>
-                <h4><a href="/">Example blog post one</a></h4>
-                <p class="article-date">January 17, 1970 1:02 pm</p>
-                <img src="http://placehold.it/400x200" alt="Featured Image"/>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at ultricies tellus, ac eleifend ex. Nunc quis eros eu massa porta dignissim. Nam ac ipsum in massa sagittis auctor non vitae mi. Curabitur ultricies eleifend erat maximus sollicitudin. Curabitur et vulputate urna, id euismod leo&hellip;</p>
-                <hr/>
-            </article>
-            <article>
-                <h4><a href="/">Example blog post two</a></h4>
-                <p class="article-date">January 17, 1970 1:02 pm</p>
-                <img src="http://placehold.it/400x200" alt="Featured Image"/>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at ultricies tellus, ac eleifend ex. Nunc quis eros eu massa porta dignissim. Nam ac ipsum in massa sagittis auctor non vitae mi. Curabitur ultricies eleifend erat maximus sollicitudin. Curabitur et vulputate urna, id euismod leo&hellip;</p>
-            </article>
+        <article>
+            <h4><a href="/">Example blog post one</a></h4>
+            <p class="article-date">January 17, 1970 1:02 pm</p>
+            <img src="http://placehold.it/400x200" alt="Featured Image"/>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at ultricies tellus, ac eleifend ex. Nunc quis eros eu massa porta dignissim. Nam ac ipsum in massa sagittis auctor non vitae mi. Curabitur ultricies eleifend erat maximus sollicitudin. Curabitur et vulputate urna, id euismod leo&hellip;</p>
+            <hr/>
+        </article>
+        <article>
+            <h4><a href="/">Example blog post two</a></h4>
+            <p class="article-date">January 17, 1970 1:02 pm</p>
+            <img src="http://placehold.it/400x200" alt="Featured Image"/>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at ultricies tellus, ac eleifend ex. Nunc quis eros eu massa porta dignissim. Nam ac ipsum in massa sagittis auctor non vitae mi. Curabitur ultricies eleifend erat maximus sollicitudin. Curabitur et vulputate urna, id euismod leo&hellip;</p>
+        </article>
     </div>
 </div>
