@@ -107,6 +107,8 @@ input:not([type=submit]).invalid, textarea.invalid {
 input, textarea {
     font-family: 'Open Sans', sans-serif;
     -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
 }
 
 input:not([type=submit]), textarea {
@@ -159,18 +161,11 @@ textarea {
 }
 
 .avatar {
-    // make a square container
     width: 140px;
     height: 140px;
     margin: 0px auto;
     margin-bottom: 25px;
     display: block;
-    // fill the container, preserving aspect ratio, and cropping to fit
-    background-size: cover;
-    // center the image vertically and horizontally
-    background-position: center;
-    // round the edges to a circle with border radius 1/2 container size
-    border-radius: 50%;
 }
 
 #submit-button {

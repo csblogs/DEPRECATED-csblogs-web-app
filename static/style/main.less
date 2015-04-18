@@ -54,6 +54,12 @@ body {
         right: 25px;
     }
     
+    ul:after {
+        content: '';
+        clear: both;
+        display: block;
+    }
+    
     li {
         float: left;
         text-align: center;
@@ -101,14 +107,9 @@ body {
     margin-top: 16px;
 }
 
-//#masthead h1 {
-//	//margin-left: 65px;
-//    font-size: 35px;
-//    margin-top: 2px;
-//	letter-spacing: -2px;
-//	text-indent: -3px;
-//	font-weight: 700;
-//}
+main {
+    font-size: 16px;
+}
 
 main, footer {
 	max-width: 800px;
@@ -142,6 +143,12 @@ hr {
     margin: 0;
     padding: 0;
     clear: both;
+}
+
+.avatar {
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
 }
 
 #body-footer {
@@ -200,6 +207,23 @@ hr {
     height: 40px;
 }
 
+#error-header {
+    color: @accent-color;
+    font-weight: 600;
+    font-size: 8em;
+    text-align: center;
+    margin-top: 12px;
+}
+
+#error-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+}
+
+#error-text + p {
+    margin-bottom: 14px;
+}
+
 @media screen and (max-width: 580px) {
     #footer-info {
         white-space: normal;
@@ -222,7 +246,8 @@ hr {
     
     #head-content {
         #nav-bg {
-            background: #750008;
+            //background: #750008;
+            background: #9F0714;
             display: block;
             position: absolute;
             top: 55px;
