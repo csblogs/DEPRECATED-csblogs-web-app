@@ -23,9 +23,11 @@
         <div id="profile-header-content">
             <div class="avatar" style="background-image: url('{{blogger.avatarUrl}}');"></div>
             <div id="profile-header-title">
-                <h2>{{blogger.firstName}} {{blogger.lastName}}</h2>
-                <a id="ph-site" href="{{blogger.websiteUrl}}">{{urlFormat blogger.websiteUrl}}</a>
-                <p id="ph-orgs">Member of <em>University of Hull</em></p>
+                <ul>
+                    <li><h2>{{blogger.firstName}} {{blogger.lastName}}</h2></li>
+                    <li><a id="ph-site" href="{{blogger.websiteUrl}}">{{urlFormat blogger.websiteUrl}}</a></li>
+                    <li><p id="ph-orgs">Member of <em>University of Hull</em></p></li>
+                </ul>
             </div>
 <!--
             <a id="edit-btn" href="/">
