@@ -46,6 +46,7 @@ main {
         color: #fff;
         font-family: 'Open Sans', sans-serif;
         font-weight: 300;
+        text-align: left;
         margin: 0px;
         margin-left: 2px;
         line-height: 1em;
@@ -61,13 +62,21 @@ main {
     }
     
     #ph-site {
+        position: relative;
         margin: 6px 0px 10px 2px;
         font-size: 20px;
         text-decoration: none;
     }
 
-    #ph-site:hover {
-        text-decoration: underline;
+    // Underline effect for user's site. Better on non-HDPI screens.
+    #ph-site:hover::after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 0px;  
+        left: 0px;
+        bottom: 0px;
+        border-bottom: 1px solid #fff;  
     }
 }
 
