@@ -29,6 +29,7 @@ main {
 }
 
 #profile-header-content {
+    position: relative;
     max-width: 800px;
     margin: 0px auto;
     padding: 0px 25px;
@@ -41,10 +42,11 @@ main {
     height: 100%;
     
     p, a {
-        display: block;
+        display: inline-block;
         color: #fff;
         font-family: 'Open Sans', sans-serif;
         font-weight: 300;
+        text-align: left;
         margin: 0px;
         margin-left: 2px;
         line-height: 1em;
@@ -60,17 +62,59 @@ main {
     }
     
     #ph-site {
+        position: relative;
         margin: 6px 0px 10px 2px;
         font-size: 20px;
         text-decoration: none;
     }
 
-    #ph-site:hover {
-        text-decoration: underline;
+    // Underline effect for user's site. Better on non-HDPI screens.
+    #ph-site:hover::after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 0px;  
+        left: 0px;
+        bottom: 0px;
+        border-bottom: 1px solid #fff;  
     }
 }
 
-#profile-header-content:after {
+#edit-btn {
+    position: absolute;
+    bottom: -10px;
+    right: 25px;
+    width: 114px;
+    height: 24px;
+    -webkit-transition: background 0.4s ease-out;
+    -moz-transition: background 0.4s ease-out;
+    -o-transition: background 0.4s ease-out;
+    -ms-transition: background 0.4s ease-out;
+    transition: background 0.4s ease-out;
+    background: rgba(0,0,0,0.18);
+    border-radius: 6px;
+    padding: 7px 7px;
+    text-decoration: none;
+    
+    svg {
+        float: left;
+        height: 24px;
+        fill: rgba(255,255,255,0.85);
+    }
+    p {
+        float: left;
+        font-family: 'Open Sans', sans-serif;
+        margin: 5px 0px 0px 4px;
+        line-height: 1em;
+        color: rgba(255,255,255,0.85);
+    }
+}
+
+#edit-btn:hover {
+    background: rgba(0,0,0,0.28);
+}
+
+#profile-header-content:after, #edit-btn:after {
     content: '';
     clear: both;
     display: block;
@@ -206,11 +250,18 @@ hr {
             float: none;
         }
         
-        p, a {
+        li {
+            display: block;
+            margin: 0 auto;
             text-align: center;
             padding: 0 15%;
-            margin-left: 0px;
         }
+    }
+    
+    #edit-btn {
+        top: -8px;
+        right: 16px;
+        bottom: auto;
     }
     
     .avatar {
