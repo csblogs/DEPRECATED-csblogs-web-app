@@ -97,6 +97,53 @@ article footer {
     float: right;
 }
 
+#nav-pages:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.page-btn {
+    position: relative;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.page-btn:hover {
+    color: @accent-color;
+}
+
+#older {
+    float: left;
+    margin-left: 14px;
+}
+
+#newer {
+    float: right;
+    text-align: right;
+    margin-right: 14px;
+}
+
+#older:before {
+    content: '‹';
+    display: inline-block;
+    position: absolute;
+    top: -12px;
+    left: -14px;
+    margin-right: 5px;
+    font-size: 36px;
+}
+
+#newer:after {
+    content: '›';
+    display: inline-block;
+    position: absolute;
+    top: -12px;
+    right: -14px;
+    margin-left: 5px;
+    font-size: 36px;
+}
+
 @media screen and (max-width: 1130px) {
     article footer {
         padding: 0;
