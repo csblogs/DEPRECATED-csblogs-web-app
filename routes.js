@@ -13,7 +13,7 @@ module.exports = function(app) {
       res.render('login', {title : 'Login / CS Blogs'});
   });
 
-  app.get('/profile', function(req, res) {
+  app.get('/profile', ensureAuthenticated, function(req, res) {
       // Use provider id to get user from database
       console.log(req.user);
       blogger.findOne({userProvider: req.user.provider, userId: req.user.id}, function(error, profile) {
