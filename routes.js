@@ -18,7 +18,7 @@ module.exports = function(app) {
       console.log(req.user);
       blogger.findOne({userProvider: req.user.provider, userId: req.user.id}, function(error, profile) {
         console.log(profile)
-        console.err(error);        
+        console.error(error);        
         if(error) {
             internalError(res, error ? error : "Unknown error connecting to blogger database");
         }
