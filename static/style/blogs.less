@@ -97,6 +97,54 @@ article footer {
     float: right;
 }
 
+#nav-pages {
+    margin: 18px 8px 0px 8px;
+}
+
+#nav-pages:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.page-btn {
+    position: relative;
+    text-decoration: none;
+    
+    svg {
+        width: 18px;
+        margin: 0px 4px;
+        fill: @link-color;
+    }
+    
+    p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 20px;
+        color: @link-color;
+        line-height: 1em;
+        margin: 0px;
+        margin-top: 6px;
+        vertical-align: top;
+    }
+    
+    * {
+        display: inline-block;
+    }
+}
+
+.page-btn:hover * {
+    color: @accent-color;
+    fill: @accent-color;
+}
+
+#older {
+    float: left;
+}
+
+#newer {
+    float: right;
+}
+
 @media screen and (max-width: 1130px) {
     article footer {
         padding: 0;

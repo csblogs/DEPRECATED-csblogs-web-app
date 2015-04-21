@@ -18,18 +18,18 @@ module.exports = function(app) {
       console.log(req.user);
       blogger.findOne({userProvider: req.user.provider, userId: req.user.id}, function(error, profile) {
         console.log(profile)
-        console.error(error);        
-        if(error) {
-            internalError(res, error ? error : "Unknown error connecting to blogger database");
+        console.error(error);
+        if (error) {
+            internalError(res, error);
         }
-        else if(!profile) {
+        else if (!profile) {
             //Blogger not registered.
             res.redirect('/register');
-        } 
+        }
         else {
             var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
             res.render('profile', {title: nameTitle, blogger: profile});
-        } 
+        }
       });
   });
 
