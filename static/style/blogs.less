@@ -110,42 +110,38 @@ article footer {
 .page-btn {
     position: relative;
     text-decoration: none;
-    font-size: 20px;
+    
+    svg {
+        width: 18px;
+        margin: 0px 4px;
+        fill: @accent-color;
+    }
+    
+    p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 20px;
+        color: @link-color;
+        line-height: 1em;
+        margin: 0px;
+        margin-top: 6px;
+        vertical-align: top;
+    }
+    
+    * {
+        display: inline-block;
+    }
 }
 
-.page-btn:hover {
+.page-btn:hover p {
     color: @accent-color;
 }
 
 #older {
     float: left;
-    margin-left: 15px;
 }
 
 #newer {
     float: right;
-    text-align: right;
-    margin-right: 15px;
-}
-
-#older:before {
-    content: '‹';
-    font-weight: 300;
-    display: inline-block;
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    font-size: 38px;
-}
-
-#newer:after {
-    content: '›';
-    font-weight: 300;
-    display: inline-block;
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    font-size: 38px;
 }
 
 @media screen and (max-width: 1130px) {
