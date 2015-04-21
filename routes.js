@@ -13,9 +13,24 @@ module.exports = function(app) {
       res.render('login', {title : 'Login / CS Blogs'});
   });
 
-  app.get('/profile', function(req, res) {
+  app.get('/profile', ensureAuthenticated, function(req, res) {
       // Use provider id to get user from database
-      res.render('profile', {title: 'Your Profile / CS Blogs'});
+      console.log(req.user);
+      blogger.findOne({userProvider: req.user.provider, userId: req.user.id}, function(error, profile) {
+        console.log(profile)
+        console.error(error);        
+        if(error) {
+            internalError(res, error ? error : "Unknown error connecting to blogger database");
+        }
+        else if(!profile) {
+            //Blogger not registered.
+            res.redirect('/register');
+        } 
+        else {
+            var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
+            res.render('profile', {title: nameTitle, blogger: profile});
+        } 
+      });
   });
 
   app.get('/bloggers', function(req, res) {
@@ -59,7 +74,10 @@ module.exports = function(app) {
         res.render('register', {title: 'Register / CS Blogs', submitText: 'Add your blog', user: req.user});
   	})
 	.post(ensureAuthenticated, function(req, res) {
-		newBlogger = new blogger({firstName:          req.body.first_name,
+		newBlogger = new blogger({
+                                  userProvider:       req.user.provider,
+                                  userId:             req.user.id,
+                                  firstName:          req.body.first_name,
 		                          lastName:           req.body.last_name,
                                   avatarUrl:          req.user._json.avatar_url,
 		                          emailAddress:       req.body.email,
