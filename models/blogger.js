@@ -3,6 +3,10 @@ var validator = require('validator');
 var Schema = mongoose.Schema;
 
 var bloggerSchema = new Schema({
+  //Log in Details
+  userProvider : String,
+  userId : String,
+
   //Personal Details
   firstName : String,
   lastName : String,
