@@ -22,7 +22,7 @@
 
 body {
 	background: #fff;
-    font-family: "Open Sans", sans-serif;
+    font-family: @sans-serif-font;
     width: 100%;
 }
 
@@ -99,6 +99,19 @@ body {
     #addblog-sml-btn {
         display: none;
     }
+    
+    .avatar {
+        width: 40px;
+        height: 40px;
+        display: block;
+        position: absolute;
+        top: -12px;
+        right: 0px;
+    }
+    
+    li:nth-child(4) {
+        width: 40px;
+    }
 }
 
 #site-title svg {
@@ -131,7 +144,7 @@ p {
 	line-height: 1.7em;
     color: @text-color;
 	margin: 10px 0px;
-    font-family: "Merriweather", serif;
+    font-family: @serif-font;
 }
 
 hr {
@@ -195,7 +208,7 @@ hr {
     p {
         font-size: 14px;
         line-height: 120%;
-        font-family: "Open Sans", sans-serif;
+        font-family: @sans-serif-font;
     }
 }
 
@@ -216,7 +229,7 @@ hr {
 }
 
 #error-text {
-    font-family: 'Open Sans', sans-serif;
+    font-family: @sans-serif-font;
     font-size: 18px;
 }
 
@@ -286,6 +299,10 @@ hr {
         }
         #addblog-btn:hover {
             background: none;
+        }
+        
+        .avatar {
+            display: none;
         }
     }
 }

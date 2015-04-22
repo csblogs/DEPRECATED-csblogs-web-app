@@ -23,7 +23,8 @@
                         <li><a href="/profile">Profile</a></li>
                         <li><a href="/bloggers">Bloggers</a></li>
                         {{#if loggedIn}}
-                        <li><a href="#">Log Out</a></li>
+                        <li><a href="#">Log out</a></li>
+                        <li><a class="avatar" style="background-image: url('{{user.avatar}}');"></a></li>
                         {{else}}
                         <li id="addblog-btn"><a href="/register">Add your blog</a></li>
                         <li id="addblog-sml-btn"><a href="/register">Add blog</a></li>
