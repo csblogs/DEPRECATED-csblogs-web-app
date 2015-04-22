@@ -33,6 +33,13 @@ module.exports = function(app) {
       });
   });
 
+  app.route('/account')
+    .get(ensureAuthenticated, function(req, res) {
+        res.render('register', {title: 'Account / CS Blogs', submitText: 'Update profile', user: req.user});
+  })
+    .post(ensureAuthenticated, function(req, res) {
+  });
+
   app.get('/bloggers', function(req, res) {
       blogger.find({}, function(error, allBloggers) {
         if (error || !allBloggers) {
