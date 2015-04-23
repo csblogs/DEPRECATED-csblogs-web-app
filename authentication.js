@@ -1,7 +1,29 @@
 var passport = require('passport');
+var blogger = require('./models/blogger').Blogger;
 var GitHubStrategy = require('passport-github').Strategy;
 var WordpressStrategy = require('passport-wordpress').Strategy;
 var StackExchangeStrategy = require('passport-stackexchange').Strategy;
+
+function normalizeUser(profile) {
+	console.log("PROFILE:  %j", profile);
+	
+	// Find user in database
+    blogger.findOne({userProvider: req.user.provider, userId: req.user.id}, function(error, userInDB) {
+        console.log("USER IN DB: %j", userInDB);
+        console.error(error);
+        
+        if (error) {
+            internalError(res, error);
+        }
+        else if (!userInDB) {
+            //Blogger not registered.
+			return profile;
+        }
+        else {
+            return userInDB;
+        }
+    });
+}
 
 //Github
 passport.use(new GitHubStrategy({
@@ -12,7 +34,7 @@ passport.use(new GitHubStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         console.log("Github User logged in: " + profile.id);
-        done(null, profile);
+        done(null, normalizeUser(profile));
     }
 ));
 
@@ -24,7 +46,7 @@ passport.use(new WordpressStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         console.log("Wordpress User logged in: " + profile.id);
-        done(null, profile);
+        done(null, normalizeUser(profile));
     }
 ));
 
@@ -37,7 +59,7 @@ passport.use(new StackExchangeStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         console.log("Stack Exchange User logged in: " + profile.id);
-        done(null, profile);
+        done(null, normalizeUser(profile));
     }
 ));
 
