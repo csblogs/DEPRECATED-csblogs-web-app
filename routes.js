@@ -20,9 +20,7 @@ module.exports = function(app) {
 
     app.get('/profile', ensureAuthenticated, function(req, res) {
         // Use provider id to get user from database
-        console.log(req.user);
-        
-        blogger.findOne({userProvider: req.user.provider, userId: req.user.id}, function(error, profile) {
+        blogger.findOne({userProvider: req.user.userProvider, userId: req.user.userId}, function(error, profile) {
             console.log(profile);
             console.error(error);
             
