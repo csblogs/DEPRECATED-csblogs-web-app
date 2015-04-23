@@ -38,7 +38,8 @@ module.exports = function(app) {
                 var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
                 res.render('profile', {
                     title: nameTitle,
-                    blogger: profile
+                    blogger: profile,
+                    user: req.user
                 });
             }
         });
@@ -61,7 +62,8 @@ module.exports = function(app) {
             } else {
                 res.render('bloggers', {
                     title: 'Bloggers / CS Blogs',
-                    bloggers: allBloggers
+                    bloggers: allBloggers,
+                    user: req.user
                 });
             }
         });
@@ -86,7 +88,8 @@ module.exports = function(app) {
                 var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
                 res.render('profile', {
                     title: nameTitle,
-                    blogger: profile
+                    blogger: profile,
+                    user: req.user
                 });
             }
         });
@@ -130,7 +133,8 @@ module.exports = function(app) {
         var blogs = require('./test-data/blogs.json');
         res.render('blogs', {
             title: 'Blogs / CS Blogs',
-            content: blogs
+            content: blogs,
+            user: req.user
         });
     });
 
@@ -140,7 +144,8 @@ module.exports = function(app) {
         res.render('error', {
             title: 'Error 404 / CS Blogs',
             errorCode: 404,
-            errorMessage: 'Page Not Found'
+            errorMessage: 'Page Not Found',
+            user: req.user
         });
     });
 
@@ -154,7 +159,8 @@ module.exports = function(app) {
         res.render('error', {
             title: 'Error 500 / CS Blogs',
             errorCode: 500,
-            errorMessage: errorMessage
+            errorMessage: errorMessage,
+            user: req.user
         });
     }
 }
