@@ -159,8 +159,7 @@ module.exports = function(app) {
         res.render('error', {
             title: 'Error 500 / CS Blogs',
             errorCode: 500,
-            errorMessage: errorMessage,
-            user: req.user
+            errorMessage: errorMessage
         });
     }
 }
