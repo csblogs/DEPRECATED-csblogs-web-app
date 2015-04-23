@@ -22,7 +22,7 @@
                     <ul>
                         <li><a href="/profile">Profile</a></li>
                         <li><a href="/bloggers">Bloggers</a></li>
-                        {{#if loggedIn}}
+                        {{#if user}}
                         <li><a href="#">Log out</a></li>
                         <li><a class="avatar" style="background-image: url('{{user.avatar}}');"></a></li>
                         {{else}}
