@@ -42,3 +42,7 @@ exports.urlFormat = function(url) {
 	    return url;
 	} 
 }
+
+exports.editable = function(user, blogger) {
+    return ((user.userId === blogger.userId) && (user.userProvider === blogger.userProvider));
+}
