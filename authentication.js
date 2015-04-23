@@ -5,11 +5,11 @@ var WordpressStrategy = require('passport-wordpress').Strategy;
 var StackExchangeStrategy = require('passport-stackexchange').Strategy;
 
 function normalizeUser(profile) {
-	console.log("PROFILE:  %j", profile);
+	console.log("PROFILE:  %j\n\n", profile);
 	
 	// Find user in database
-    blogger.findOne({userProvider: req.user.provider, userId: req.user.id}, function(error, userInDB) {
-        console.log("USER IN DB: %j", userInDB);
+    blogger.findOne({userProvider: profile.provider, userId: profile.id}, function(error, userInDB) {
+        console.log("USER IN DB: %j\n\n", userInDB);
         console.error(error);
         
         if (error) {
