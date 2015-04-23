@@ -7,7 +7,8 @@ module.exports = function(app) {
 
     app.get('/', function(req, res) {
         res.render('index', {
-            title: 'Index / CS Blogs'
+            title: 'Index / CS Blogs',
+            user: req.user
         });
     });
 
@@ -33,6 +34,7 @@ module.exports = function(app) {
                 res.redirect('/register');
             }
             else {
+                req.user = profile;
                 var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
                 res.render('profile', {
                     title: nameTitle,
