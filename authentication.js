@@ -34,7 +34,9 @@ passport.use(new GitHubStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         console.log("Github User logged in: " + profile.id);
-        done(null, normalizeUser(profile));
+		var usr = normalizeUser(profile);
+		console.log("Normalized User: %j", usr);
+        done(null, usr);
     }
 ));
 
