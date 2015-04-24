@@ -103,38 +103,80 @@ module.exports = function(app) {
         .get(ensureAuthenticated, function(req, res) {
 			console.log("/register GET called");
 			
-            var usersName = req.user.displayName.split(' ');
-            req.user.firstname = usersName[0];
-            req.user.lastname = usersName[1];
-            res.render('register', {
-                title: 'Register / CS Blogs',
-                submitText: 'Add your blog',
-                user: req.user
-            });
+			if(req.user.userProvider && req.user.userId) {
+				//Already registered user doing an edit.
+	            res.render('register', {
+	                title: 'Edit Account / CS Blogs',
+	                submitText: 'Update',
+	                user: req.user
+	            });
+			}
+			else {
+				//User is logged in with an account, but not registered.
+				//We need to parse thier data out and put it into the form
+				//to aid them filling it in.
+				switch(req.user.provider) {
+					case 'github':
+			            var usersName = req.user.displayName.split(' ');				
+			            var userAsBlogger = new blogger({
+							avatarUrl: 		req.user._json.avatar_url,
+			                firstName: 		usersName[0],
+			                lastName: 		usersName[1],
+			                emailAddress: 	req.user._json.email,
+			                blogWebsiteUrl: req.user._json.blog,
+			                githubProfile: 	req.user._json.login,
+			                bio: 			req.user._json.bio,
+			                vanityUrl: 		req.user.username,
+			            });
+						break;
+					case 'Wordpress':
+			            var userAsBlogger = new blogger({
+							avatarUrl: 		req.user._json.avatar_URL,
+			                emailAddress: 	req.user._json.email,
+			                blogWebsiteUrl: "http://" + req.user._json.user + ".wordpress.com",
+			                vanityUrl: 		req.user._json.display_name,
+			            });
+						break;
+				}
+				
+	            res.render('register', {
+	                title: 'Register / CS Blogs',
+	                submitText: 'Register',
+	                user: userAsBlogger
+	            });
+			}
         })
         .post(ensureAuthenticated, function(req, res) {
 			console.log("/register POST called");
 			
+			//VALIDATE FIELDS HERE
+			
             newBlogger = new blogger({
                 userProvider: req.user.provider,
                 userId: req.user.id,
-                firstName: req.body.first_name,
-                lastName: req.body.last_name,
-                avatarUrl: req.user._json.avatar_url,
-                emailAddress: req.body.email,
-                feedUrl: req.body.feed_url,
-                blogWebsiteUrl: req.body.blog_url,
-                websiteUrl: req.body.site_url,
-                cvUrl: req.body.cv_url,
-                githubProfile: req.body.github_name,
-                twitterProfile: req.body.twitter_name,
-                linkedInProfile: req.body.linkedIn_name,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                emailAddress: req.body.emailAddress,
+                feedUrl: req.body.feedUrl,
+                blogWebsiteUrl: req.body.blogWebsiteUrl,
+                websiteUrl: req.body.websiteUrl,
+                cvUrl: req.body.cvUrl,
+                githubProfile: req.body.githubProfile,
+                twitterProfile: req.body.twitterProfile,
+                linkedInProfile: req.body.linkedInProfile,
                 bio: req.body.bio,
-                vanityUrl: req.body.vanity_url,
+                vanityUrl: req.body.vanityUrl,
                 validated: false
             });
-            newBlogger.save();
 			
+			switch(req.user.provider) {
+				case 'github':
+					newBlogger.avatarUrl = req.user._json.avatar_url;
+				case 'Wordpress':
+					newBlogger.avatarUrl = req.user._json.avatar_URL;
+			}
+			
+            newBlogger.save();
 			req.session.passport.user = newBlogger;			
             res.redirect('/profile');
     });
