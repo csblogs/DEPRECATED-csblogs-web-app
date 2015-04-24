@@ -10,7 +10,7 @@ function normalizeUser(profile) {
 	// Find user in database
     blogger.findOne({userProvider: profile.provider, userId: profile.id}, function(error, userInDB) {
         console.log("USER IN DB: %j\n\n", userInDB);
-        console.error(error);
+        console.error("Error occured finding user in DB: %j", error);
         
         if (error) {
             internalError(res, error);
