@@ -135,10 +135,7 @@ module.exports = function(app) {
             });
             newBlogger.save();
 			
-			console.log('\n\n\n\n REQ.USER Before assign', req.user);
-			req.user = newBlogger;
-			console.log('\n\n\n\n REQ.USER after assign', req.user);
-			
+			req.session.passport.user = newBlogger;			
             res.redirect('/profile');
     });
 
