@@ -21,7 +21,7 @@ function normalizeUser(profile, callback) {
         }
         else {
 	        console.log("USER IN DB: %j\n\n", userInDB);
-            callback(profile);
+            callback(userInDB);
         }
     });
 }
