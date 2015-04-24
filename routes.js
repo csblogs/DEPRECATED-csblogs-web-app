@@ -175,11 +175,11 @@ module.exports = function(app) {
 			
 			switch(req.user.provider) {
 				case 'github':
-                	userId = req.user.id,
+                	newBlogger.userId = req.user.id,
 					newBlogger.avatarUrl = req.user._json.avatar_url;
 					break;
 				case 'Wordpress':
-					userId = req.user._json.ID;
+					newBlogger.userId = req.user._json.ID;
 					newBlogger.avatarUrl = req.user._json.avatar_URL;
 					break;
 			}
