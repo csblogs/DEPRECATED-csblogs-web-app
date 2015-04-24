@@ -7,8 +7,18 @@ var StackExchangeStrategy = require('passport-stackexchange').Strategy;
 function normalizeUser(profile, callback) {
 	console.log("PROFILE:  %j\n\n", profile);
 	
+	var identifier = '';
+	switch(profile.provider) { 
+		case 'github':
+			identifier = profile.id;
+			break;
+		case 'Wordpress':
+			identifier = profile._json.ID;
+			break;
+	}
+	
 	// Find user in database
-    blogger.findOne({userProvider: profile.provider, userId: profile.id}, function(error, userInDB) {
+    blogger.findOne({userProvider: profile.provider, userId: identifier}, function(error, userInDB) {
         if (error) {
 	        console.error("Error occured finding user in DB: %j", error);
             internalError(res, error);

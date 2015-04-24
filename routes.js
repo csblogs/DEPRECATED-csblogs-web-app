@@ -158,7 +158,6 @@ module.exports = function(app) {
 			
 			var newBlogger = new blogger({
                 userProvider: 		req.user.provider,
-                userId: 			req.user.id,
                 firstName: 			req.body.firstName,
                 lastName: 			req.body.lastName,
                 emailAddress: 		req.body.emailAddress,
@@ -176,9 +175,11 @@ module.exports = function(app) {
 			
 			switch(req.user.provider) {
 				case 'github':
+                	userId = req.user.id,
 					newBlogger.avatarUrl = req.user._json.avatar_url;
 					break;
 				case 'Wordpress':
+					userId = req.user._json.ID;
 					newBlogger.avatarUrl = req.user._json.avatar_URL;
 					break;
 			}
