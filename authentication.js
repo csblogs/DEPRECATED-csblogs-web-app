@@ -55,8 +55,17 @@ passport.use(new WordpressStrategy({
         callbackURL: "http://csblogs.com/auth/wordpress/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        console.log("Wordpress User logged in: " + profile.id);
-        done(null, normalizeUser(profile));
+        console.log("WordPress User logged in: " + profile.id);
+		normalizeUser(profile, function(normalizedUser) {
+			console.log("Normalized User: %j", normalizedUser);
+			if(normalizedUser != null) {
+				done(null, normalizedUser);
+			}
+			else {
+				//Error
+				done(normalizedUser);
+			}
+		});
     }
 ));
 
@@ -69,7 +78,16 @@ passport.use(new StackExchangeStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         console.log("Stack Exchange User logged in: " + profile.id);
-        done(null, normalizeUser(profile));
+		normalizeUser(profile, function(normalizedUser) {
+			console.log("Normalized User: %j", normalizedUser);
+			if(normalizedUser != null) {
+				done(null, normalizedUser);
+			}
+			else {
+				//Error
+				done(normalizedUser);
+			}
+		});
     }
 ));
 
@@ -84,9 +102,8 @@ passport.deserializeUser(function(obj, done) {
 exports.Passport = passport;
 
 exports.ensureAuthenticated = function(req, res, next) {
-    console.log("USER LOGGED IN : %j", req.user)
-
     if (req.isAuthenticated()) {
+		console.log("User logged in")
         return next();
     } else {
         console.log("Not logged in")
