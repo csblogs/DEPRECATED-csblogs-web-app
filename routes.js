@@ -45,15 +45,18 @@ module.exports = function(app) {
 
     app.route('/account')
         .get(ensureAuthenticated, function(req, res) {
-			console.log("/account called");
+			console.log("/account GET called");
 			
             res.render('register', {
                 title: 'Account / CS Blogs',
+                postAction: 'account',
                 submitText: 'Update profile',
                 user: req.user
             });
         })
-        .post(ensureAuthenticated, function(req, res) {});
+        .post(ensureAuthenticated, function(req, res) {
+            console.log('/account POST called');
+    });
 
     app.get('/bloggers', function(req, res) {
 		console.log("/bloggers called");
@@ -102,7 +105,7 @@ module.exports = function(app) {
     app.route('/register')
         .get(ensureAuthenticated, function(req, res) {
 			console.log("/register GET called");
-			
+
 			if(req.user.userProvider && req.user.userId) {
 				//Already registered user doing an edit.
 	            res.render('register', {
