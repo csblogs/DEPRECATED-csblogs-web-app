@@ -4,7 +4,7 @@ var GitHubStrategy = require('passport-github').Strategy;
 var WordpressStrategy = require('passport-wordpress').Strategy;
 var StackExchangeStrategy = require('passport-stackexchange').Strategy;
 
-function normalizeUser(profile) {
+function normalizeUser(profile, callback) {
 	console.log("PROFILE:  %j\n\n", profile);
 	
 	// Find user in database
@@ -12,15 +12,16 @@ function normalizeUser(profile) {
         if (error) {
 	        console.error("Error occured finding user in DB: %j", error);
             internalError(res, error);
+			callback(null);
         }
         else if (!userInDB) {
             //Blogger not registered.
 			console.log("NO USER IN DB");
-			return profile;
+			callback(profile);
         }
         else {
 	        console.log("USER IN DB: %j\n\n", userInDB);
-            return userInDB;
+            callback(profile);
         }
     });
 }
@@ -34,9 +35,16 @@ passport.use(new GitHubStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         console.log("Github User logged in: " + profile.id);
-		var usr = normalizeUser(profile);
-		console.log("Normalized User: %j", usr);
-        done(null, usr);
+		normalizeUser(profile, function(normalizedUser) {
+			console.log("Normalized User: %j", normalizedUser);
+			if(normalizedUser != null) {
+				done(null, normalizedUser);
+			}
+			else {
+				//Error
+				done(normalizedUser);
+			}
+		});
     }
 ));
 
