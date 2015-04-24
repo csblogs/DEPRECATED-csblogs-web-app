@@ -177,8 +177,10 @@ module.exports = function(app) {
 			switch(req.user.provider) {
 				case 'github':
 					newBlogger.avatarUrl = req.user._json.avatar_url;
+					break;
 				case 'Wordpress':
 					newBlogger.avatarUrl = req.user._json.avatar_URL;
+					break;
 			}
 			
             newBlogger.save();
