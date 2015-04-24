@@ -133,6 +133,8 @@ module.exports = function(app) {
                 validated: false
             });
             newBlogger.save();
+			
+			req.user = newBlogger;
             res.redirect('/profile');
     });
 
