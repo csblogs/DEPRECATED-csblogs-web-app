@@ -9,17 +9,17 @@ function normalizeUser(profile) {
 	
 	// Find user in database
     blogger.findOne({userProvider: profile.provider, userId: profile.id}, function(error, userInDB) {
-        console.log("USER IN DB: %j\n\n", userInDB);
-        console.error("Error occured finding user in DB: %j", error);
-        
         if (error) {
+	        console.error("Error occured finding user in DB: %j", error);
             internalError(res, error);
         }
         else if (!userInDB) {
             //Blogger not registered.
+			console.log("NO USER IN DB");
 			return profile;
         }
         else {
+	        console.log("USER IN DB: %j\n\n", userInDB);
             return userInDB;
         }
     });

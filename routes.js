@@ -6,6 +6,8 @@ module.exports = function(app) {
     authentication.serveOAuthRoutes(app);
 
     app.get('/', function(req, res) {
+		console.log("/ called");
+		
         res.render('index', {
             title: 'Index / CS Blogs',
             user: req.user
@@ -13,12 +15,16 @@ module.exports = function(app) {
     });
 
     app.get('/login', function(req, res) {
+		console.log("/login called");
+		
         res.render('login', {
             title: 'Login / CS Blogs'
         });
     });
 
     app.get('/profile', ensureAuthenticated, function(req, res) {
+		console.log("/profile called");
+		
 		if(req.user.userProvider && req.user.userId) {
 			console.log("Registered user");
 			console.log("Blogger user: %j", req.user);
@@ -38,6 +44,8 @@ module.exports = function(app) {
 
     app.route('/account')
         .get(ensureAuthenticated, function(req, res) {
+			console.log("/account called");
+			
             res.render('register', {
                 title: 'Account / CS Blogs',
                 submitText: 'Update profile',
@@ -47,6 +55,8 @@ module.exports = function(app) {
         .post(ensureAuthenticated, function(req, res) {});
 
     app.get('/bloggers', function(req, res) {
+		console.log("/bloggers called");
+		
         blogger.find({}, function(error, allBloggers) {
             if (error || !allBloggers) {
                 internalError(res, error ? error : "No bloggers found.");
@@ -61,10 +71,12 @@ module.exports = function(app) {
     });
 
     app.get('/bloggers/:vanityurl', function(req, res) {
+		console.log("/bloggers/:vanityurl called")
         renderBlogger(req, res);
     });
 
     app.get('/b/:vanityurl', function(req, res) {
+		console.log("/b/:vanityurl called");
         renderBlogger(req, res);
     });
 
@@ -88,6 +100,8 @@ module.exports = function(app) {
 
     app.route('/register')
         .get(ensureAuthenticated, function(req, res) {
+			console.log("/register GET called");
+			
             var usersName = req.user.displayName.split(' ');
             req.user.firstname = usersName[0];
             req.user.lastname = usersName[1];
@@ -98,6 +112,8 @@ module.exports = function(app) {
             });
         })
         .post(ensureAuthenticated, function(req, res) {
+			console.log("/register POST called");
+			
             newBlogger = new blogger({
                 userProvider: req.user.provider,
                 userId: req.user.id,
@@ -121,6 +137,8 @@ module.exports = function(app) {
     });
 
     app.get('/blogs', function(req, res) {
+		console.log("/blogs called");
+		
         var blogs = require('./test-data/blogs.json');
         res.render('blogs', {
             title: 'Blogs / CS Blogs',
@@ -131,6 +149,8 @@ module.exports = function(app) {
 
     // Handle error 404
     app.use(function(req, res) {
+		console.error("ERROR 404. Request: %j", req);
+		
         res.status(404);
         res.render('error', {
             title: 'Error 404 / CS Blogs',
@@ -142,6 +162,7 @@ module.exports = function(app) {
 
     // Handle error 500
     app.use(function(error, req, res, next) {
+		console.error("ERROR 500. Error: %j", error);
         internalError(res, error);
     });
 
