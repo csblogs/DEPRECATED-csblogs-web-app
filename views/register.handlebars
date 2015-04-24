@@ -4,22 +4,22 @@
 {{/section}}
 
 <div id="body-content">
-    <div class="avatar" style="background-image: url('{{user._json.avatar_url}}');"></div>
+    <div class="avatar" style="background-image: url('{{user.avatarUrl}}');"></div>
 
     <form method="post" action="/{{postAction}}">
         <h2>Your Profile</h2>
         <div class="row">
             <div class="input-field column">
-                <input id="first_name" name="first_name" type="text" value="{{user.firstname}}">
+                <input id="first_name" name="firstName" type="text" value="{{user.firstName}}">
                 <label for="first_name">First Name</label>
             </div>
             <div class="input-field column">
-                <input id="last_name" name="last_name" type="text" value="{{user.lastname}}">
+                <input id="last_name" name="lastName" type="text" value="{{user.lastName}}">
                 <label for="last_name">Last Name</label>
             </div>
         </div>
         <div class="input-field">
-            <input id="email" name="email" type="email" value="{{user._json.email}}">
+            <input id="email" name="emailAddress" type="email" value="{{user.emailAddress}}">
             <label for="email">Email Address</label>
         </div>
         <div class="input-field">
@@ -28,38 +28,38 @@
         </div>
         <p id="bio-desc">A short bio about yourself, up to 120 characters.</p>
         <div class="input-field">
-            <input id="vanity_url" name="vanity_url" type="text" value="{{user.username}}">
+            <input id="vanity_url" name="vanityUrl" type="text" value="{{user.vanityUrl}}">
             <label for="vanity_url">Profile Name</label>
         </div>
         <p>This will be used in your profile URL (e.g. csblogs.com/yourname)</p>
         <h2>Your Content</h2>
         <div class="input-field">
-            <input id="feed_url" name="feed_url" type="url">
-            <label for="feed_url">Blog Feed URL</label>
+            <input id="feed_url" name="feedUrl" type="url">
+            <label for="feedUrl">Blog Feed URL</label>
         </div>
         <div class="input-field">
-            <input id="blog_url" name="blog_url" type="url" value="{{user._json.blog}}">
+            <input id="blog_url" name="blogWebsiteUrl" type="url" value="{{user.blogWebsiteUrl}}">
             <label for="blog_url">Blog Website URL</label>
         </div>
         <div class="input-field">
-            <input id="site_url" name="site_url" type="url">
+            <input id="site_url" name="websiteUrl" type="url" value="{{user.websiteUrl}}">
             <label for="site_url">Website URL</label>
         </div>
         <div class="input-field">
-            <input id="cv_url" name="cv_url" type="url">
-            <label for="cv_url">Curriculum Vitae URL</label>
+            <input id="cv_url" name="cvUrl" type="url" value="{{user.cvUrl}}">
+            <label for="cvUrl">Curriculum Vitae URL</label>
         </div>
         <h2>Social Links</h2>
         <div class="input-field">
-            <input id="github_name" name="github_name" type="text" value="{{user._json.login}}">
+            <input id="github_name" name="githubProfile" type="text" value="{{user.githubProfile}}">
             <label for="github_name">GitHub Name</label>
         </div>
         <div class="input-field">
-            <input id="twitter_name" name="twitter_name" type="text">
+            <input id="twitter_name" name="twitterProfile" type="text" value="{{user.twitterProfile}}">
             <label for="twitter_name">Twitter Name</label>
         </div>
         <div class="input-field">
-            <input id="linkedIn_name" name="linkedIn_name" type="text">
+            <input id="linkedIn_name" name="linkedInProfile" type="text" value="{{user.linkedInProfile}}">
             <label for="linkedIn_name">LinkedIn Name</label>
         </div>
         <input id="submit-button" type="submit" value="{{submitText}}">
