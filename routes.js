@@ -111,6 +111,7 @@ module.exports = function(app) {
 	            res.render('register', {
 	                title: 'Edit Account / CS Blogs',
 	                submitText: 'Update',
+					postAction: 'account',
 	                user: req.user
 	            });
 			}
@@ -145,7 +146,8 @@ module.exports = function(app) {
 	            res.render('register', {
 	                title: 'Register / CS Blogs',
 	                submitText: 'Register',
-	                user: userAsBlogger
+					postAction: 'register',
+	                user: userAsBlogger,
 	            });
 			}
         })
@@ -154,22 +156,22 @@ module.exports = function(app) {
 			
 			//VALIDATE FIELDS HERE
 			
-            newBlogger = new blogger({
-                userProvider: req.user.provider,
-                userId: req.user.id,
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                emailAddress: req.body.emailAddress,
-                feedUrl: req.body.feedUrl,
-                blogWebsiteUrl: req.body.blogWebsiteUrl,
-                websiteUrl: req.body.websiteUrl,
-                cvUrl: req.body.cvUrl,
-                githubProfile: req.body.githubProfile,
-                twitterProfile: req.body.twitterProfile,
-                linkedInProfile: req.body.linkedInProfile,
-                bio: req.body.bio,
-                vanityUrl: req.body.vanityUrl,
-                validated: false
+			var newBlogger = new blogger({
+                userProvider: 		req.user.provider,
+                userId: 			req.user.id,
+                firstName: 			req.body.firstName,
+                lastName: 			req.body.lastName,
+                emailAddress: 		req.body.emailAddress,
+                feedUrl: 			req.body.feedUrl,
+                blogWebsiteUrl: 	req.body.blogWebsiteUrl,
+                websiteUrl: 		req.body.websiteUrl,
+                cvUrl: 				req.body.cvUrl,
+                githubProfile: 		req.body.githubProfile,
+                twitterProfile: 	req.body.twitterProfile,
+                linkedInProfile: 	req.body.linkedInProfile,
+                bio: 				req.body.bio,
+                vanityUrl: 			req.body.vanityUrl,
+                validated: 			false
             });
 			
 			switch(req.user.provider) {
