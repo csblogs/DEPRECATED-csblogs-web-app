@@ -19,28 +19,21 @@ module.exports = function(app) {
     });
 
     app.get('/profile', ensureAuthenticated, function(req, res) {
-        // Use provider id to get user from database
-        blogger.findOne({userProvider: req.user.userProvider, userId: req.user.userId}, function(error, profile) {
-            console.log(profile);
-            console.error(error);
-            
-            if (error) {
-                internalError(res, error);
-            }
-            else if (!profile) {
-                //Blogger not registered.
-                res.redirect('/register');
-            }
-            else {
-                req.user = profile;
-                var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
-                res.render('profile', {
-                    title: nameTitle,
-                    blogger: profile,
-                    user: req.user
-                });
-            }
-        });
+		if(req.user.userProvider && req.user.userId) {
+			console.log("Registered user");
+			console.log("Blogger user: %j", req.user);
+			var nameTitle = req.user.firstName + ' ' + req.user.lastName + ' / CS Blogs';
+            res.render('profile', {
+                title: nameTitle,
+                blogger: req.user,
+				user: req.user
+            });
+		}
+		else {
+			console.log("Not a registered user");
+			console.log("Passport.js user: %j", req.user);
+			res.redirect('/register');
+		}
     });
 
     app.route('/account')
