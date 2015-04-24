@@ -45,15 +45,18 @@ module.exports = function(app) {
 
     app.route('/account')
         .get(ensureAuthenticated, function(req, res) {
-			console.log("/account called");
+			console.log("/account GET called");
 			
             res.render('register', {
                 title: 'Account / CS Blogs',
+                postAction: 'account',
                 submitText: 'Update profile',
                 user: req.user
             });
         })
-        .post(ensureAuthenticated, function(req, res) {});
+        .post(ensureAuthenticated, function(req, res) {
+            console.log('/account POST called');
+    });
 
     app.get('/bloggers', function(req, res) {
 		console.log("/bloggers called");
@@ -108,6 +111,7 @@ module.exports = function(app) {
             req.user.lastname = usersName[1];
             res.render('register', {
                 title: 'Register / CS Blogs',
+                postAction: 'register',
                 submitText: 'Add your blog',
                 user: req.user
             });
