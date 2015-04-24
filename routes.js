@@ -147,6 +147,12 @@ module.exports = function(app) {
         });
     });
 
+	app.get('/logout', function(req, res) {
+		console.log("/logout called");
+	  	req.logout();
+	  	res.redirect('/');
+	});
+
     // Handle error 404
     app.use(function(req, res) {
 		console.error("ERROR 404. Request: %j", req);
