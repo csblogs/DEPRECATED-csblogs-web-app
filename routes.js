@@ -141,6 +141,13 @@ module.exports = function(app) {
 			                vanityUrl: 		req.user._json.display_name,
 			            });
 						break;
+					case 'stackexchange':
+			            var userAsBlogger = new blogger({
+							avatarUrl: 		req.user.profile_image,
+			                vanityUrl: 		req.user.display_name,
+							websiteUrl: 	req.user.website_url
+			            });
+						break;
 				}
 				
 	            res.render('register', {
@@ -181,6 +188,10 @@ module.exports = function(app) {
 				case 'Wordpress':
 					newBlogger.userId = req.user._json.ID;
 					newBlogger.avatarUrl = req.user._json.avatar_URL;
+					break;
+				case 'stackexchange':
+					newBlogger.userId = req.user.user_id;
+					newBlogger.avatarUrl = req.user.profile_image;
 					break;
 			}
 			

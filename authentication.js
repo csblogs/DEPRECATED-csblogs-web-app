@@ -15,6 +15,9 @@ function normalizeUser(profile, callback) {
 		case 'Wordpress':
 			identifier = profile._json.ID;
 			break;
+		case 'stackexchange':
+			identifier = profile.user_id;
+			break;
 	}
 	
 	// Find user in database
