@@ -8,13 +8,13 @@
         <header>
             <h2><a href="{{link}}">{{title}}</a></h2>
         </header>
-        {{#if image}}<img src="{{image}}" alt="Featured Image"/>{{/if}}
-        <p>{{{description}}}</p>
+        {{#if imageUrl}}<img src="{{imageUrl}}" alt="Featured Image"/>{{/if}}
+        <p>{{{summary}}}</p>
         <footer>
             <div class="article-info">
-                <a class="avatar" href="{{site}}" style="background-image: url('{{author.avatarUrl}}');"></a>
-                <a class="article-author" href="{{site}}">{{author.firstName}} {{author.lastName}}</a><br/>
-                <p class="article-date">{{formatDateShort date}}</p>
+                <a class="avatar" href="{{author.websiteUrl}}" style="background-image: url('{{author.avatarUrl}}');"></a>
+                <a class="article-author" href="{{author.websiteUrl}}">{{author.firstName}} {{author.lastName}}</a><br/>
+                <p class="article-date">{{formatDateShort pubDate}}</p>
             </div>
         </footer>
         {{#unless @last}}<hr/>{{/unless}}
