@@ -43,7 +43,7 @@ exports.urlFormat = function(url) {
 	} 
 }
 
-exports.editable = function(user, blogger, options) {
+exports.ifEqualBlogger = function(user, blogger, options) {
     if (user && blogger && (user.userId === blogger.userId) && (user.userProvider === blogger.userProvider)) {
         return options.fn(this);
     }

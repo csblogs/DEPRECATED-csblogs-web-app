@@ -25,7 +25,6 @@ main {
     width: 100%;
     padding-top: 12px;
     padding-bottom: 25px;
-    margin-bottom: 12px;
 }
 
 #profile-header-content {
@@ -80,10 +79,17 @@ main {
     }
 }
 
-#edit-btn {
+#edit-btn-wide {
     position: absolute;
     bottom: -10px;
     right: 25px;
+}
+
+#edit-li {
+    display: none;
+}
+
+#edit-btn-wide, #edit-btn-small {
     width: 114px;
     height: 24px;
     -webkit-transition: background 0.4s ease-out;
@@ -104,17 +110,18 @@ main {
     p {
         float: left;
         font-family: @sans-serif-font;
+        font-weight: 400;
         margin: 5px 0px 0px 4px;
         line-height: 1em;
         color: rgba(255,255,255,0.85);
     }
 }
 
-#edit-btn:hover {
+#edit-btn-wide:hover, #edit-btn-small:hover {
     background: rgba(0,0,0,0.28);
 }
 
-#profile-header-content:after, #edit-btn:after {
+#profile-header-content:after, #edit-btn-wide:after {
     content: '';
     clear: both;
     display: block;
@@ -298,15 +305,23 @@ hr {
             float: none;
         }
         
-        li {
+        li:not(#edit-li) {
             display: block;
+        }
+        
+        li {
             margin: 0 auto;
             text-align: center;
-            padding: 0 15%;
+            padding: 0 10%;
+        }
+        
+        p {
+            margin-left: 0px;
+            text-align: center;
         }
     }
     
-    #edit-btn {
+    #edit-btn-wide {
         top: -8px;
         right: 16px;
         bottom: auto;
@@ -320,5 +335,20 @@ hr {
     
     article p {
         font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    #edit-btn-wide {
+        display: none;
+    }
+    
+    #profile-header-title #edit-li {
+        display: block;
+        margin-top: 12px;
+    }
+    
+    #profile-header {
+        padding-bottom: 12px;
     }
 }
