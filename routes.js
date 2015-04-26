@@ -201,21 +201,24 @@ module.exports = function(app) {
 			}
 			else
 			{
-				console.log("Found blogs");
+				//No error, found blogs
 		        blogger.find({}, function(error, allBloggers) {
 		            if (error || !allBloggers) {
 		                internalError(res, error ? error : "No bloggers found.");
-		            } else {
-						console.log("Found bloggers");
-						
-						blogs.forEach(function(thisBlog, index, blogsArray) {
+		            } else {	
+						//No error, found bloggers					
+						blogs.forEach(function(thisBlog, index, blogsArray) {	
+							//Associate each blog with its blogger						
 							blogsArray[index].author = allBloggers.filter(function(element) {
 								return ((element.userId == thisBlog.userId) && (element.userProvider == thisBlog.userProvider));
-							});
+							})[0];
 						})
 						
-						console.log("BLOGS: %j", blogs);
-						
+						//Sort blogs
+						blogs.sort(function(a,b) {
+						    return new Date(b.pubDate) - new Date(a.pubDate);
+						});
+												
 				        res.render('blogs', {
 				            title: 'Blogs / CS Blogs',
 				            content: blogs,
