@@ -208,8 +208,8 @@ module.exports = function(app) {
 		            } else {
 						console.log("Found bloggers");
 						
-						blogs.forEach(function(thisBlog) {
-							thisBlog.author = allBloggers.filter(function(element) {
+						blogs.forEach(function(thisBlog, index, blogsArray) {
+							blogsArray[index].author = allBloggers.filter(function(element) {
 								return ((element.userId == thisBlog.userId) && (element.userProvider == thisBlog.userProvider));
 							});
 						})
