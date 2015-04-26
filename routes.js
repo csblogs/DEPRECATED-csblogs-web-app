@@ -201,15 +201,20 @@ module.exports = function(app) {
 			}
 			else
 			{
+				console.log("Found blogs");
 		        blogger.find({}, function(error, allBloggers) {
 		            if (error || !allBloggers) {
 		                internalError(res, error ? error : "No bloggers found.");
 		            } else {
+						console.log("Found bloggers");
+						
 						blogs.forEach(function(thisBlog) {
 							thisBlog.author = allBloggers.filter(function(element) {
 								return ((element.userId == thisBlog.userId) && (element.userProvider == thisBlog.userProvider));
 							});
 						})
+						
+						console.log("BLOGS: %j", blogs);
 						
 				        res.render('blogs', {
 				            title: 'Blogs / CS Blogs',
