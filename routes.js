@@ -1,18 +1,10 @@
 var blogger = require('./models/blogger').Blogger;
+var blog = require('./models/blog').Blog;
 var authentication = require('./authentication');
 var ensureAuthenticated = authentication.ensureAuthenticated;
 
 module.exports = function(app) {
     authentication.serveOAuthRoutes(app);
-
-    app.get('/', function(req, res) {
-		console.log("/ called");
-		
-        res.render('index', {
-            title: 'Index / CS Blogs',
-            user: req.user
-        });
-    });
 
     app.get('/login', function(req, res) {
 		console.log("/login called");
@@ -200,15 +192,34 @@ module.exports = function(app) {
             res.redirect('/profile');
     });
 
-    app.get('/blogs', function(req, res) {
-		console.log("/blogs called");
+    app.get('/', function(req, res) {
+		console.log("/ called");
 		
-        var blogs = require('./test-data/blogs.json');
-        res.render('blogs', {
-            title: 'Blogs / CS Blogs',
-            content: blogs,
-            user: req.user
-        });
+	    blog.find(function(error, blogs) {
+	        if (error) {
+				internalError(res, error);
+			}
+			else
+			{
+		        blogger.find({}, function(error, allBloggers) {
+		            if (error || !allBloggers) {
+		                internalError(res, error ? error : "No bloggers found.");
+		            } else {
+						blogs.forEach(function(thisBlog) {
+							thisBlog.author = allBloggers.filter(function(element) {
+								return ((element.userId == thisBlog.userId) && (element.userProvider == thisBlog.userProvider));
+							});
+						})
+						
+				        res.render('blogs', {
+				            title: 'Blogs / CS Blogs',
+				            content: blogs,
+				            user: req.user
+				        });
+		            }
+		        });
+			}
+		});
     });
 
 	app.get('/logout', function(req, res) {

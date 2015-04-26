@@ -12,8 +12,8 @@
         <p>{{{description}}}</p>
         <footer>
             <div class="article-info">
-                <a class="avatar" href="{{site}}" style="background-image: url('{{avatar}}');"></a>
-                <a class="article-author" href="{{site}}">{{author}}</a><br/>
+                <a class="avatar" href="{{site}}" style="background-image: url('{{author.avatarUrl}}');"></a>
+                <a class="article-author" href="{{site}}">{{author.firstName}} {{author.lastName}}</a><br/>
                 <p class="article-date">{{formatDateShort date}}</p>
             </div>
         </footer>
