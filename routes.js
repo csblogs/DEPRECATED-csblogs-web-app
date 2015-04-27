@@ -23,7 +23,7 @@ module.exports = function(app) {
 					console.log("[ERROR] %j", error)
 				}
 				else {
-	                var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
+	                var nameTitle = req.user.firstName + ' ' + req.user.lastName + ' / CS Blogs';
 					
 					//Sort blogs
 					blogs.sort(function(a,b) {
