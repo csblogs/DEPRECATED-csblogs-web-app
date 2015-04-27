@@ -91,30 +91,17 @@
             {{/if}}
         </div>
         <h3>Blog posts</h3>
-<!--
-        {{#each content.posts}}
+
+        {{#each content}}
         <article>
             <h4><a href="{{link}}">{{title}}</a></h4>
-            <p class="article-date">{{formatDateLong date}}</p>
-            {{#if image}}<img src="{{image}}" alt="Featured Image"/>{{/if}}
-            <p>{{{description}}}</p>
+            <p class="article-date">{{formatDateLong pubDate}}</p>
+            {{#if imageUrl}}<img src="{{imageUrl}}" alt="Featured Image"/>{{/if}}
+            <p>{{{summary}}}</p>
             {{#unless @last}}<hr/>{{/unless}}
         </article>
         {{/each}}
--->
-        <article>
-            <h4><a href="/">Example blog post one</a></h4>
-            <p class="article-date">January 17, 1970 1:02 pm</p>
-            <img src="http://placehold.it/400x200" alt="Featured Image"/>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at ultricies tellus, ac eleifend ex. Nunc quis eros eu massa porta dignissim. Nam ac ipsum in massa sagittis auctor non vitae mi. Curabitur ultricies eleifend erat maximus sollicitudin. Curabitur et vulputate urna, id euismod leo&hellip;</p>
-            <hr/>
-        </article>
-        <article>
-            <h4><a href="/">Example blog post two</a></h4>
-            <p class="article-date">January 17, 1970 1:02 pm</p>
-            <img src="http://placehold.it/400x200" alt="Featured Image"/>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at ultricies tellus, ac eleifend ex. Nunc quis eros eu massa porta dignissim. Nam ac ipsum in massa sagittis auctor non vitae mi. Curabitur ultricies eleifend erat maximus sollicitudin. Curabitur et vulputate urna, id euismod leo&hellip;</p>
-        </article>
+
         <div id="nav-pages">
             <a id="older" class="page-btn" href="#">
                 <svg viewbox="0 0 37.62 67.32">

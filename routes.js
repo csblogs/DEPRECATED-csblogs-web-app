@@ -16,21 +16,31 @@ module.exports = function(app) {
 
     app.get('/profile', ensureAuthenticated, function(req, res) {
 		console.log("/profile called");
-		console.log('\n\n\n\nREQ.USER in profile', req.user);
 		
 		if(req.user.userProvider && req.user.userId) {
-			console.log("Registered user");
-			console.log("Blogger user: %j", req.user);
-			var nameTitle = req.user.firstName + ' ' + req.user.lastName + ' / CS Blogs';
-            res.render('profile', {
-                title: nameTitle,
-                blogger: req.user,
-				user: req.user
-            });
+			blog.find({userId: req.user.userId, userProvider: req.user.userProvider}, function(error, blogs) {
+				if(error) {
+					console.log("[ERROR] %j", error)
+				}
+				else {
+	                var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
+					
+					//Sort blogs
+					blogs.sort(function(a,b) {
+					    return new Date(b.pubDate) - new Date(a.pubDate);
+					});
+					
+	                res.render('profile', {
+	                    title: nameTitle,
+	                    blogger: req.user,
+	                    user: req.user,
+						content: blogs
+	                });
+				}
+			});
 		}
 		else {
-			console.log("Not a registered user");
-			console.log("Passport.js user: %j", req.user);
+			// Not a registered user, so cannot see this page. Redirect to /register
 			res.redirect('/register');
 		}
     });
@@ -84,12 +94,26 @@ module.exports = function(app) {
                 internalError(res, error ? error : 'Blogger profile not found.');
             }
             else {
-                var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
-                res.render('profile', {
-                    title: nameTitle,
-                    blogger: profile,
-                    user: req.user
-                });
+				blog.find({userId: profile.userId, userProvider: profile.userProvider}, function(error, blogs) {
+					if(error) {
+						console.log("[ERROR] %j", error)
+					}
+					else {
+		                var nameTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
+						
+						//Sort blogs
+						blogs.sort(function(a,b) {
+						    return new Date(b.pubDate) - new Date(a.pubDate);
+						});
+						
+		                res.render('profile', {
+		                    title: nameTitle,
+		                    blogger: profile,
+		                    user: req.user,
+							content: blogs
+		                });
+					}
+				});
             }
         });
     }
