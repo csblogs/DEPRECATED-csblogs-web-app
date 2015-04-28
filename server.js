@@ -5,6 +5,7 @@ var compression = require('compression');
 var exphbs = require('express-handlebars');
 var lessMiddleware = require('less-middleware');
 var mongoose = require('mongoose');
+var paginate = require('express-paginate');
 var bodyParser = require('body-parser')
 var helpers = require('./helpers');
 var passport = require('./authentication').Passport;
@@ -26,6 +27,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/static'));
+app.use(paginate.middleware(10, 50));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true

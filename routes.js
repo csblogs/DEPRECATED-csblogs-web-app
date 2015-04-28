@@ -3,6 +3,8 @@ var blog = require('./models/blog').Blog;
 var authentication = require('./authentication');
 var ensureAuthenticated = authentication.ensureAuthenticated;
 
+blog.schema.plugin(require('mongoose-paginate'));
+
 module.exports = function(app) {
     authentication.serveOAuthRoutes(app);
 
@@ -219,17 +221,18 @@ module.exports = function(app) {
     app.get('/', function(req, res) {
 		console.log("/ called");
 		
-	    blog.find(function(error, blogs) {
+        blog.paginate({}, req.query.page, req.query.limit, function(error, pageCount, blogs, itemCount) {
+        //blog.find(function(error, blogs) {
 	        if (error) {
 				internalError(res, error);
 			}
-			else
-			{
+			else {
 				//No error, found blogs
 		        blogger.find({}, function(error, allBloggers) {
 		            if (error || !allBloggers) {
 		                internalError(res, error ? error : "No bloggers found.");
-		            } else {	
+		            }
+                    else {
 						//No error, found bloggers					
 						blogs.forEach(function(thisBlog, index, blogsArray) {	
 							//Associate each blog with its blogger						
@@ -242,7 +245,7 @@ module.exports = function(app) {
 						blogs.sort(function(a,b) {
 						    return new Date(b.pubDate) - new Date(a.pubDate);
 						});
-												
+                        
 				        res.render('blogs', {
 				            title: 'Blogs / CS Blogs',
 				            content: blogs,
