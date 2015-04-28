@@ -1,24 +1,34 @@
 var moment = require('moment');
 
 exports.formatDateShort = function(datestamp) {
-    var date = moment(datestamp);
-    
-    if (date.isBefore(moment(), 'week')) {
-        return date.format('MMM D, YYYY');
+    try {
+        var date = moment(new Date(datestamp));
+
+        if (date.isBefore(moment(), 'week')) {
+            return date.format('MMM D, YYYY');
+        }
+        else {
+            return date.fromNow();
+        }
     }
-    else {
-        return date.fromNow();
+    catch (error) {
+        return '';
     }
 };
 
 exports.formatDateLong = function(datestamp) {
-    var date = moment(datestamp);
+    try {
+        var date = moment(new Date(datestamp));
 
-    if (date.isBefore(moment(), 'week')) {
-        return date.format('MMMM D, YYYY  h:mm a');
+        if (date.isBefore(moment(), 'week')) {
+            return date.format('MMMM D, YYYY  h:mm a');
+        }
+        else {
+            return date.fromNow();
+        }
     }
-    else {
-        return date.fromNow();
+    catch (error) {
+        return '';
     }
 };
 
@@ -51,4 +61,8 @@ exports.ifEqualBlogger = function(user, blogger, options) {
     {
         return options.inverse(this);
     }
+}
+
+exports.add = function(number1, number2) {
+    return number1 + number2;
 }

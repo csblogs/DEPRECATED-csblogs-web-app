@@ -16,4 +16,6 @@ var blogSchema = new Schema({
   link : String
 });
 
+blogSchema.plugin(require('mongoose-paginate'));
+
 exports.Blog = mongoose.model('Blog', blogSchema);

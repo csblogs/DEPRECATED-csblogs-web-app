@@ -2,8 +2,7 @@ var blogger = require('./models/blogger').Blogger;
 var blog = require('./models/blog').Blog;
 var authentication = require('./authentication');
 var ensureAuthenticated = authentication.ensureAuthenticated;
-
-blog.schema.plugin(require('mongoose-paginate'));
+var paginate = require('./server').paginate;
 
 module.exports = function(app) {
     authentication.serveOAuthRoutes(app);
@@ -220,7 +219,7 @@ module.exports = function(app) {
 
     app.get('/', function(req, res) {
 		console.log("/ called");
-		
+        
         blog.paginate({}, req.query.page, req.query.limit, function(error, pageCount, blogs, itemCount) {
         //blog.find(function(error, blogs) {
 	        if (error) {
@@ -249,12 +248,53 @@ module.exports = function(app) {
 				        res.render('blogs', {
 				            title: 'Blogs / CS Blogs',
 				            content: blogs,
+                            page: req.query.page,
+                            hasLess: req.query.page > 1,
+                            hasMore: paginate.hasNextPages(req)(pageCount),
 				            user: req.user
 				        });
 		            }
 		        });
 			}
-		});
+        });
+        
+//        blog.paginate({}, req.query.page, req.query.limit, function(error, pageCount, blogs, itemCount) {
+//            if (error) {
+//                internalError(res, error);
+//            }
+//            else {
+//                blogs.forEach(function(entry) {
+//                    console.log("1: " + entry.pubDate);
+//                });
+//            }
+//        });
+//        
+//        blog.paginate({}, req.query.page, req.query.limit, function(error, pageCount, blogs, itemCount) {
+//            if (error) {
+//                internalError(res, error);
+//            }
+//            else {
+//                blogs.forEach(function(entry) {
+//                    console.log("2: " + entry.pubDate);
+//                });
+//            }
+//        }, {sortBy: { pubDate: 'asc' }});
+//        
+//        blog.find().sort({pubDate: 'asc'}).exec(function(error, blogs) {
+//            if (error) {
+//                internalError(res, error);
+//            }
+//            else {
+//                blogs.forEach(function(entry) {
+//                    console.log("3: " + entry.pubDate);
+//                });
+//            }
+//        });
+//        
+//        res.render('blogs', {
+//            title: 'Blogs / CS Blogs',
+//            user: req.user
+//        });
     });
 
 	app.get('/logout', function(req, res) {

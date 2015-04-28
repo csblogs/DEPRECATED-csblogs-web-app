@@ -38,6 +38,8 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
+module.exports.paginate = paginate;
+
 // Get any arguments passed via command-line
 var args = process.argv.slice(2);
 
