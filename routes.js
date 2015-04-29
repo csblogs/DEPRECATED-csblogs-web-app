@@ -257,44 +257,6 @@ module.exports = function(app) {
 		        });
 			}
         }, {sortBy: {date : 'asc'}});
-        
-//        blog.paginate({}, req.query.page, req.query.limit, function(error, pageCount, blogs, itemCount) {
-//            if (error) {
-//                internalError(res, error);
-//            }
-//            else {
-//                blogs.forEach(function(entry) {
-//                    console.log("1: " + entry.pubDate);
-//                });
-//            }
-//        });
-//        
-//        blog.paginate({}, req.query.page, req.query.limit, function(error, pageCount, blogs, itemCount) {
-//            if (error) {
-//                internalError(res, error);
-//            }
-//            else {
-//                blogs.forEach(function(entry) {
-//                    console.log("2: " + entry.pubDate);
-//                });
-//            }
-//        }, {sortBy: { pubDate: 'asc' }});
-//        
-//        blog.find().sort({pubDate: 'asc'}).exec(function(error, blogs) {
-//            if (error) {
-//                internalError(res, error);
-//            }
-//            else {
-//                blogs.forEach(function(entry) {
-//                    console.log("3: " + entry.pubDate);
-//                });
-//            }
-//        });
-//        
-//        res.render('blogs', {
-//            title: 'Blogs / CS Blogs',
-//            user: req.user
-//        });
     });
 
 	app.get('/logout', function(req, res) {
