@@ -123,11 +123,11 @@ module.exports = function(app) {
         .get(ensureAuthenticated, function(req, res) {
 			console.log("/register GET called");
 
-			if(req.user.userProvider && req.user.userId) {
+			if (req.user.userProvider && req.user.userId) {
 				//Already registered user doing an edit.
 	            res.render('register', {
 	                title: 'Edit Account / CS Blogs',
-	                submitText: 'Update',
+	                submitText: 'Update profile',
 					postAction: 'account',
 	                user: req.user
 	            });
@@ -169,7 +169,7 @@ module.exports = function(app) {
 				
 	            res.render('register', {
 	                title: 'Register / CS Blogs',
-	                submitText: 'Register',
+	                submitText: 'Add your blog',
 					postAction: 'register',
 	                user: userAsBlogger,
 	            });
