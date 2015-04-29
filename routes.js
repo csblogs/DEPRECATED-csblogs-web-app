@@ -50,11 +50,17 @@ module.exports = function(app) {
         .get(ensureAuthenticated, function(req, res) {
 			console.log("/account GET called");
 			
-            res.render('register', {
-                title: 'Account / CS Blogs',
-                postAction: 'account',
-                submitText: 'Update profile',
-                user: req.user
+//            res.render('register', {
+//                title: 'Account / CS Blogs',
+//                postAction: 'account',
+//                submitText: 'Update profile',
+//                user: req.user
+//            });
+            res.status(501);
+            res.render('error', {
+                title: 'Error 501 / CS Blogs',
+                errorCode: 501,
+                errorMessage: 'The ability to edit your profile is still under development.'
             });
         })
         .post(ensureAuthenticated, function(req, res) {
