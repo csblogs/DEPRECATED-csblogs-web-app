@@ -227,7 +227,6 @@ module.exports = function(app) {
 		console.log("/ called");
         
         blog.paginate({}, req.query.page, req.query.limit, function(error, pageCount, blogs, itemCount) {
-        //blog.find(function(error, blogs) {
 	        if (error) {
 				internalError(res, error);
 			}
@@ -247,9 +246,9 @@ module.exports = function(app) {
 						})
 						
 						//Sort blogs
-						blogs.sort(function(a,b) {
-						    return new Date(b.pubDate) - new Date(a.pubDate);
-						});
+						//blogs.sort(function(a,b) {
+                        //    return new Date(b.pubDate) - new Date(a.pubDate);
+						//});
                         
 				        res.render('blogs', {
 				            title: 'Blogs / CS Blogs',
@@ -262,7 +261,7 @@ module.exports = function(app) {
 		            }
 		        });
 			}
-        }, {sortBy: {date : 'asc'}});
+        }, {sortBy: {pubDate : 'desc'}});
     });
 
 	app.get('/logout', function(req, res) {
