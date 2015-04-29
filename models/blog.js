@@ -11,9 +11,11 @@ var blogSchema = new Schema({
   title: String,
   imageUrl : String,
   summary : String,
-  pubDate : String,
-  updateDate : String,
+  pubDate : Date,
+  updateDate : Date,
   link : String
 });
+
+blogSchema.plugin(require('mongoose-paginate'));
 
 exports.Blog = mongoose.model('Blog', blogSchema);

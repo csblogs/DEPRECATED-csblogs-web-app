@@ -5,6 +5,7 @@ var compression = require('compression');
 var exphbs = require('express-handlebars');
 var lessMiddleware = require('less-middleware');
 var mongoose = require('mongoose');
+var paginate = require('express-paginate');
 var bodyParser = require('body-parser')
 var helpers = require('./helpers');
 var passport = require('./authentication').Passport;
@@ -26,6 +27,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/static'));
+app.use(paginate.middleware(10, 50));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -36,11 +38,14 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
+module.exports.paginate = paginate;
+
 // Get any arguments passed via command-line
 var args = process.argv.slice(2);
 
 // Get database connection
 mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://csblogs:Hatter1636@ds045107.mongolab.com:45107/csblogs');
+//mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://localhost');
 
 var database = mongoose.connection;
 database.on('error', console.error.bind(console, 'MongoDB Connection Error:'));

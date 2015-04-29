@@ -2,6 +2,7 @@ var blogger = require('./models/blogger').Blogger;
 var blog = require('./models/blog').Blog;
 var authentication = require('./authentication');
 var ensureAuthenticated = authentication.ensureAuthenticated;
+var paginate = require('./server').paginate;
 
 module.exports = function(app) {
     authentication.serveOAuthRoutes(app);
@@ -49,11 +50,17 @@ module.exports = function(app) {
         .get(ensureAuthenticated, function(req, res) {
 			console.log("/account GET called");
 			
-            res.render('register', {
-                title: 'Account / CS Blogs',
-                postAction: 'account',
-                submitText: 'Update profile',
-                user: req.user
+//            res.render('register', {
+//                title: 'Account / CS Blogs',
+//                postAction: 'account',
+//                submitText: 'Update profile',
+//                user: req.user
+//            });
+            res.status(501);
+            res.render('error', {
+                title: 'Error 501 / CS Blogs',
+                errorCode: 501,
+                errorMessage: 'The ability to edit your profile is still under development.'
             });
         })
         .post(ensureAuthenticated, function(req, res) {
@@ -122,11 +129,11 @@ module.exports = function(app) {
         .get(ensureAuthenticated, function(req, res) {
 			console.log("/register GET called");
 
-			if(req.user.userProvider && req.user.userId) {
+			if (req.user.userProvider && req.user.userId) {
 				//Already registered user doing an edit.
 	            res.render('register', {
 	                title: 'Edit Account / CS Blogs',
-	                submitText: 'Update',
+	                submitText: 'Update profile',
 					postAction: 'account',
 	                user: req.user
 	            });
@@ -168,7 +175,7 @@ module.exports = function(app) {
 				
 	            res.render('register', {
 	                title: 'Register / CS Blogs',
-	                submitText: 'Register',
+	                submitText: 'Add your blog',
 					postAction: 'register',
 	                user: userAsBlogger,
 	            });
@@ -218,18 +225,18 @@ module.exports = function(app) {
 
     app.get('/', function(req, res) {
 		console.log("/ called");
-		
-	    blog.find(function(error, blogs) {
+        
+        blog.paginate({}, req.query.page, req.query.limit, function(error, pageCount, blogs, itemCount) {
 	        if (error) {
 				internalError(res, error);
 			}
-			else
-			{
+			else {
 				//No error, found blogs
 		        blogger.find({}, function(error, allBloggers) {
 		            if (error || !allBloggers) {
 		                internalError(res, error ? error : "No bloggers found.");
-		            } else {	
+		            }
+                    else {
 						//No error, found bloggers					
 						blogs.forEach(function(thisBlog, index, blogsArray) {	
 							//Associate each blog with its blogger						
@@ -239,19 +246,22 @@ module.exports = function(app) {
 						})
 						
 						//Sort blogs
-						blogs.sort(function(a,b) {
-						    return new Date(b.pubDate) - new Date(a.pubDate);
-						});
-												
+						//blogs.sort(function(a,b) {
+                        //    return new Date(b.pubDate) - new Date(a.pubDate);
+						//});
+                        
 				        res.render('blogs', {
 				            title: 'Blogs / CS Blogs',
 				            content: blogs,
+                            page: req.query.page,
+                            hasLess: req.query.page > 1,
+                            hasMore: paginate.hasNextPages(req)(pageCount),
 				            user: req.user
 				        });
 		            }
 		        });
 			}
-		});
+        }, {sortBy: {pubDate : 'desc'}});
     });
 
 	app.get('/logout', function(req, res) {

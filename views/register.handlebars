@@ -5,8 +5,11 @@
 
 <div id="body-content">
     <div class="avatar" style="background-image: url('{{user.avatarUrl}}');"></div>
-
+    
     <form method="post" action="/{{postAction}}">
+        <div class="alert-box alert-info">
+            <p>You can update your profile picture by changing it inside the service you log in with.</p>
+        </div>
         <h2>Your Profile</h2>
         <div class="row">
             <div class="input-field column">
@@ -62,6 +65,11 @@
             <input id="linkedIn_name" name="linkedInProfile" type="text" value="{{user.linkedInProfile}}">
             <label for="linkedIn_name">LinkedIn Name</label>
         </div>
+        {{#unless user.validated}}
+        <div class="alert-box alert-warning">
+            <p>Your profile will be validated by a moderator before it can be seen by the public. An email will be sent to you when this has been done.</p>
+        </div>
+        {{/unless}}
         <input id="submit-button" type="submit" value="{{submitText}}">
     </form>
 </div>
