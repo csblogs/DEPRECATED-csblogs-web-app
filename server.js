@@ -44,8 +44,8 @@ module.exports.paginate = paginate;
 var args = process.argv.slice(2);
 
 // Get database connection
-//mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://csblogs:Hatter1636@ds045107.mongolab.com:45107/csblogs');
-mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://localhost');
+mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://csblogs:Hatter1636@ds045107.mongolab.com:45107/csblogs');
+//mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://localhost');
 
 var database = mongoose.connection;
 database.on('error', console.error.bind(console, 'MongoDB Connection Error:'));
