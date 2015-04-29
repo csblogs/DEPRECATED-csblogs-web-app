@@ -256,7 +256,7 @@ module.exports = function(app) {
 		            }
 		        });
 			}
-        });
+        }, {sortBy: {date : 'asc'}});
         
 //        blog.paginate({}, req.query.page, req.query.limit, function(error, pageCount, blogs, itemCount) {
 //            if (error) {

@@ -11,8 +11,8 @@ var blogSchema = new Schema({
   title: String,
   imageUrl : String,
   summary : String,
-  pubDate : String,
-  updateDate : String,
+  pubDate : Date,
+  updateDate : Date,
   link : String
 });
 

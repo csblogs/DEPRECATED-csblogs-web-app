@@ -2,7 +2,7 @@ var moment = require('moment');
 
 exports.formatDateShort = function(datestamp) {
     try {
-        var date = moment(new Date(datestamp));
+        var date = moment(datestamp);
 
         if (date.isBefore(moment(), 'week')) {
             return date.format('MMM D, YYYY');
@@ -18,7 +18,7 @@ exports.formatDateShort = function(datestamp) {
 
 exports.formatDateLong = function(datestamp) {
     try {
-        var date = moment(new Date(datestamp));
+        var date = moment(datestamp);
 
         if (date.isBefore(moment(), 'week')) {
             return date.format('MMMM D, YYYY  h:mm a');
