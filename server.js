@@ -7,9 +7,13 @@ var lessMiddleware = require('less-middleware');
 var mongoose = require('mongoose');
 var paginate = require('express-paginate');
 var bodyParser = require('body-parser')
-var helpers = require('./helpers');
 var passport = require('./authentication').Passport;
-var populateDatabase = require('./test-data/populate-database').Populate;
+var helpers = require('./helpers');
+
+// Routes
+var authentication = require('./authentication');
+var website = require('./website');
+var api = require('./api');
 
 // Initialize app
 var app = express();
@@ -38,31 +42,37 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
+// Logging for all requests
+app.use(function(req, res, next) {
+    if(req.user) {
+        var id = req.user.userId || req.user.id;
+        var provider = req.user.userProvider || req.user.provider;
+        console.log("[%s] %s requested by user(%s@%s) @ IP: %s", req.method, req.path, id, provider, req.ip);
+    }
+    else {
+        console.log("[%s] %s requested by unknown user @ IP: %s ", req.method, req.path, req.ip);
+    }
+    next();
+});
+
 module.exports.paginate = paginate;
 
 // Get any arguments passed via command-line
 var args = process.argv.slice(2);
 
 // Get database connection
-mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://csblogs:Hatter1636@ds045107.mongolab.com:45107/csblogs');
-//mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://localhost');
+mongoose.connect(process.env.CUSTOMCONNSTR_MONGODB_URI || 'mongodb://localhost');
 
 var database = mongoose.connection;
 database.on('error', console.error.bind(console, 'MongoDB Connection Error:'));
 database.once('open', function(callback) {
     console.log('Database connection established successfully.');
 
-    // Populate database with test data if required by user
-    if (args.indexOf('setup-db') > -1) {
-        console.log('Removing all database entries...');
-        database.db.dropDatabase();
-        console.log('Will now populate database with new test data...');
-        populateDatabase();
-    }
-
     // Import routes (and thus serve the site) if the database connection worked
+    authentication.serveOAuthRoutes(app);
+	website.serveRoutes(app);
+    api.serveRoutes(app);
     console.log('Now serving all routes!');
-    require('./routes')(app);
 });
 
 // Initialize and start HTTP server

@@ -1,5 +1,5 @@
 var passport = require('passport');
-var blogger = require('./models/blogger').Blogger;
+var Blogger = require('./models/blogger').Blogger;
 var GitHubStrategy = require('passport-github').Strategy;
 var WordpressStrategy = require('passport-wordpress').Strategy;
 var StackExchangeStrategy = require('passport-stackexchange').Strategy;
@@ -116,12 +116,53 @@ exports.Passport = passport;
 
 exports.ensureAuthenticated = function(req, res, next) {
     if (req.isAuthenticated()) {
-		console.log("User logged in")
+		console.log("User (id: %s) is already logged in", req.user.id);
         return next();
     } else {
-        console.log("Not logged in")
+        // Not logged in
         res.redirect('/login');
     }
+};
+
+exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
+    var userAsBlogger = null;
+    switch(passportjsUser.provider) {
+    	case 'github':
+            var usersName = passportjsUser.displayName.split(' ');				
+            userAsBlogger = new Blogger({
+    			avatarUrl: 		passportjsUser._json.avatar_url,
+                firstName: 		usersName[0],
+                lastName: 		usersName[1],
+                emailAddress: 	passportjsUser._json.email,
+                blogWebsiteUrl: passportjsUser._json.blog,
+                githubProfile: 	passportjsUser._json.login,
+                bio: 			passportjsUser._json.bio,
+                vanityUrl: 		passportjsUser.username,
+            });
+    		break;
+    	case 'Wordpress':
+            userAsBlogger = new Blogger({
+    			avatarUrl: 		passportjsUser._json.avatar_URL,
+                emailAddress: 	passportjsUser._json.email,
+                blogWebsiteUrl: "http://" + passportjsUser._json.user + ".wordpress.com",
+                vanityUrl: 		passportjsUser._json.display_name,
+            });
+    		break;
+    	case 'stackexchange':
+            userAsBlogger = new Blogger({
+    			avatarUrl: 		passportjsUser.profile_image,
+                vanityUrl: 		passportjsUser.display_name,
+    			websiteUrl: 	passportjsUser.website_url
+            });
+    		break;
+    }
+    return userAsBlogger; 
+};
+
+exports.isRegistered = function (passportjsUser) {
+    //If a user has userProvider and userId attributes instead of id and provider attributes
+    //then they have been registered (these variables are only set once registered)
+    return (passportjsUser.userProvider && passportjsUser.userId);
 }
 
 exports.serveOAuthRoutes = function(app) {
