@@ -30,41 +30,8 @@ var bloggerSchema = new Schema({
     vanityUrl: String,
 });
 
-bloggerSchema.methods.isValid = function(returnIssues) {
-    //TODO: Implement this.
-    var issues = [];
-    if (returnIssues) {
-        return issues;
-    } else {
-        return true;
-    }
-
-    /*
-    var issues = [];
-
-    if(validator.isURL(displayPictureUrl)) {
-
-    }
-
-    if(validator.isURL(feedUrl)) {
-
-    }
-
-    if(validator.isURL(blogWebsiteUrl)) {
-
-    }
-
-    if(validator.isURL(websiteUrl)) {
-
-    }
-
-    if(validator.isURL(cvUrl)) {
-
-    }
-
-    if(validator.isEmail(emailAddress)) {
-
-    } */
-}
+bloggerSchema.methods.isValid = function() {
+    //TODO: Use validator package here
+};
 
 exports.Blogger = mongoose.model('Blogger', bloggerSchema);

@@ -1,10 +1,10 @@
-var Blog = require("../models/blog")
-var Blogger = require("../models/blogger")
+var Blog = require("../models/blog").Blog;
+var Blogger = require("../models/blogger").Blogger;
 var BloggerController = require("./blogger")
-var paginate = require('../server').paginate; 
+var paginate = require('express-paginate');
 
 //Done of form (blogs, pageNumber, showBack, showNext, error)
-exports.getPaginatedBlogs = function (options, req, done) {
+exports.getPaginatedBlogs = function (options, req, done) {		
 	Blog.paginate(options, req.query.page, req.query.limit, function (error, pageCount, blogs, itemCount) {
 		if (error) { done(null, -1, false, false, error); }
 		else {

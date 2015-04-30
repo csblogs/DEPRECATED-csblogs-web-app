@@ -1,11 +1,11 @@
-var blog = require('../models/blog');
-var blogger = require('../models/blogger');
+var Blog = require('../models/blog').Blog;
+var Blogger = require('../models/blogger').Blogger;
 
 //Callback of form done(profile, error);
 exports.getUserProfile = function(passportUser, done) {
 	if(passportUser.userProvider && passportUser.userId) {
-		//This user is registered
-		blog.find({userId: passportUser.userId, userProvider: passportUser.userProvider}, function(error, blogs) {
+		//This user is registered (so their profile is actually already in req.user, but we need to attach some blogs)
+		Blog.find({userId: passportUser.userId, userProvider: passportUser.userProvider}, function(error, blogs) {
 			if(error) {
 				console.log("[ERROR] %j", error);
 				done(null, error);
@@ -27,7 +27,7 @@ exports.getUserProfile = function(passportUser, done) {
 };
 
 exports.getProfileByVanityUrl = function (vanityUrl, done) {
-	blogger.findOne({vanityUrl: vanityUrl}, function(error, profile) {
+	Blogger.findOne({vanityUrl: vanityUrl}, function(error, profile) {
 		if (error) {
 			console.log("[ERROR] %j", error);
 			done(null, error);
@@ -35,7 +35,7 @@ exports.getProfileByVanityUrl = function (vanityUrl, done) {
 		else {
 			if(profile) {
 				//Attach blogs to user to create full profile
-				blog.find({userId: profile.userId, userProvider: profile.userProvider}, function(error, blogs) {
+				Blog.find({userId: profile.userId, userProvider: profile.userProvider}, function(error, blogs) {
 					if(error) {
 						console.log("[ERROR] %j", error);
 					}
@@ -56,12 +56,14 @@ exports.getProfileByVanityUrl = function (vanityUrl, done) {
 	});
 }
 
-exports.getAllProfiles = function (verifiedOnly, done) {
+exports.getAllProfiles = function (validatedOnly, done) {
 	var options = {};
-	if(verifiedOnly) {
-		options.verified = true;
+	if(validatedOnly) {
+		options.validated = true;
 	}
-	blogger.find(options, function(error, allBloggers) {
+	console.log("%j", options);
+	
+	Blogger.find(options, function(error, allBloggers) {
 		done(allBloggers, error);
 	});
 };

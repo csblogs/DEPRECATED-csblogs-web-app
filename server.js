@@ -55,8 +55,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-module.exports.paginate = paginate;
-
 // Get any arguments passed via command-line
 var args = process.argv.slice(2);
 

@@ -72,7 +72,7 @@ exports.serveRoutes = function(app) {
         BloggerController.getProfileByVanityUrl(vanityUrl, function (profile, error) {
            if(error) { internalError(res, error); }
            else {
-               if(!profile) { internalError(res, "Sorry, there is no user called %s", vanityUrl); }
+               if(!profile || !profile.validated) { internalError(res, "Sorry, there is no user called %s", vanityUrl); }
                else {
                    var pageTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
                    res.render('profile', {
