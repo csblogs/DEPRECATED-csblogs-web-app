@@ -21,10 +21,9 @@ function normalizeUser(profile, callback) {
 	}
 	
 	// Find user in database
-    blogger.findOne({userProvider: profile.provider, userId: identifier}, function(error, userInDB) {
+    Blogger.findOne({userProvider: profile.provider, userId: identifier}, function(error, userInDB) {
         if (error) {
 	        console.error("Error occured finding user in DB: %j", error);
-            internalError(res, error);
 			callback(null);
         }
         else if (!userInDB) {
@@ -163,7 +162,7 @@ exports.isRegistered = function (passportjsUser) {
     //If a user has userProvider and userId attributes instead of id and provider attributes
     //then they have been registered (these variables are only set once registered)
     return (passportjsUser.userProvider && passportjsUser.userId);
-}
+};
 
 exports.serveOAuthRoutes = function(app) {
     //Github routes
@@ -195,4 +194,4 @@ exports.serveOAuthRoutes = function(app) {
             failureRedirect: '/login',
             failureFlash: true
         }));
-}
+};

@@ -54,14 +54,13 @@ exports.getProfileByVanityUrl = function (vanityUrl, done) {
 			}
 		}
 	});
-}
+};
 
 exports.getAllProfiles = function (validatedOnly, done) {
 	var options = {};
 	if(validatedOnly) {
 		options.validated = true;
 	}
-	console.log("%j", options);
 	
 	Blogger.find(options, function(error, allBloggers) {
 		done(allBloggers, error);
