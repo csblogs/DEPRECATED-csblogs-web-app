@@ -50,6 +50,11 @@
         </div>
     </div>
     <div id="profile-body">
+        {{#ifEqualBlogger user blogger}}{{#unless user.validated}}
+        <div class="alert-box alert-info">
+            <p>Your profile will be validated by a moderator before it can be seen by the public. An email will be sent to you when this has been done.</p>
+        </div>
+        {{/unless}}{{/ifEqualBlogger}}
         <h3>About</h3>
         <p>{{blogger.bio}}</p>
         <div>

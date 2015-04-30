@@ -9,7 +9,7 @@ var paginate = require('./server').paginate;
 exports.serveRoutes = function(app) {
     app.get('/', function(req, res) {
         BlogController.getPaginatedBlogs({}, req, function(blogs, pageNumber, showBack, showNext, error) {
-            if(error) { internalError(res, error); }
+            if (error) { internalError(res, error); }
             else {
                 res.render('blogs', {
     	            title: 'Blogs / CS Blogs',
@@ -36,11 +36,11 @@ exports.serveRoutes = function(app) {
 
     app.get('/profile', ensureAuthenticated, function(req, res) {
         BloggerController.getUserProfile(req.user, function(profile, error) {
-            if(error) { internalError(res, error); }
+            if (error) { internalError(res, error); }
             else {  
-                if(profile == null) {
+                if (profile == null) {
                     res.redirect('/register');
-                } 
+                }
                 else {
                     var pageTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
                     
@@ -56,7 +56,7 @@ exports.serveRoutes = function(app) {
 
     app.get('/bloggers', function(req, res) {
         BloggerController.getAllProfiles(true, function(allProfiles, error) {
-            if(error) { internalError(res, error); }
+            if (error) { internalError(res, error); }
             else {
                 res.render('bloggers', {
                     title: 'Bloggers / CS Blogs',
@@ -70,7 +70,7 @@ exports.serveRoutes = function(app) {
     app.get('/bloggers/:vanityurl', function(req, res) {
         var vanityUrl = req.params.vanityurl;
         BloggerController.getProfileByVanityUrl(vanityUrl, function (profile, error) {
-           if(error) { internalError(res, error); }
+           if (error) { internalError(res, error); }
            else {
                if(!profile || !profile.validated) { internalError(res, "Sorry, there is no user called %s", vanityUrl); }
                else {

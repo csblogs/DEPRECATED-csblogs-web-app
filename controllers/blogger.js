@@ -26,7 +26,7 @@ exports.getUserProfile = function(passportUser, done) {
 	}
 };
 
-exports.getProfileByVanityUrl = function (vanityUrl, done) {
+exports.getProfileByVanityUrl = function(vanityUrl, done) {
 	Blogger.findOne({vanityUrl: vanityUrl}, function(error, profile) {
 		if (error) {
 			console.log("[ERROR] %j", error);
@@ -56,9 +56,9 @@ exports.getProfileByVanityUrl = function (vanityUrl, done) {
 	});
 };
 
-exports.getAllProfiles = function (validatedOnly, done) {
+exports.getAllProfiles = function(validatedOnly, done) {
 	var options = {};
-	if(validatedOnly) {
+	if (validatedOnly) {
 		options.validated = true;
 	}
 	
