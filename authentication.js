@@ -5,8 +5,6 @@ var WordpressStrategy = require('passport-wordpress').Strategy;
 var StackExchangeStrategy = require('passport-stackexchange').Strategy;
 
 function normalizeUser(profile, callback) {
-	console.log("PROFILE:  %j\n\n", profile);
-	
 	var identifier = '';
 	switch(profile.provider) { 
 		case 'github':
@@ -23,16 +21,14 @@ function normalizeUser(profile, callback) {
 	// Find user in database
     Blogger.findOne({userProvider: profile.provider, userId: identifier}, function(error, userInDB) {
         if (error) {
-	        console.error("Error occured finding user in DB: %j", error);
+	        console.error("[ERROR] Error occured finding user in DB: %j", error);
 			callback(null);
         }
         else if (!userInDB) {
             //Blogger not registered.
-			console.log("NO USER IN DB");
 			callback(profile);
         }
         else {
-	        console.log("USER IN DB: %j\n\n", userInDB);
             callback(userInDB);
         }
     });
@@ -46,9 +42,8 @@ passport.use(new GitHubStrategy({
         callbackURL: "http://csblogs.com/auth/github/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        console.log("Github User logged in: " + profile.id);
+        console.log("[INFO] Github User logged in: %s", profile.id);
 		normalizeUser(profile, function(normalizedUser) {
-			console.log("Normalized User: %j", normalizedUser);
 			if(normalizedUser != null) {
 				done(null, normalizedUser);
 			}
@@ -67,9 +62,8 @@ passport.use(new WordpressStrategy({
         callbackURL: "http://csblogs.com/auth/wordpress/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        console.log("WordPress User logged in: " + profile.id);
+        console.log("[INFO] WordPress User logged in: %s", profile.id);
 		normalizeUser(profile, function(normalizedUser) {
-			console.log("Normalized User: %j", normalizedUser);
 			if(normalizedUser != null) {
 				done(null, normalizedUser);
 			}
@@ -89,9 +83,8 @@ passport.use(new StackExchangeStrategy({
         key: "B)qtqv9BuljF8MvlPjxbLw(("
     },
     function(accessToken, refreshToken, profile, done) {
-        console.log("Stack Exchange User logged in: " + profile.id);
+        console.log("[INFO] Stack Exchange User logged in: %s", profile.id);
 		normalizeUser(profile, function(normalizedUser) {
-			console.log("Normalized User: %j", normalizedUser);
 			if(normalizedUser != null) {
 				done(null, normalizedUser);
 			}
@@ -115,7 +108,7 @@ exports.Passport = passport;
 
 exports.ensureAuthenticated = function(req, res, next) {
     if (req.isAuthenticated()) {
-		console.log("User (id: %s) is already logged in", req.user.id);
+		console.log("[INFO] User (id: %s) is already logged in", req.user.id);
         return next();
     } else {
         // Not logged in
