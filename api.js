@@ -12,7 +12,7 @@ exports.serveRoutes = function(app) {
 		});
 	});
 	
-	app.get('/api/v0.1/bloggers/:vanityUrl', function(req, res) {
+	app.get('/api/v0.1/bloggers/:vanityurl', function(req, res) {
 		var vanityUrl = req.params.vanityurl;
 		BloggerController.getProfileByVanityUrl(vanityUrl, function (profile, error) {
 			if(error) {
