@@ -67,9 +67,9 @@ database.once('open', function(callback) {
     console.log('Database connection established successfully.');
 
     // Import routes (and thus serve the site) if the database connection worked
+    api.serveRoutes(app);
     authentication.serveOAuthRoutes(app);
 	website.serveRoutes(app);
-    api.serveRoutes(app);
     console.log('Now serving all routes!');
 });
 
