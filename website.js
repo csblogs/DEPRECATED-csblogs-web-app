@@ -12,7 +12,7 @@ exports.serveRoutes = function(app) {
             if (error) { internalError(res, error); }
             else {
                 res.render('blogs', {
-    	            title: 'Blogs / CS Blogs',
+    	            title: 'Home / CS Blogs',
     	            blogs: blogs,
                     pageNumber: pageNumber,
                     hasLess: showBack,

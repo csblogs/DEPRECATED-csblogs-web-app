@@ -98,6 +98,15 @@ article footer {
     float: right;
 }
 
+.read-more {
+    color: @accent-color;
+    text-decoration: none;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
 #nav-pages {
     margin: 18px 8px 0px 8px;
 }
@@ -199,5 +208,19 @@ article footer {
     
     article p {
         font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .article-info .article-author {
+        display: block;
+        margin-top: 1px;
+        float: none;
+    }
+    
+    .article-info .article-date {
+        display: block;
+        margin-top: 0px;
+        float: none;
     }
 }
