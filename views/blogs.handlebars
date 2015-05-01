@@ -9,7 +9,7 @@
             <h2><a href="{{link}}">{{title}}</a></h2>
         </header>
         {{#if imageUrl}}<img src="{{imageUrl}}" alt="Featured Image"/>{{/if}}
-        <p>{{{summary}}}</p>
+        <p>{{{truncateAndRemoveHTML summary 400}}}</p>
         <footer>
             <div class="article-info">
                 <a class="avatar" href="/bloggers/{{author.vanityUrl}}" style="background-image: url('{{author.avatarUrl}}');"></a>

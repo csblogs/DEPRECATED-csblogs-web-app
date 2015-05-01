@@ -1,4 +1,25 @@
 var moment = require('moment');
+var html_strip = require('htmlstrip-native');
+
+var html_decode_options = {
+    include_script : false,
+    include_style : false,
+    compact_whitespace : true,
+    include_attributes : {}
+};
+
+exports.truncateAndRemoveHTML = function (str, len) {
+    str = html_strip.html_strip(str, html_decode_options);
+    if (str.length > len && str.length > 0) {
+        var new_str = str + " ";
+        new_str = str.substr (0, len);
+        new_str = str.substr (0, new_str.lastIndexOf(" "));
+        new_str = (new_str.length > 0) ? new_str : str.substr (0, len);
+
+        return new_str + '&hellip;'; 
+    }
+    return str;
+};
 
 exports.formatDateShort = function(datestamp) {
     try {

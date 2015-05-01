@@ -102,7 +102,7 @@
             <h4><a href="{{link}}">{{title}}</a></h4>
             <p class="article-date">{{formatDateLong pubDate}}</p>
             {{#if imageUrl}}<img src="{{imageUrl}}" alt="Featured Image"/>{{/if}}
-            <p>{{{summary}}}</p>
+            <p>{{{truncateAndRemoveHTML summary 400}}}</p>
             {{#unless @last}}<hr/>{{/unless}}
         </article>
         {{/each}}
