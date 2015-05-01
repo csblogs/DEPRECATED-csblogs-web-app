@@ -1,15 +1,11 @@
 var moment = require('moment');
-var html_strip = require('htmlstrip-native');
-
-var html_decode_options = {
-    include_script : false,
-    include_style : false,
-    compact_whitespace : true,
-    include_attributes : {}
-};
+var sanitizeHtml = require('sanitize-html');
 
 exports.truncateAndRemoveHTML = function (str, len) {
-    str = html_strip.html_strip(str, html_decode_options);
+    str = sanitizeHtml(str, {
+        allowedTags: [],
+        allowedAttributes: {}
+    });
     if (str.length > len && str.length > 0) {
         var new_str = str + " ";
         new_str = str.substr (0, len);
