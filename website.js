@@ -13,8 +13,8 @@ exports.serveRoutes = function(app) {
             else {
                 res.render('blogs', {
     	            title: 'Blogs / CS Blogs',
-    	            content: blogs,
-                    page: pageNumber,
+    	            blogs: blogs,
+                    pageNumber: pageNumber,
                     hasLess: showBack,
                     hasMore: showNext,
     	            user: req.user
@@ -35,7 +35,7 @@ exports.serveRoutes = function(app) {
 	});
 
     app.get('/profile', ensureAuthenticated, function(req, res) {
-        BloggerController.getUserProfile(req.user, function(profile, error) {
+        BloggerController.getUserProfile(req.user, req, function(profile, page, error) {
             if (error) { internalError(res, error); }
             else {  
                 if (profile == null) {
@@ -46,7 +46,9 @@ exports.serveRoutes = function(app) {
                     
                     res.render('profile', {
                         title: pageTitle,
+                        url: 'profile',
                         blogger: profile,
+                        page: page,
                         user: req.user
                     });
                 }
@@ -69,19 +71,21 @@ exports.serveRoutes = function(app) {
 
     app.get('/bloggers/:vanityurl', function(req, res) {
         var vanityUrl = req.params.vanityurl;
-        BloggerController.getProfileByVanityUrl(vanityUrl, function (profile, error) {
+        BloggerController.getProfileByVanityUrl(vanityUrl, req, function(profile, page, error) {
            if (error) { internalError(res, error); }
            else {
-               if(!profile || !profile.validated) { internalError(res, "Sorry, there is no user called %s", vanityUrl); }
+               if (!profile || !profile.validated) { internalError(res, "Sorry, there is no user called %s", vanityUrl); }
                else {
                    var pageTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
                    res.render('profile', {
-                        title: pageTitle,
-                        blogger: profile,
-                        user: req.user
-                    });
+                       title: pageTitle,
+                       url: 'bloggers/' + vanityUrl,
+                       blogger: profile,
+                       page: page,
+                       user: req.user
+                   });
                }
-           } 
+           }
         });
     });
 

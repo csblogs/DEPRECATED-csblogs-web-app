@@ -3,7 +3,7 @@
 {{/section}}
 
 <div id="space-saver"></div>
-{{#each content}}
+{{#each blogs}}
     <article>
         <header>
             <h2><a href="{{link}}">{{title}}</a></h2>
@@ -22,7 +22,7 @@
 {{/each}}
 <div id="nav-pages">
     {{#if hasLess}}
-    <a id="newer" class="page-btn" href="/?page={{add page -1}}">
+    <a id="newer" class="page-btn" href="/?page={{add pageNumber -1}}">
         <svg viewbox="0 0 37.62 67.32">
             <use xlink:href="/images/defs.svg#left-arrow"></use>
         </svg>
@@ -30,7 +30,7 @@
     </a>
     {{/if}}
     {{#if hasMore}}
-    <a id="older" class="page-btn" href="/?page={{add page 1}}">
+    <a id="older" class="page-btn" href="/?page={{add pageNumber 1}}">
         <p>Older</p>
         <svg viewbox="0 0 37.62 67.32">
             <use xlink:href="/images/defs.svg#right-arrow"></use>
