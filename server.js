@@ -1,4 +1,5 @@
 // Express.js and Middleware
+var subdomain = require('express-subdomain');
 var express = require('express');
 var session = require('express-session');
 var compression = require('compression');
@@ -9,6 +10,7 @@ var paginate = require('express-paginate');
 var bodyParser = require('body-parser')
 var passport = require('./authentication').Passport;
 var helpers = require('./helpers');
+var router = express.Router();
 
 // Routes
 var authentication = require('./authentication');
@@ -67,7 +69,8 @@ database.once('open', function(callback) {
     console.log('Database connection established successfully.');
 
     // Import routes (and thus serve the site) if the database connection worked
-    api.serveRoutes(app);
+    api.serveRoutes(router);
+    app.use(subdomain('api', router));
     authentication.serveOAuthRoutes(app);
 	website.serveRoutes(app);
     console.log('Now serving all routes!');
