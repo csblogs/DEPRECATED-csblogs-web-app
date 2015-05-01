@@ -14,6 +14,9 @@ exports.truncateAndRemoveHTML = function (str, len) {
 
         return new_str + '&hellip;'; 
     }
+    if (str.indexOf('[…]', str.length - 3) !== -1) {
+        str = str.substring(0, str.length - 3);
+    }
     return str;
 };
 
