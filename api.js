@@ -1,10 +1,6 @@
 var BloggerController = require('./controllers/blogger');
 
 exports.serveRoutes = function(router) {
-    router.get('/', function(req, res) {
-        res.send('Welcome to our API!');
-    });
-    
     router.get('/v0.1/bloggers', function(req, res) {
 		BloggerController.getAllProfiles(true, function (profiles, error) {
 			if(error) {
