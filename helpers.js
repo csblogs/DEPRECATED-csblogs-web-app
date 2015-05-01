@@ -41,7 +41,7 @@ exports.section = function(name, options) {
 }
 
 exports.urlFormat = function(url) {
-	if(typeof url !== "undefined" && url != null) {
+	if(typeof url !== 'undefined' && url != null) {
 	    if (url.lastIndexOf('http://', 0) === 0) {
 	        url = url.substring(7);
         
@@ -64,5 +64,10 @@ exports.ifEqualBlogger = function(user, blogger, options) {
 }
 
 exports.add = function(number1, number2) {
-    return number1 + number2;
+    if (isNaN(parseInt(number1)) || isNaN(parseInt(number2))) {
+        return '';
+    }
+    else {
+        return number1 + number2;
+    }
 }

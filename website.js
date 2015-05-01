@@ -9,12 +9,12 @@ var paginate = require('./server').paginate;
 exports.serveRoutes = function(app) {
     app.get('/', function(req, res) {
         BlogController.getPaginatedBlogs({}, req, function(blogs, pageNumber, showBack, showNext, error) {
-            if(error) { internalError(res, error); }
+            if (error) { internalError(res, error); }
             else {
                 res.render('blogs', {
     	            title: 'Blogs / CS Blogs',
-    	            content: blogs,
-                    page: pageNumber,
+    	            blogs: blogs,
+                    pageNumber: pageNumber,
                     hasLess: showBack,
                     hasMore: showNext,
     	            user: req.user
@@ -35,18 +35,20 @@ exports.serveRoutes = function(app) {
 	});
 
     app.get('/profile', ensureAuthenticated, function(req, res) {
-        BloggerController.getUserProfile(req.user, function(profile, error) {
-            if(error) { internalError(res, error); }
+        BloggerController.getUserProfile(req.user, req, function(profile, page, error) {
+            if (error) { internalError(res, error); }
             else {  
-                if(profile == null) {
+                if (profile == null) {
                     res.redirect('/register');
-                } 
+                }
                 else {
                     var pageTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
                     
                     res.render('profile', {
                         title: pageTitle,
+                        url: 'profile',
                         blogger: profile,
+                        page: page,
                         user: req.user
                     });
                 }
@@ -56,7 +58,7 @@ exports.serveRoutes = function(app) {
 
     app.get('/bloggers', function(req, res) {
         BloggerController.getAllProfiles(true, function(allProfiles, error) {
-            if(error) { internalError(res, error); }
+            if (error) { internalError(res, error); }
             else {
                 res.render('bloggers', {
                     title: 'Bloggers / CS Blogs',
@@ -69,19 +71,21 @@ exports.serveRoutes = function(app) {
 
     app.get('/bloggers/:vanityurl', function(req, res) {
         var vanityUrl = req.params.vanityurl;
-        BloggerController.getProfileByVanityUrl(vanityUrl, function (profile, error) {
-           if(error) { internalError(res, error); }
+        BloggerController.getProfileByVanityUrl(vanityUrl, req, function(profile, page, error) {
+           if (error) { internalError(res, error); }
            else {
-               if(!profile || !profile.validated) { internalError(res, "Sorry, there is no user called %s", vanityUrl); }
+               if (!profile || !profile.validated) { renderError(res, 404, "Sorry, there is no user named " + vanityUrl); }
                else {
                    var pageTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
                    res.render('profile', {
-                        title: pageTitle,
-                        blogger: profile,
-                        user: req.user
-                    });
+                       title: pageTitle,
+                       url: 'bloggers/' + vanityUrl,
+                       blogger: profile,
+                       page: page,
+                       user: req.user
+                   });
                }
-           } 
+           }
         });
     });
 
@@ -145,6 +149,22 @@ exports.serveRoutes = function(app) {
             res.redirect('/profile');
     });
 
+    app.route('/account')
+        .get(ensureAuthenticated, function(req, res) {
+        console.log("/account GET called");
+
+//        res.render('register', {
+//            title: 'Account / CS Blogs',
+//            postAction: 'account',
+//            submitText: 'Update profile',
+//            user: req.user
+//        });
+        renderError(res, 501, 'The ability to edit your profile is still under development.');
+    })
+        .post(ensureAuthenticated, function(req, res) {
+        console.log('/account POST called');
+    });
+    
     // Handle error 404
     app.use(function(req, res) {
 		console.error("ERROR 404. Request: %j", req);
@@ -162,13 +182,23 @@ exports.serveRoutes = function(app) {
 		console.error("ERROR 500. Error: %j", error);
         internalError(res, error);
     });
-    	
+
     // Code to call errors ourselves
     function internalError(res, errorMessage) {
         res.status(500);
         res.render('error', {
             title: 'Error 500 / CS Blogs',
             errorCode: 500,
+            errorMessage: errorMessage
+        });
+    }
+    
+    // Code to call any error code (could replace internalError)
+    function renderError(res, errorCode, errorMessage) {
+        res.status(errorCode);
+        res.render('error', {
+            title: 'Error ' + errorCode + ' / CS Blogs',
+            errorCode: errorCode,
             errorMessage: errorMessage
         });
     }
