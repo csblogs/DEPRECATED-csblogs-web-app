@@ -11,8 +11,8 @@ exports.run = run;
 exports.isObject = isObject;
 exports.isEmail = isEmail;
 exports.isUrl = isUrl;
-exports.isNotUrl = isNotUrl;
-exports.noWhitespace = noWhitespace;
+exports.notUrl = notUrl;
+exports.notBlank = notBlank;
 exports.noSpaces = noSpaces;
 exports.maxLength = maxLength;
 exports.vanityUrl = vanityUrl;
@@ -36,7 +36,7 @@ function run(validator, value, callback) {
     }
 
     validator.validate(value, onError);
-    callback(errors.length, errors);
+    callback(errors);
 }
 
 function ValidationError(details) {
@@ -98,6 +98,8 @@ function isObject() {
             var parameterValue = value[parameterName];
             var rule = rules[parameterName];
 
+            console.log(parameterName);
+            
             if (rule.required && isEmpty(parameterValue)) {
                 onError('Value cannot be blank.', parameterName, parameterValue);
                 continue;
@@ -127,10 +129,14 @@ function isObject() {
                         }
                         onError(message, name, childValue !== undefined ? childValue : parameterValue);
                         hasError = true;
+                        console.log(parameterName + ' in ' + hasError);
                     });
                 }
                 
-                if (hasError) { break; }
+                console.log(parameterName + ' out ' + hasError);
+                if (hasError) {
+                    break;
+                }
             }
         }
     }
@@ -164,7 +170,7 @@ function isString(options) {
     }
 }
 
-function noWhitespace(message) {
+function notBlank(message) {
     return {
         validate: validate
     };
@@ -242,7 +248,7 @@ function isUrl(message) {
     }
 }
 
-function isNotUrl(message) {
+function notUrl(message) {
     return {
         validate: validate
     };
@@ -262,7 +268,7 @@ function validateUrl(url) {
     if (url.indexOf('mailto:') === 0) {
         return false;
     }
-    options = {
+    var options = {
         protocols: [ 'http' ],
         require_tld: true,
         require_protocol: true,
@@ -332,7 +338,7 @@ function validateEmail(str) {
 }
 
 function isFQDN(str) {
-    options = {
+    var options = {
         require_tld: true,
         allow_underscores: false,
         allow_trailing_dot: false

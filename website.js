@@ -173,7 +173,7 @@ exports.serveRoutes = function(app) {
         res.render('register', {
             title: 'Register / CS Blogs',
             submitText: 'Add your blog',
-            postAction: 'test',
+            postAction: 'test'
         });
     })
     .post(function(req, res) {
@@ -182,6 +182,7 @@ exports.serveRoutes = function(app) {
         var newBlogger = new blogger({
             userId:             '123',
             userProvider: 		'github',
+            avatarUrl:          'http://placehold.it/350x350',
             firstName: 			req.body.firstName,
             lastName: 			req.body.lastName,
             emailAddress: 		req.body.emailAddress,
@@ -194,13 +195,37 @@ exports.serveRoutes = function(app) {
             linkedInProfile: 	req.body.linkedInProfile,
             bio: 				req.body.bio,
             vanityUrl: 			req.body.vanityUrl,
-            validated: 			false
+            validated: 			null
         });
 
         newBlogger.sanitize();
-        newBlogger.validate();
-
-        res.redirect('/test#submit-button'); 
+        newBlogger.validate(function(errors) {
+            BloggerController.isVanityUrlTaken(newBlogger.vanityUrl, function(taken, error) {
+                if (error) {
+                    internalError(res, error);
+                }
+                else if (taken) {
+                    errors.push({
+                        parameter: 'vanityUrl',
+                        value: newBlogger.vanityUrl,
+                        message: 'Profile name is already taken by another user.'
+                    });
+                }
+            
+                if (errors.length > 0) {
+                    res.render('register', {
+                        title: 'Register / CS Blogs',
+                        submitText: 'Add your blog',
+                        postAction: 'test',
+                        user: newBlogger,
+                        errors: errors
+                    });
+                }
+                else {
+                    res.redirect('/'); 
+                }
+            });
+        });
     });
     
     // Handle error 404

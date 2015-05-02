@@ -58,6 +58,21 @@ exports.getAllProfiles = function(validatedOnly, done) {
 	});
 };
 
+exports.isVanityUrlTaken = function(vanityUrl, done) {
+    Blogger.findOne({vanityUrl: vanityUrl}, function(error, profile) {
+        if (error) {
+            console.log("[ERROR] %j", error);
+            done(false, error);
+        }
+        else if (profile) {
+            done(true, null);
+        }
+        else {
+            done(false, null);
+        }
+    });
+};
+
 function getBlogs(bloggerQuery, req, done) {
     BlogController.getPaginatedBlogs(bloggerQuery, req, function(blogs, pageNumber, showBack, showNext, error) {
         var page = {

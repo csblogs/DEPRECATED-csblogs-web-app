@@ -42,7 +42,7 @@ bloggerSchema.methods.sanitize = function() {
                         );
 }
 
-bloggerSchema.methods.validate = function() {    
+bloggerSchema.methods.validate = function(done) {    
     var check = validator.isObject()
     .withRequired('_id')
     .withRequired('userProvider')
@@ -55,15 +55,15 @@ bloggerSchema.methods.validate = function() {
     .withRequired('blogWebsiteUrl', validator.isUrl())
     .withOptional('websiteUrl', validator.isUrl())
     .withOptional('cvUrl', validator.isUrl())
-    .withOptional('githubProfile', validator.noWhitespace(), validator.isNotUrl())
-    .withOptional('twitterProfile', validator.noWhitespace(), validator.isNotUrl())
-    .withOptional('linkedInProfile', validator.noWhitespace(), validator.isNotUrl())
-    .withOptional('bio', validator.noWhitespace(), validator.maxLength(120))
+    .withOptional('githubProfile', validator.notBlank(), validator.notUrl())
+    .withOptional('twitterProfile', validator.notBlank(), validator.notUrl())
+    .withOptional('linkedInProfile', validator.notBlank(), validator.notUrl())
+    .withOptional('bio', validator.notBlank(), validator.maxLength(200))
     .withRequired('validated')
-    .withRequired('vanityUrl', validator.noSpaces(), validator.vanityUrl())
-    
-    validator.run(check, this._doc, function(errorCount, errors) {
-        console.log(errors);
+    .withRequired('vanityUrl', validator.noSpaces(), validator.vanityUrl());
+
+    validator.run(check, this._doc, function(errors) {
+        done(errors);
     });
 };
 
