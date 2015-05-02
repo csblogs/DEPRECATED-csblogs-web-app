@@ -63,7 +63,7 @@ function isObject() {
             validators.push(arguments[i]);
         }
         
-        rules[name] = { validator: validators };
+        rules[name] = { required: false, validator: validators };
         return v;
     }
 
@@ -87,17 +87,20 @@ function isObject() {
             var parameterValue = value[parameterName];
             var rule = rules[parameterName];
 
-            if (isEmpty(parameterValue) && rule.required) {
+            if (rule.required && isEmpty(parameterValue)) {
                 onError('Value cannot be blank.', parameterName, parameterValue);
                 continue;
+            }
+            else if (!rule.required && (!parameterValue || 0 === parameterValue.length)) {
+                break; // Empty and not required
             }
 
             for (i = 0; i < rule.validator.length; ++i) {
                 var hasError = false;
                 
-                if (parameterValue === undefined || parameterValue === null || !rule.validator[i]) {
-                    continue;
-                }
+                //if (parameterValue === undefined || parameterValue === null || !rule.validator[i]) {
+                //    continue;
+                //}
 
                 if (rule.validator[i]) {
                     rule.validator[i].validate(parameterValue, function(message, childName, childValue) {
@@ -156,9 +159,6 @@ function notWhitespace(message) {
     };
 
     function validate(value, onError) {
-        if (!value || 0 === value.length) {
-            return null; // Can be ""/nothing
-        }
         if (!/\S/.test(value.toString())) {
             return onError(message || 'Value cannot be blank.');
         }

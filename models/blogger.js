@@ -34,7 +34,7 @@ bloggerSchema.methods.validate = function() {
     var check = validator.isObject()
     .withRequired('_id')
     .withRequired('firstName')
-    .withOptional('lastName', validator.notWhitespace())
+    .withOptional('lastName', validator.notWhitespace(), validator.isEmail())
     
     validator.run(check, this._doc, function(errorCount, errors) {
         console.log(errors);
