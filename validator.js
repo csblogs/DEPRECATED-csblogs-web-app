@@ -7,10 +7,10 @@
 
 exports.run = run;
 exports.isObject = isObject;
-exports.isString = isString;
 exports.isEmail = isEmail;
 exports.isUrl = isUrl;
-exports.notWhitespace = notWhitespace;
+exports.isNotUrl = isNotUrl;
+exports.noWhitespace = noWhitespace;
 exports.noSpaces = noSpaces;
 exports.maxLength = maxLength;
 exports.vanityUrl = vanityUrl;
@@ -138,7 +138,7 @@ function isEmpty(value) {
     if (value === undefined || value === null) {
         return true;
     }
-    if (!/\S/.test(value.toString())) {
+    if (!regex_blank.test(value.toString())) {
         return true;
     }
     return false;
@@ -162,7 +162,7 @@ function isString(options) {
     }
 }
 
-function notWhitespace(message) {
+function noWhitespace(message) {
     return {
         validate: validate
     };
@@ -235,6 +235,19 @@ function isUrl(message) {
     function validate(value, onError) {
         if (!validateUrl(value.toString())) {
             return onError(message || 'Value must be a valid URL.');
+        }
+        return null;
+    }
+}
+
+function isNotUrl(message) {
+    return {
+        validate: validate
+    };
+
+    function validate(value, onError) {
+        if (validateUrl(value.toString())) {
+            return onError(message || 'Value should not be a URL.');
         }
         return null;
     }

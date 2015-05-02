@@ -178,19 +178,21 @@ exports.serveRoutes = function(app) {
         console.log('/test POST called');
         
         var newBlogger = new blogger({
+            userId:             '123',
+            userProvider: 		'github',
             firstName: 			req.body.firstName,
             lastName: 			req.body.lastName,
-//            emailAddress: 		req.body.emailAddress,
-//            feedUrl: 			req.body.feedUrl,
-//            blogWebsiteUrl: 	req.body.blogWebsiteUrl,
-//            websiteUrl: 		req.body.websiteUrl,
-//            cvUrl: 				req.body.cvUrl,
-//            githubProfile: 		req.body.githubProfile,
-//            twitterProfile: 	req.body.twitterProfile,
-//            linkedInProfile: 	req.body.linkedInProfile,
-//            bio: 				req.body.bio,
-//            vanityUrl: 			req.body.vanityUrl,
-//            validated: 			false
+            emailAddress: 		req.body.emailAddress,
+            feedUrl: 			req.body.feedUrl,
+            blogWebsiteUrl: 	req.body.blogWebsiteUrl,
+            websiteUrl: 		req.body.websiteUrl,
+            cvUrl: 				req.body.cvUrl,
+            githubProfile: 		req.body.githubProfile,
+            twitterProfile: 	req.body.twitterProfile,
+            linkedInProfile: 	req.body.linkedInProfile,
+            bio: 				req.body.bio,
+            vanityUrl: 			req.body.vanityUrl,
+            validated: 			false
         });
 
         newBlogger.sanitize();

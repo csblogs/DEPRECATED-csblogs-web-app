@@ -32,14 +32,33 @@ var bloggerSchema = new Schema({
 
 bloggerSchema.methods.sanitize = function() {
     validator.trimStrings(this._doc);
-    validator.formatUrls(this._doc, 'firstName', 'lastName');
+    validator.formatUrls(this._doc,
+                         'feedUrl',
+                         'blogWebsiteUrl',
+                         'websiteUrl',
+                         'cvUrl'
+                        );
 }
 
 bloggerSchema.methods.validate = function() {    
     var check = validator.isObject()
     .withRequired('_id')
-    .withRequired('firstName', validator.isUrl())
-    .withOptional('lastName', validator.isUrl())
+    .withRequired('userProvider')
+    .withRequired('userId')
+    .withRequired('firstName')
+    .withRequired('lastName')
+    .withRequired('emailAddress', validator.isEmail())
+    .withRequired('avatarUrl', validator.isUrl())
+    .withRequired('feedUrl', validator.isUrl())
+    .withRequired('blogWebsiteUrl', validator.isUrl())
+    .withOptional('websiteUrl', validator.isUrl())
+    .withOptional('cvUrl', validator.isUrl())
+    .withOptional('githubProfile', validator.noWhitespace(), validator.isNotUrl())
+    .withOptional('twitterProfile', validator.noWhitespace(), validator.isNotUrl())
+    .withOptional('linkedInProfile', validator.noWhitespace(), validator.isNotUrl())
+    .withOptional('bio', validator.noWhitespace(), validator.maxLength(120))
+    .withRequired('validated')
+    .withRequired('vanityUrl', validator.noSpaces(), validator.vanityUrl())
     
     validator.run(check, this._doc, function(errorCount, errors) {
         console.log(errors);
