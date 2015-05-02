@@ -1,3 +1,5 @@
+"use strict";
+
 var BloggerController = require('./controllers/blogger');
 var BlogController = require('./controllers/blog');
 var blogger = require('./models/blogger').Blogger;

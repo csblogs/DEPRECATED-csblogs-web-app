@@ -1,3 +1,5 @@
+"use strict";
+
 // Express.js and Middleware
 var subdomain = require('express-subdomain');
 var express = require('express');
