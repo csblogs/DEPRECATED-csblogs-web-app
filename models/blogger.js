@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var validator = require('validator');
+var validator = require('../validator');
 var Schema = mongoose.Schema;
 
 var bloggerSchema = new Schema({
@@ -30,8 +30,15 @@ var bloggerSchema = new Schema({
     vanityUrl: String,
 });
 
-bloggerSchema.methods.isValid = function() {
-    //TODO: Use validator package here
+bloggerSchema.methods.validate = function() {    
+    var check = validator.isObject()
+        .withRequired('firstName' validator.notEmpty())
+        .withRequired('lastName', validator.notEmpty())
+        .withRequired('emailAddress', validator.notEmpty())
+    
+    validator.run(check, this._doc, function(errorCount, errors) {
+        console.log(errors);
+    });
 };
 
 exports.Blogger = mongoose.model('Blogger', bloggerSchema);

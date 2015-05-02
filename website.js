@@ -165,6 +165,38 @@ exports.serveRoutes = function(app) {
         console.log('/account POST called');
     });
     
+    app.route('/test').get(function(req, res) {
+        console.log('/test GET called');
+
+        res.render('register', {
+            title: 'Register / CS Blogs',
+            submitText: 'Add your blog',
+            postAction: 'test',
+        });
+    })
+    .post(function(req, res) {
+        console.log('/test POST called');
+        
+        var newBlogger = new blogger({
+            firstName: 			req.body.firstName,
+            lastName: 			req.body.lastName,
+//            emailAddress: 		req.body.emailAddress,
+//            feedUrl: 			req.body.feedUrl,
+//            blogWebsiteUrl: 	req.body.blogWebsiteUrl,
+//            websiteUrl: 		req.body.websiteUrl,
+//            cvUrl: 				req.body.cvUrl,
+//            githubProfile: 		req.body.githubProfile,
+//            twitterProfile: 	req.body.twitterProfile,
+//            linkedInProfile: 	req.body.linkedInProfile,
+//            bio: 				req.body.bio,
+//            vanityUrl: 			req.body.vanityUrl,
+//            validated: 			false
+        });
+
+        newBlogger.validate();
+        res.redirect('/test#submit-button'); 
+    });
+    
     // Handle error 404
     app.use(function(req, res) {
 		console.error("ERROR 404. Request: %j", req);
