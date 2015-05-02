@@ -1,3 +1,5 @@
+"use strict";
+
 /* Reference - modified code:
  * Node Validator
  * https://bitbucket.org/gregbacchus/node-validator/
@@ -58,7 +60,7 @@ function isObject() {
 
     function required(name, validator) {
         var validators = [];
-        for (i = 1; i < arguments.length; ++i) {
+        for (var i = 1; i < arguments.length; ++i) {
             validators.push(arguments[i]);
         }
         
@@ -68,7 +70,7 @@ function isObject() {
 
     function optional(name, validator) {
         var validators = [];
-        for (i = 1; i < arguments.length; ++i) {
+        for (var i = 1; i < arguments.length; ++i) {
             validators.push(arguments[i]);
         }
         
@@ -104,7 +106,7 @@ function isObject() {
                 break; // Empty and not required
             }
 
-            for (i = 0; i < rule.validator.length; ++i) {
+            for (var i = 0; i < rule.validator.length; ++i) {
                 var hasError = false;
                 
                 //if (parameterValue === undefined || parameterValue === null || !rule.validator[i]) {
@@ -367,7 +369,7 @@ function isFQDN(str) {
 }
 
 function trimStrings(str) {
-    for (i in str) {
+    for (var i in str) {
         if (typeof str[i] === 'string') {
             str[i] = str[i].trim();
         }
@@ -375,7 +377,7 @@ function trimStrings(str) {
 }
 
 function formatUrls(blogger) {
-    for (i = 1; i < arguments.length; ++i) {
+    for (var i = 1; i < arguments.length; ++i) {
         if (!isEmpty(blogger[arguments[i]])) {
             // Remove https:// at the start
             if (blogger[arguments[i]].lastIndexOf('https://', 0) === 0) {

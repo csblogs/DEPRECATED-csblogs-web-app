@@ -60,7 +60,7 @@ exports.getAllProfiles = function(validatedOnly, done) {
 
 function getBlogs(bloggerQuery, req, done) {
     BlogController.getPaginatedBlogs(bloggerQuery, req, function(blogs, pageNumber, showBack, showNext, error) {
-        page = {
+        var page = {
             blogs: blogs,
             pageNumber: pageNumber,
             hasLess: showBack,
