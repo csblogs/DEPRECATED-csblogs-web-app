@@ -193,6 +193,7 @@ exports.serveRoutes = function(app) {
 //            validated: 			false
         });
 
+        newBlogger.sanitize();
         newBlogger.validate();
 
         res.redirect('/test#submit-button'); 

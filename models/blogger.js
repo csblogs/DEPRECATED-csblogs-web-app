@@ -30,11 +30,16 @@ var bloggerSchema = new Schema({
     vanityUrl: String,
 });
 
+bloggerSchema.methods.sanitize = function() {
+    validator.trimStrings(this._doc);
+    validator.formatUrls(this._doc, 'firstName', 'lastName');
+}
+
 bloggerSchema.methods.validate = function() {    
     var check = validator.isObject()
     .withRequired('_id')
-    .withRequired('firstName')
-    .withOptional('lastName', validator.notWhitespace(), validator.isEmail())
+    .withRequired('firstName', validator.isUrl())
+    .withOptional('lastName', validator.isUrl())
     
     validator.run(check, this._doc, function(errorCount, errors) {
         console.log(errors);
