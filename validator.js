@@ -10,7 +10,8 @@ var moment = require('moment');
 exports.run = run;
 exports.isObject = isObject;
 exports.isString = isString;
-exports.notEmpty = notEmpty;
+exports.isEmail = isEmail;
+exports.notWhitespace = notWhitespace;
 
 function run(validator, value, callback) {
     var errors = [];
@@ -40,27 +41,29 @@ function isObject() {
     var v = {
         withRequired: required,
         withOptional: optional,
-        withCustom: custom,
         validate: validate
     };
-
     var rules = {};
-    var globalRules = [];
 
     return v;
 
     function required(name, validator) {
-        rules[name] = { required: true, validator: validator };
+        var validators = [];
+        for (i = 1; i < arguments.length; ++i) {
+            validators.push(arguments[i]);
+        }
+        
+        rules[name] = { required: true, validator: validators };
         return v;
     }
 
     function optional(name, validator) {
-        rules[name] = { validator: validator };
-        return v;
-    }
-
-    function custom(customValidator) {
-        globalRules.push({ validator: { validate: customValidator } });
+        var validators = [];
+        for (i = 1; i < arguments.length; ++i) {
+            validators.push(arguments[i]);
+        }
+        
+        rules[name] = { validator: validators };
         return v;
     }
 
@@ -84,41 +87,49 @@ function isObject() {
             var parameterValue = value[parameterName];
             var rule = rules[parameterName];
 
-            if ((parameterValue === undefined || parameterValue === null) && rule.required) {
-                onError('Required value.', parameterName, parameterValue);
+            if (isEmpty(parameterValue) && rule.required) {
+                onError('Value cannot be blank.', parameterName, parameterValue);
                 continue;
             }
 
-            if (parameterValue === undefined || parameterValue === null || !rule.validator) {
-                continue;
-            }
+            for (i = 0; i < rule.validator.length; ++i) {
+                var hasError = false;
+                
+                if (parameterValue === undefined || parameterValue === null || !rule.validator[i]) {
+                    continue;
+                }
 
-            if (rule.validator) {
-                rule.validator.validate(parameterValue, function(message, childName, childValue) {
-                    var name;
-                    if (childName) {
-                        if (childName[0] === '[') {
-                            name = parameterName + childName;
+                if (rule.validator[i]) {
+                    rule.validator[i].validate(parameterValue, function(message, childName, childValue) {
+                        var name;
+                        if (childName) {
+                            if (childName[0] === '[') {
+                                name = parameterName + childName;
+                            } else {
+                                name = parameterName + '.' + childName;
+                            }
                         } else {
-                            name = parameterName + '.' + childName;
+                            name = parameterName;
                         }
-                    } else {
-                        name = parameterName;
-                    }
-                    onError(message, name, childValue !== undefined ? childValue : parameterValue)
-                });
-            }
-        }
-
-        // global rules
-        for (var i in globalRules) {
-            var globalRule = globalRules[i];
-
-            if (globalRule.validator) {
-                globalRule.validator.validate(value, onError);
+                        onError(message, name, childValue !== undefined ? childValue : parameterValue);
+                        hasError = true;
+                    });
+                }
+                
+                if (hasError) { break; }
             }
         }
     }
+}
+
+function isEmpty(value) {
+    if (value === undefined || value === null) {
+        return true;
+    }
+    if (!/\S/.test(value.toString())) {
+        return true;
+    }
+    return false;
 }
 
 function isString(options) {
@@ -139,17 +150,30 @@ function isString(options) {
     }
 }
 
-function notEmpty(message) {
+function notWhitespace(message) {
     return {
         validate: validate
     };
 
     function validate(value, onError) {
-        if (typeof value !== 'string') {
-            return onError('Incorrect type. Expected string.');
+        if (!value || 0 === value.length) {
+            return null; // Can be ""/nothing
         }
-        if (!/\S/.test(value)) {
-            return onError(message || 'Required field');
+        if (!/\S/.test(value.toString())) {
+            return onError(message || 'Value cannot be blank.');
+        }
+        return null;
+    }
+}
+
+function isEmail(message) {
+    return {
+        validate: validate
+    };
+
+    function validate(value, onError) {
+        if (!/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i.test(value.toString())) {
+            return onError(message || 'Not a valid email address.');
         }
         return null;
     }

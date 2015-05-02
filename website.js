@@ -194,6 +194,7 @@ exports.serveRoutes = function(app) {
         });
 
         newBlogger.validate();
+
         res.redirect('/test#submit-button'); 
     });
     

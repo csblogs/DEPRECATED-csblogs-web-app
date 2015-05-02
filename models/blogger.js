@@ -32,9 +32,9 @@ var bloggerSchema = new Schema({
 
 bloggerSchema.methods.validate = function() {    
     var check = validator.isObject()
-        .withRequired('firstName' validator.notEmpty())
-        .withRequired('lastName', validator.notEmpty())
-        .withRequired('emailAddress', validator.notEmpty())
+    .withRequired('_id')
+    .withRequired('firstName')
+    .withOptional('lastName', validator.notWhitespace())
     
     validator.run(check, this._doc, function(errorCount, errors) {
         console.log(errors);
