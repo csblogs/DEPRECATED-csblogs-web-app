@@ -24,6 +24,11 @@ exports.truncateAndRemoveHTML = function (str, len) {
         str = str.substring(0, continueReadingPosition);
     }
     
+    var readMorePosition = str.indexOf('... Read more');
+    if(readMorePosition !== -1) {
+        str = str.substring(0, readMorePosition);
+    }
+    
     if (str.indexOf('[…]', str.length - 3) !== -1) {
         str = str.substring(0, str.length - 3);
     }
