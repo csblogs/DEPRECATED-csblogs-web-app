@@ -1,5 +1,7 @@
 "use strict";
 
+var request = require('request');
+var async = require('async')
 var mongoose = require('mongoose');
 var validator = require('../validator');
 var Schema = mongoose.Schema;
@@ -63,7 +65,35 @@ bloggerSchema.methods.validate = function(done) {
     .withRequired('vanityUrl', validator.noSpaces(), validator.vanityUrl());
 
     validator.run(check, this._doc, function(errors) {
-        done(errors);
+		//Everything is valid in terms of syntax. Now lets make sure user submitted URLs are real/live
+		var brokenUrls = [];
+		var urls = [this._doc.feedUrl, this._doc.blogWebsiteUrl, this._doc.websiteUrl, this._doc.cvUrl];
+		async.each(urls, function(url, asyncCallback) {
+            //Improve this by requesting headers only...
+			request(url, function (err, resp) {
+				if(err) {
+					brokenUrls.push(url);
+				}
+				else{
+			    	if (resp.statusCode === 200) {
+			      	  	return; // url exists
+			    	}
+			  	  	else {
+				   	 	brokenUrls.push(url);
+			   	 	}
+		   		}
+				asyncCallback();
+			});
+		},
+		function(err) {
+			//All done on URL Checks
+			if(brokenUrls.length > 0 ){
+				brokenUrls.forEach(function(item) {
+					errors.push("Invalid url: %s", item);
+				});
+			}
+		    done(errors);
+		});
     });
 };
 

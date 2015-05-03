@@ -21,6 +21,7 @@
   },
   "homepage": "https://csblogs.com",
   "dependencies": {
+    "async": "^0.9.0",
     "body-parser": "^1.12.0",
     "compression": "^1.4.1",
     "express": "^4.11.2",
@@ -36,6 +37,7 @@
     "passport-github": "^0.1.5",
     "passport-stackexchange": "^0.1.0",
     "passport-wordpress": "0.0.3",
+    "request": "^2.55.0",
     "sanitize-html": "^1.6.1"
   }
 }
