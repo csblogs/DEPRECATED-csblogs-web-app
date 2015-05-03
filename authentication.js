@@ -138,6 +138,7 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
             userAsBlogger = new Blogger({
     			avatarUrl: 		passportjsUser._json.avatar_URL,
                 emailAddress: 	passportjsUser._json.email,
+                feedUrl:        "http://" + passportjsUser.displayName + ".wordpress.com/feed",
                 blogWebsiteUrl: "http://" + passportjsUser.displayName + ".wordpress.com",
                 vanityUrl: 		passportjsUser._json.display_name.replace(/\s+/g, '-').toLowerCase()
             });
