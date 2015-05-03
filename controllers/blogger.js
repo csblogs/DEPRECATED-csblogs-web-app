@@ -58,11 +58,11 @@ exports.getAllProfiles = function(validatedOnly, done) {
 	});
 };
 
-exports.isVanityUrlTaken = function(vanityUrl, done) {
+function isVanityUrlTaken(vanityUrl, done) {
     Blogger.findOne({vanityUrl: vanityUrl}, function(error, profile) {
         if (error) {
             console.log("[ERROR] %j", error);
-            done(false, error);
+            done(true, error);
         }
         else if (profile) {
             done(true, null);
@@ -85,3 +85,23 @@ function getBlogs(bloggerQuery, req, done) {
         done(page, error);
     });
 }
+
+exports.register = function(newBlogger, done) {
+    newBlogger.sanitize();
+    newBlogger.validate(function(errors) {
+        isVanityUrlTaken(newBlogger.vanityUrl, function(taken, error) {
+            if (error) {
+                done(null, null, error);
+            }
+            else if (taken) {
+                errors.push({
+                    parameter: 'vanityUrl',
+                    value: newBlogger.vanityUrl,
+                    message: 'Profile name is already taken by another user.'
+                });
+            }
+
+            done(newBlogger, errors, null);
+        });
+    });
+};

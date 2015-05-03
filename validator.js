@@ -268,7 +268,7 @@ function validateUrl(url) {
     var options = {
         protocols: [ 'http' ],
         require_tld: true,
-        require_protocol: true,
+        require_protocol: false,
         allow_underscores: true,
         allow_trailing_dot: false,
         allow_protocol_relative_urls: false
