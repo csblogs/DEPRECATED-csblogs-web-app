@@ -150,7 +150,9 @@ function validateUserSubmittedUrls (blogger, done) {
     			asyncCallback();
     		});
         }
-		asyncCallback();
+        else {
+    		asyncCallback();
+        }
 	},
 	function(err) {
         if(err) {
