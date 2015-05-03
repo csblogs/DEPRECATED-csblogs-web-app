@@ -105,6 +105,8 @@ exports.register = function(newBlogger, done) {
                         message: 'Profile name is already taken by another user.'
                     });
                 }
+                console.log("%j", brokenUrls);
+                
                 brokenUrls.forEach(function(brokenUrl) {
                    errors.push({
                        parameter: brokenUrl.name,
@@ -112,6 +114,9 @@ exports.register = function(newBlogger, done) {
                        message: 'URL doesnt appear to be correct, or site is broken'
                    });
                 });
+                
+                console.log("%j", errors);
+                
             	done(newBlogger, errors, null);
             });
         });
@@ -136,7 +141,7 @@ function validateUserSubmittedUrls (blogger, done) {
     			}
     			else{
     		    	if (resp.statusCode === 200) {
-    		      	  	return; // url exists
+    		      	    // url exists
     		    	}
     		  	  	else {
     			   	 	brokenUrls.push(url);
