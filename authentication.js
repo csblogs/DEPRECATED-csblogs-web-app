@@ -2,6 +2,7 @@
 
 var passport = require('passport');
 var Blogger = require('./models/blogger').Blogger;
+var Blog = require('./models/blog').Blog;
 var GitHubStrategy = require('passport-github').Strategy;
 var WordpressStrategy = require('passport-wordpress').Strategy;
 var StackExchangeStrategy = require('passport-stackexchange').Strategy;
@@ -190,4 +191,9 @@ exports.serveOAuthRoutes = function(app) {
             failureRedirect: '/login',
             failureFlash: true
         }));
+};
+
+exports.deleteUser = function(passportJSUser) {
+    Blogger.findOne({userId: passportJSUser.userId, userProvider: passportJSUser.userProvider}).remove();
+    Blog.find({userId: passportJSUser.userId, userProvider: passportJSUser.userProvider}).remove();
 };

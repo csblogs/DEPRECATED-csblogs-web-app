@@ -42,6 +42,18 @@ exports.serveRoutes = function(app) {
 	  	req.logout();
 	  	res.redirect('/');
 	});
+    
+    app.get('/confirm-delete', function (req, res) {
+        res.render('confirm-delete', {
+            title: 'Confirm account delete / CS Blogs' 
+        });
+    });
+    
+    app.get('/delete-account', function (req, res) {
+        authentication.deleteUser(req.user);
+        req.logout();
+        res.redirect('/');
+    })
 
     app.get('/profile', ensureAuthenticated, function(req, res) {
         var url = '/profile?';
