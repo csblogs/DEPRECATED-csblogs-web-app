@@ -1,5 +1,7 @@
 "use strict";
 
+var request = require('request');
+var async = require('async')
 var Blog = require('../models/blog').Blog;
 var BlogController = require('./blog');
 var Blogger = require('../models/blogger').Blogger;
@@ -92,18 +94,63 @@ exports.register = function(newBlogger, done) {
     newBlogger.sanitize();
     newBlogger.validate(function(errors) {
         isVanityUrlTaken(newBlogger.vanityUrl, function(taken, error) {
-            if (error) {
-                done(null, null, error);
-            }
-            else if (taken) {
-                errors.push({
-                    parameter: 'vanityUrl',
-                    value: newBlogger.vanityUrl,
-                    message: 'Profile name is already taken by another user.'
+            validateUserSubmittedUrls(newBlogger, function (brokenUrls) {
+                if (error) {
+                    return done(null, null, error);
+                }
+                else if (taken) {
+                    errors.push({
+                        parameter: 'vanityUrl',
+                        value: newBlogger.vanityUrl,
+                        message: 'Profile name is already taken by another user.'
+                    });
+                }
+                brokenUrls.forEach(function(brokenUrl) {
+                   errors.push({
+                       parameter: brokenUrl.name,
+                       value: brokenUrl.location,
+                       message: 'URL doesnt appear to be correct, or site is broken'
+                   });
                 });
-            }
-
-            done(newBlogger, errors, null);
+            	done(newBlogger, errors, null);
+            });
         });
     });
+};
+
+//Done of form done(brokenUrls);
+function validateUserSubmittedUrls (blogger, done) {
+    //Everything is valid in terms of syntax. Now lets make sure user submitted URLs are real/live
+	var brokenUrls = [];
+	var urls = [{name: "feedUrl",     	    location: blogger.feedUrl}, 
+                {name: "blogWebsiteUrl",    location: blogger.blogWebsiteUrl}, 
+                {name: "websiteUrl",        location: blogger.websiteUrl}, 
+                {name: "cvUrl",             location: blogger.cvUrl}];
+                
+	async.each(urls, function(url, asyncCallback) {
+        if(url != "") {        
+            //Improve this by requesting headers only...
+    		request(url.location, function (err, resp) {
+    			if(err) {
+    				brokenUrls.push(url);
+    			}
+    			else{
+    		    	if (resp.statusCode === 200) {
+    		      	  	return; // url exists
+    		    	}
+    		  	  	else {
+    			   	 	brokenUrls.push(url);
+    		   	 	}
+    	   		}
+    			asyncCallback();
+    		});
+        }
+		asyncCallback();
+	},
+	function(err) {
+        if(err) {
+            console.error("[ERROR] %j", err);
+        }
+	    done(brokenUrls);
+	});
 };
