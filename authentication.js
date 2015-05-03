@@ -194,6 +194,6 @@ exports.serveOAuthRoutes = function(app) {
 };
 
 exports.deleteUser = function(passportJSUser) {
-    Blogger.findOne({userId: passportJSUser.userId, userProvider: passportJSUser.userProvider}).remove();
-    Blog.find({userId: passportJSUser.userId, userProvider: passportJSUser.userProvider}).remove();
+    Blogger.findOne({userId: passportJSUser.userId, userProvider: passportJSUser.userProvider}).remove().exec();
+    Blog.find({userId: passportJSUser.userId, userProvider: passportJSUser.userProvider}).remove().exec();
 };
