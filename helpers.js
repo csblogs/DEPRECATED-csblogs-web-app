@@ -91,3 +91,14 @@ exports.add = function(number1, number2) {
         return number1 + number2;
     }
 }
+
+exports.ifInvalid = function(errors, options) {
+    if (errors) {
+        for (var i = 0; i < errors.length; ++i) {
+            if (errors[i].parameter === options.hash.name) {
+                return 'class=invalid';
+            }
+        }
+    }
+    return '';
+}

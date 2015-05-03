@@ -84,7 +84,7 @@ function isObject() {
             return;
         }
 
-        // check for unexpected values
+        // Check for unexpected values
         for (var parameter in value) {
             if (rules[parameter]) {
                 continue;
@@ -93,7 +93,7 @@ function isObject() {
             onError('Unexpected value.', parameter, value[parameter]);
         }
         
-        // check rules
+        // Check rules
         for (var parameterName in rules) {
             var parameterValue = value[parameterName];
             var rule = rules[parameterName];
@@ -131,7 +131,7 @@ function isObject() {
                 }
                 
                 if (hasError) {
-                    // error found, do not perform other validations on this parameter.
+                    // Error found, do not perform other validations on this parameter.
                     break;
                 }
             }
@@ -226,7 +226,7 @@ function vanityUrl(message) {
 
     function validate(value, onError) {
         if (!regex_vanityUrl.test(value.toString())) {
-            return onError(message || 'Value must contain only a-z, 0-9, _, - and start with a letter.');
+            return onError(message || 'Value must contain only a-z, 0-9, -, _ and start with a letter.');
         }
         return null;
     }

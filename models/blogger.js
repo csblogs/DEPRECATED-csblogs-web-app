@@ -53,7 +53,7 @@ bloggerSchema.methods.validate = function(done) {
     .withRequired('avatarUrl', validator.isUrl())
     .withRequired('feedUrl', validator.isUrl())
     .withRequired('blogWebsiteUrl', validator.isUrl())
-    .withOptional('websiteUrl', validator.isUrl())
+    .withRequired('websiteUrl', validator.isUrl())
     .withOptional('cvUrl', validator.isUrl())
     .withOptional('githubProfile', validator.notBlank(), validator.notUrl())
     .withOptional('twitterProfile', validator.notBlank(), validator.notUrl())
