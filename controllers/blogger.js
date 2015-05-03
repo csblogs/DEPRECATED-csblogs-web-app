@@ -137,13 +137,16 @@ function validateUserSubmittedUrls (blogger, done) {
             //Improve this by requesting headers only...
     		request(url.location, function (err, resp) {
     			if(err) {
+                    console.log("%j broken", url);
     				brokenUrls.push(url);
     			}
     			else{
     		    	if (resp.statusCode === 200) {
+                        console.log("%j ok", url);
     		      	    // url exists
     		    	}
     		  	  	else {
+                        console.log("%j broken", url);
     			   	 	brokenUrls.push(url);
     		   	 	}
     	   		}
@@ -158,6 +161,7 @@ function validateUserSubmittedUrls (blogger, done) {
         if(err) {
             console.error("[ERROR] %j", err);
         }
+        console.log("BROKEN URLS %j", brokenUrls);
 	    done(brokenUrls);
 	});
 };
