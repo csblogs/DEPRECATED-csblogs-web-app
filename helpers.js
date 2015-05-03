@@ -16,6 +16,14 @@ exports.truncateAndRemoveHTML = function (str, len) {
 
         return new_str + '&hellip;'; 
     }
+    
+    //Some blogs leave annoying bits at then end, such as their own
+    //continue reading link or ellipses. Remove these.
+	var continueReadingPosition = str.indexOf('… Continue reading →');
+    if(continueReadingPosition !== -1) {
+        str = str.substring(0, continueReadingPosition);
+    }
+    
     if (str.indexOf('[…]', str.length - 3) !== -1) {
         str = str.substring(0, str.length - 3);
     }
@@ -92,4 +100,15 @@ exports.add = function(number1, number2) {
     else {
         return number1 + number2;
     }
+}
+
+exports.ifInvalid = function(errors, options) {
+    if (errors) {
+        for (var i = 0; i < errors.length; ++i) {
+            if (errors[i].parameter === options.hash.name) {
+                return 'class=invalid';
+            }
+        }
+    }
+    return '';
 }

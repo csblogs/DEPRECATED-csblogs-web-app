@@ -123,12 +123,12 @@ exports.serveRoutes = function(app) {
 	                title: 'Register / CS Blogs',
 	                submitText: 'Add your blog',
 					postAction: 'register',
-	                user: userAsBlogger,
+	                user: userAsBlogger
 	            });
 			}
         })
         .post(ensureAuthenticated, function(req, res) {            	
-			var newBlogger = new blogger({
+            var newBlogger = new blogger({
                 userProvider: 		req.user.provider,
                 firstName: 			req.body.firstName,
                 lastName: 			req.body.lastName,
@@ -144,28 +144,41 @@ exports.serveRoutes = function(app) {
                 vanityUrl: 			req.body.vanityUrl,
                 validated: 			false
             });
-			
-			switch(req.user.provider) {
-				case 'github':
-                	newBlogger.userId = req.user.id,
-					newBlogger.avatarUrl = req.user._json.avatar_url;
-					break;
-				case 'Wordpress':
-					newBlogger.userId = req.user._json.ID;
-					newBlogger.avatarUrl = req.user._json.avatar_URL;
-					break;
-				case 'stackexchange':
-					newBlogger.userId = req.user.user_id;
-					newBlogger.avatarUrl = req.user.profile_image;
-					break;
-			}
-			
-            //VALIDATE FIELDS HERE
-            //newBlogger.validate();
-            
-            newBlogger.save();
-			req.session.passport.user = newBlogger;			
-            res.redirect('/profile');
+
+            switch(req.user.provider) {
+                case 'github':
+                    newBlogger.userId = req.user.id,
+                        newBlogger.avatarUrl = req.user._json.avatar_url;
+                    break;
+                case 'Wordpress':
+                    newBlogger.userId = req.user._json.ID;
+                    newBlogger.avatarUrl = req.user._json.avatar_URL;
+                    break;
+                case 'stackexchange':
+                    newBlogger.userId = req.user.user_id;
+                    newBlogger.avatarUrl = req.user.profile_image;
+                    break;
+            }
+        
+            BloggerController.register(newBlogger, function(validBlogger, errors, dbError) {
+                if (dbError) {
+                    internalError(res, dbError);
+                }
+                else if (errors.length > 0) {
+                    res.render('register', {
+                            title: 'Register / CS Blogs',
+                            submitText: 'Add your blog',
+                            postAction: 'register',
+                            user: newBlogger,
+                            errors: errors
+                        });
+                }
+                else {
+                    validBlogger.save();
+                    req.session.passport.user = validBlogger;			
+                    res.redirect('/profile');
+                }
+            });
     });
 
     app.route('/account')
@@ -186,7 +199,7 @@ exports.serveRoutes = function(app) {
     
     // Handle error 404
     app.use(function(req, res) {
-		console.error("ERROR 404. Request: %j", req);
+        console.error("ERROR 404. Request: %j", req);
         res.status(404);
         res.render('error', {
             title: 'Error 404 / CS Blogs',
@@ -195,7 +208,7 @@ exports.serveRoutes = function(app) {
             user: req.user
         });
     });
-
+    
     // Handle error 500
     app.use(function(error, req, res, next) {
 		console.error("ERROR 500. Error: %j", error);
