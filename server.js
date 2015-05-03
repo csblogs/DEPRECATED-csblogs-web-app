@@ -74,7 +74,7 @@ database.once('open', function(callback) {
     api.serveRoutes(router);
     app.use(subdomain('api', router));
     authentication.serveOAuthRoutes(app);
-	website.serveRoutes(app);
+    website.serveRoutes(app);
     console.log('Now serving all routes!');
 });
 

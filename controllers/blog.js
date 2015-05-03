@@ -24,7 +24,7 @@ exports.getPaginatedBlogs = function (options, req, done) {
 				}
 			});
 		}
-	}, {sortBy: {pubDate : 'desc'}});
+	}, {sortBy: {pubDate : 'desc'}, columns: {__v: 0}});
 };
 
 //Done of form (allBlogs, error)

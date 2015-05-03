@@ -16,12 +16,19 @@ exports.serveRoutes = function(router) {
 	
     router.get('/v0.1/bloggers/:vanityurl', function(req, res) {
 		var vanityUrl = req.params.vanityurl;
-		BloggerController.getProfileByVanityUrl(vanityUrl, function (profile, error) {
+		BloggerController.getProfileByVanityUrl(vanityUrl, req, function (profile, page, error) {
 			if(error) {
 				res.send(error);
 			}
+            else if (profile && page) {
+                var blogger = {
+                    profile: profile,
+                    page: page
+                };
+                res.json(blogger);
+            }
 			else {
-				res.json(profile);
+				sendError(res, 404, 'Blogger not found');
 			}
 		});
 	});
@@ -43,4 +50,11 @@ exports.serveRoutes = function(router) {
             error: '500 Internal Server Error'
         });
     });
+    
+    function sendError(res, errorCode, errorMessage) {
+        res.status(errorCode);
+        res.json({
+            error: errorMessage
+        });
+    }
 };
