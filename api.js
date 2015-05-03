@@ -1,8 +1,27 @@
 "use strict";
 
+var BlogController = require('./controllers/blog');
 var BloggerController = require('./controllers/blogger');
 
 exports.serveRoutes = function(router) {
+    router.get('/v0.1/blogs', function(req, res) {
+        BlogController.getPaginatedBlogs({}, req, function(blogs, pageNumber, showBack, showNext, error) {
+            if (error) {
+                res.send(error);
+            }
+            else {                
+                var page = {
+                    blogs: blogs,
+                    pageNumber: pageNumber,
+                    hasLess: showBack,
+                    hasMore: showNext
+                };
+                
+                res.json(page);
+            }
+        });
+    });
+    
     router.get('/v0.1/bloggers', function(req, res) {
 		BloggerController.getAllProfiles(true, function (profiles, error) {
 			if(error) {
@@ -47,7 +66,7 @@ exports.serveRoutes = function(router) {
         console.error("ERROR 500. Error: %j", error);
         res.status(500);
         res.json({
-            error: '500 Internal Server Error'
+            error: 'Internal Server Error: ' + error
         });
     });
     
