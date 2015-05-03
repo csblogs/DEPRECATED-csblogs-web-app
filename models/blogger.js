@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var validator = require('validator');
 var Schema = mongoose.Schema;
 
 var bloggerSchema = new Schema({
