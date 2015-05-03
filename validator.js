@@ -92,28 +92,26 @@ function isObject() {
 
             onError('Unexpected value.', parameter, value[parameter]);
         }
-
+        
         // check rules
         for (var parameterName in rules) {
             var parameterValue = value[parameterName];
             var rule = rules[parameterName];
-
-            console.log(parameterName);
             
             if (rule.required && isEmpty(parameterValue)) {
                 onError('Value cannot be blank.', parameterName, parameterValue);
                 continue;
             }
             else if (!rule.required && (!parameterValue || 0 === parameterValue.length)) {
-                break; // Empty and not required
+                continue; // Empty and not required
             }
 
             for (var i = 0; i < rule.validator.length; ++i) {
                 var hasError = false;
                 
-                //if (parameterValue === undefined || parameterValue === null || !rule.validator[i]) {
-                //    continue;
-                //}
+                if (parameterValue === undefined || parameterValue === null || !rule.validator[i]) {
+                    continue;
+                }
 
                 if (rule.validator[i]) {
                     rule.validator[i].validate(parameterValue, function(message, childName, childValue) {
@@ -129,12 +127,11 @@ function isObject() {
                         }
                         onError(message, name, childValue !== undefined ? childValue : parameterValue);
                         hasError = true;
-                        console.log(parameterName + ' in ' + hasError);
                     });
                 }
                 
-                console.log(parameterName + ' out ' + hasError);
                 if (hasError) {
+                    // error found, do not perform other validations on this parameter.
                     break;
                 }
             }
