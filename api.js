@@ -1,3 +1,5 @@
+"use strict";
+
 var BloggerController = require('./controllers/blogger');
 
 exports.serveRoutes = function(router) {
