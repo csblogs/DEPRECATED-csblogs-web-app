@@ -111,7 +111,7 @@ exports.register = function(newBlogger, done) {
                    errors.push({
                        parameter: brokenUrl.name,
                        value: brokenUrl.location,
-                       message: 'URL doesn\'t appear to be to live website'
+                       message: 'URL doesn\'t appear to link to valid location'
                    });
                 });
                 
