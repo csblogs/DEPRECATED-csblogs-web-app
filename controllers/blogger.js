@@ -1,3 +1,5 @@
+"use strict";
+
 var Blog = require('../models/blog').Blog;
 var BlogController = require('./blog');
 var Blogger = require('../models/blogger').Blogger;
@@ -23,7 +25,7 @@ exports.getUserProfile = function(passportUser, req, done) {
 };
 
 exports.getProfileByVanityUrl = function(vanityUrl, req, done) {
-	Blogger.findOne({vanityUrl: vanityUrl}, {emailAddress: 0}, function(error, profile) {
+	Blogger.findOne({vanityUrl: vanityUrl}, {emailAddress: 0, __v: 0}, function(error, profile) {
 		if (error) {
 			console.log("[ERROR] %j", error);
 			done(null, null, error);
@@ -53,7 +55,7 @@ exports.getAllProfiles = function(validatedOnly, done) {
 		options.validated = true;
 	}
 	
-    Blogger.find(options, {emailAddress: 0}, function(error, allBloggers) {
+    Blogger.find(options, {emailAddress: 0, __v: 0}, function(error, allBloggers) {
 		done(allBloggers, error);
 	});
 };

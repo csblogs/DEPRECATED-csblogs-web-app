@@ -1,3 +1,5 @@
+"use strict";
+
 var moment = require('moment');
 var sanitizeHtml = require('sanitize-html');
 
@@ -14,6 +16,14 @@ exports.truncateAndRemoveHTML = function (str, len) {
 
         return new_str + '&hellip;'; 
     }
+    
+    //Some blogs leave annoying bits at then end, such as their own
+    //continue reading link or ellipses. Remove these.
+	var continueReadingPosition = str.indexOf('… Continue reading →');
+    if(continueReadingPosition !== -1) {
+        str = str.substring(0, continueReadingPosition);
+    }
+    
     if (str.indexOf('[…]', str.length - 3) !== -1) {
         str = str.substring(0, str.length - 3);
     }

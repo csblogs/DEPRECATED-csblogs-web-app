@@ -1,3 +1,5 @@
+"use strict";
+
 var passport = require('passport');
 var Blogger = require('./models/blogger').Blogger;
 var GitHubStrategy = require('passport-github').Strategy;
