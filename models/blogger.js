@@ -64,10 +64,11 @@ bloggerSchema.methods.validate = function(done) {
     .withRequired('validated')
     .withRequired('vanityUrl', validator.noSpaces(), validator.vanityUrl());
 
-    validator.run(check, this._doc, function(errors) {
+    var modelData = this._docs;
+    validator.run(check, modelData, function(errors) {
 		//Everything is valid in terms of syntax. Now lets make sure user submitted URLs are real/live
 		var brokenUrls = [];
-		var urls = [this._doc.feedUrl, this._doc.blogWebsiteUrl, this._doc.websiteUrl, this._doc.cvUrl];
+		var urls = [modelData.feedUrl, modelData.blogWebsiteUrl, modelData.websiteUrl, modelData.cvUrl];
 		async.each(urls, function(url, asyncCallback) {
             //Improve this by requesting headers only...
 			request(url, function (err, resp) {
