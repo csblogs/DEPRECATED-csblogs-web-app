@@ -1,3 +1,5 @@
+"use strict";
+
 var BloggerController = require('./controllers/blogger');
 var BlogController = require('./controllers/blog');
 var blogger = require('./models/blogger').Blogger;
@@ -5,15 +7,22 @@ var blog = require('./models/blog').Blog;
 var authentication = require('./authentication');
 var ensureAuthenticated = authentication.ensureAuthenticated;
 var paginate = require('./server').paginate;
+var defaultLimit = 10;
 
 exports.serveRoutes = function(app) {
     app.get('/', function(req, res) {
+        var url = '/?';
+        if (req.query.limit != defaultLimit) {
+            url += 'limit=' + req.query.limit + '&'
+        }
+        
         BlogController.getPaginatedBlogs({}, req, function(blogs, pageNumber, showBack, showNext, error) {
             if (error) { internalError(res, error); }
             else {
                 res.render('blogs', {
     	            title: 'Home / CS Blogs',
     	            blogs: blogs,
+                    url: url,
                     pageNumber: pageNumber,
                     hasLess: showBack,
                     hasMore: showNext,
@@ -35,6 +44,11 @@ exports.serveRoutes = function(app) {
 	});
 
     app.get('/profile', ensureAuthenticated, function(req, res) {
+        var url = '/profile?';
+        if (req.query.limit != defaultLimit) {
+            url += 'limit=' + req.query.limit + '&'
+        }
+        
         BloggerController.getUserProfile(req.user, req, function(profile, page, error) {
             if (error) { internalError(res, error); }
             else {  
@@ -46,7 +60,7 @@ exports.serveRoutes = function(app) {
                     
                     res.render('profile', {
                         title: pageTitle,
-                        url: 'profile',
+                        url: url,
                         blogger: profile,
                         page: page,
                         user: req.user
@@ -71,6 +85,11 @@ exports.serveRoutes = function(app) {
 
     app.get('/bloggers/:vanityurl', function(req, res) {
         var vanityUrl = req.params.vanityurl;
+        var url = '/bloggers/' + vanityUrl + '?';
+        if (req.query.limit != defaultLimit) {
+            url += 'limit=' + req.query.limit + '&'
+        }
+        
         BloggerController.getProfileByVanityUrl(vanityUrl, req, function(profile, page, error) {
            if (error) { internalError(res, error); }
            else {
@@ -79,7 +98,7 @@ exports.serveRoutes = function(app) {
                    var pageTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
                    res.render('profile', {
                        title: pageTitle,
-                       url: 'bloggers/' + vanityUrl,
+                       url: url,
                        blogger: profile,
                        page: page,
                        user: req.user

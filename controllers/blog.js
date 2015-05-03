@@ -1,3 +1,5 @@
+"use strict";
+
 var Blog = require("../models/blog").Blog;
 var Blogger = require("../models/blogger").Blogger;
 var BloggerController = require("./blogger")
@@ -22,7 +24,7 @@ exports.getPaginatedBlogs = function (options, req, done) {
 				}
 			});
 		}
-	}, {sortBy: {pubDate : 'desc'}});
+	}, {sortBy: {pubDate : 'desc'}, columns: {__v: 0}});
 };
 
 //Done of form (allBlogs, error)

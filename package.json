@@ -27,6 +27,7 @@
     "express-handlebars": "^2.0.1",
     "express-paginate": "0.0.8",
     "express-session": "^1.10.4",
+    "express-subdomain": "^1.0.3",
     "less-middleware": "^2.0.1",
     "moment": "^2.9.0",
     "mongoose": "^4.0.2",
@@ -35,7 +36,6 @@
     "passport-github": "^0.1.5",
     "passport-stackexchange": "^0.1.0",
     "passport-wordpress": "0.0.3",
-    "sanitize-html": "^1.6.1",
-    "validator": "^3.33.0"
+    "sanitize-html": "^1.6.1"
   }
 }

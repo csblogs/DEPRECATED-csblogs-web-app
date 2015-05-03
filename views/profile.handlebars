@@ -109,7 +109,7 @@
 
         <div id="nav-pages">
             {{#if page.hasLess}}
-            <a id="newer" class="page-btn" href="/{{url}}?page={{add page.pageNumber -1}}">
+            <a id="newer" class="page-btn" href="{{url}}page={{add page.pageNumber -1}}">
                 <svg viewbox="0 0 37.62 67.32">
                     <use xlink:href="/images/defs.svg#left-arrow"></use>
                 </svg>
@@ -117,7 +117,7 @@
             </a>
             {{/if}}
             {{#if page.hasMore}}
-            <a id="older" class="page-btn" href="/{{url}}?page={{add page.pageNumber 1}}">
+            <a id="older" class="page-btn" href="{{url}}page={{add page.pageNumber 1}}">
                 <p>Older</p>
                 <svg viewbox="0 0 37.62 67.32">
                     <use xlink:href="/images/defs.svg#right-arrow"></use>
