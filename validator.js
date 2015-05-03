@@ -266,7 +266,7 @@ function validateUrl(url) {
         return false;
     }
     var options = {
-        protocols: [ 'http' ],
+        protocols: [ 'http', 'https' ],
         require_tld: true,
         require_protocol: false,
         allow_underscores: true,
