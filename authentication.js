@@ -131,16 +131,15 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
                 blogWebsiteUrl: passportjsUser._json.blog,
                 githubProfile: 	passportjsUser._json.login,
                 bio: 			passportjsUser._json.bio,
-                vanityUrl: 		passportjsUser.username.replace(" ", "-").toLowerCase(),
+                vanityUrl: 		passportjsUser.username.replace(/\s+/g, '-').toLowerCase()
             });
     		break;
     	case 'Wordpress':
-            console.log("%j", passportjsUser);
             userAsBlogger = new Blogger({
     			avatarUrl: 		passportjsUser._json.avatar_URL,
                 emailAddress: 	passportjsUser._json.email,
-                blogWebsiteUrl: "http://" + passportjsUser._json.user + ".wordpress.com",
-                vanityUrl: 		passportjsUser._json.display_name.replace(" ", "-").toLowerCase()
+                blogWebsiteUrl: "http://" + passportjsUser.displayName + ".wordpress.com",
+                vanityUrl: 		passportjsUser._json.display_name.replace(/\s+/g, '-').toLowerCase()
             });
     		break;
     	case 'stackexchange':
