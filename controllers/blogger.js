@@ -128,7 +128,7 @@ function validateUserSubmittedUrls (blogger, done) {
                 {name: "cvUrl",             location: blogger.cvUrl}];
                 
 	async.each(urls, function(url, asyncCallback) {
-        if(url != "") {        
+        if(url.location != "") {        
             //Improve this by requesting headers only...
     		request(url.location, function (err, resp) {
     			if(err) {

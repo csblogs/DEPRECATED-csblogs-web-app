@@ -62,7 +62,7 @@ bloggerSchema.methods.validate = function(done) {
     .withRequired('validated')
     .withRequired('vanityUrl', validator.noSpaces(), validator.vanityUrl());
 
-    validator.run(check, this._docs, function(errors) {
+    validator.run(check, this._doc, function(errors) {
 		done(errors);
     });
 };
