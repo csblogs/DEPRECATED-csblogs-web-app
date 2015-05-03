@@ -1,7 +1,7 @@
 "use strict";
 
 var mongoose = require('mongoose');
-var validator = require('../validator');
+var validator = require('../utils/validator');
 var Schema = mongoose.Schema;
 
 var bloggerSchema = new Schema({

@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 var paginate = require('express-paginate');
 var bodyParser = require('body-parser')
 var passport = require('./authentication').Passport;
-var helpers = require('./helpers');
+var helpers = require('./utils/helpers');
 var router = express.Router();
 
 // Routes
