@@ -105,17 +105,17 @@ exports.register = function(newBlogger, done) {
                         message: 'Profile name is already taken by another user.'
                     });
                 }
-                console.log("%j", brokenUrls);
                 
                 brokenUrls.forEach(function(brokenUrl) {
                    errors.push({
                        parameter: brokenUrl.name,
                        value: brokenUrl.location,
-                       message: 'URL doesn\'t appear to link to valid location'
+                       message: 'URL doesn\'t appear to link to valid location.'
                    });
                 });
                 
-                console.log("%j", errors);
+                if (brokenUrls.length > 0) { console.log("%j", brokenUrls); }
+                if (errors.length > 0) { console.log("%j", errors); }
                 
             	done(newBlogger, errors, null);
             });
@@ -133,13 +133,12 @@ function validateUserSubmittedUrls (blogger, done) {
                 {name: "cvUrl",             location: blogger.cvUrl}];
                 
 	async.each(urls, function(url, asyncCallback) {
-        if(url.location != "") {        
-            //Improve this by requesting headers only...
-    		request(url.location, function (err, resp) {
-    			if(err) {
+        if (url.location != "") {
+    		request({url: url.location, method: 'HEAD'}, function (err, resp) {
+    			if (err) {
     				brokenUrls.push(url);
     			}
-    			else{
+    			else {
     		    	if (resp.statusCode === 200) {
     		      	    // url exists
     		    	}
@@ -155,7 +154,7 @@ function validateUserSubmittedUrls (blogger, done) {
         }
 	},
 	function(err) {
-        if(err) {
+        if (err) {
             console.error("[ERROR] %j", err);
         }
 	    done(brokenUrls);
