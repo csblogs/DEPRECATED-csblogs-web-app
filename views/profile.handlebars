@@ -29,7 +29,7 @@
                     <li><!--<p id="ph-orgs">Member of <em>University of Hull</em></p>--></li>
                     {{#ifEqualBlogger user blogger}}
                     <li id="edit-li">
-                        <a id="edit-btn-small" href="/update">
+                        <a id="edit-btn-small" href="/account">
                             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 24 24" version="1.1">
                                 <use xlink:href="/images/defs.svg#icon-edit"></use>
                             </svg>
@@ -99,6 +99,7 @@
         </div>
         <h3>Blog posts</h3>
 
+        {{#if page.blogs}}
         {{#each page.blogs}}
         <article>
             <h4><a href="{{link}}">{{title}}</a></h4>
@@ -108,6 +109,9 @@
             {{#unless @last}}<hr/>{{/unless}}
         </article>
         {{/each}}
+        {{else}}
+        <p>Blog posts will appear here on the next sync if there are any to view.</p>
+        {{/if}}
 
         <div id="nav-pages">
             {{#if page.hasLess}}

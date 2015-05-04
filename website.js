@@ -188,12 +188,12 @@ exports.serveRoutes = function(app) {
                 }
                 else {
                     validBlogger.save();
-                    req.session.passport.user = validBlogger;			
+                    req.session.passport.user = validBlogger;
                     res.redirect('/profile');
                 }
             });
     });
-
+    
     app.route('/account')
         .get(ensureAuthenticated, function(req, res) {
         console.log("/account GET called");
@@ -206,7 +206,7 @@ exports.serveRoutes = function(app) {
 //        });
         renderError(res, 501, 'The ability to edit your profile is still under development.');
     })
-        .post(ensureAuthenticated, function(req, res) {
+    .post(ensureAuthenticated, function(req, res) {
         console.log('/account POST called');
     });
     
