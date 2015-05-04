@@ -45,7 +45,8 @@ exports.serveRoutes = function(app) {
     
     app.get('/confirm-delete', function (req, res) {
         res.render('confirm-delete', {
-            title: 'Confirm account delete / CS Blogs' 
+            title: 'Confirm account deletion / CS Blogs', 
+            user: req.user
         });
     });
     
