@@ -43,14 +43,14 @@ exports.serveRoutes = function(app) {
 	  	res.redirect('/');
 	});
     
-    app.get('/confirm-delete', function (req, res) {
+    app.get('/confirm-delete', ensureAuthenticated, function (req, res) {
         res.render('confirm-delete', {
             title: 'Confirm account deletion / CS Blogs', 
             user: req.user
         });
     });
     
-    app.get('/delete-account', function (req, res) {
+    app.get('/delete-account', ensureAuthenticated, function (req, res) {
         authentication.deleteUser(req.user);
         req.logout();
         res.redirect('/');
