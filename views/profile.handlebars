@@ -39,6 +39,15 @@
                     {{/ifEqualBlogger}}
                 </ul>
             </div>
+
+            {{#ifEqualBlogger user blogger}}
+            <a id="edit-btn-wide" href="/account">
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 24 24" version="1.1">
+                    <use xlink:href="/images/defs.svg#icon-edit"></use>
+                </svg>
+                <p>Edit Profile</p>
+            </a>
+            {{/ifEqualBlogger}}
         </div>
     </div>
     <div id="profile-body">
