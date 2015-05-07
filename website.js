@@ -15,41 +15,41 @@ exports.serveRoutes = function(app) {
         if (req.query.limit != defaultLimit) {
             url += 'limit=' + req.query.limit + '&'
         }
-        
+
         BlogController.getPaginatedBlogs({}, req, function(blogs, pageNumber, showBack, showNext, error) {
             if (error) { internalError(res, error); }
             else {
                 res.render('blogs', {
-    	            title: 'Home / CS Blogs',
-    	            blogs: blogs,
+                    title: 'Home / CS Blogs',
+                    blogs: blogs,
                     url: url,
                     pageNumber: pageNumber,
                     hasLess: showBack,
                     hasMore: showNext,
-    	            user: req.user
-    	        });
+                    user: req.user
+                });
             }
         });
     });
-    
+
     app.get('/login', function(req, res) {
         res.render('login', {
             title: 'Login / CS Blogs'
         });
     });
-    
-	app.get('/logout', function(req, res) {
-	  	req.logout();
-	  	res.redirect('/');
-	});
-    
+
+    app.get('/logout', function(req, res) {
+          req.logout();
+          res.redirect('/');
+    });
+
     app.get('/confirm-delete', ensureAuthenticated, function (req, res) {
         res.render('confirm-delete', {
-            title: 'Confirm account deletion / CS Blogs', 
+            title: 'Confirm account deletion / CS Blogs',
             user: req.user
         });
     });
-    
+
     app.get('/delete-account', ensureAuthenticated, function (req, res) {
         authentication.deleteUser(req.user);
         req.logout();
@@ -61,16 +61,16 @@ exports.serveRoutes = function(app) {
         if (req.query.limit != defaultLimit) {
             url += 'limit=' + req.query.limit + '&'
         }
-        
+
         BloggerController.getUserProfile(req.user, req, function(profile, page, error) {
             if (error) { internalError(res, error); }
-            else {  
+            else {
                 if (profile == null) {
                     res.redirect('/register');
                 }
                 else {
                     var pageTitle = profile.firstName + ' ' + profile.lastName + ' / CS Blogs';
-                    
+
                     res.render('profile', {
                         title: pageTitle,
                         url: url,
@@ -102,7 +102,7 @@ exports.serveRoutes = function(app) {
         if (req.query.limit != defaultLimit) {
             url += 'limit=' + req.query.limit + '&'
         }
-        
+
         BloggerController.getProfileByVanityUrl(vanityUrl, req, function(profile, page, error) {
            if (error) { internalError(res, error); }
            else {
@@ -123,24 +123,24 @@ exports.serveRoutes = function(app) {
 
     app.route('/register')
         .get(ensureAuthenticated, function(req, res) {
-			if (authentication.isRegistered(req.user)) {
-	            internalError(res, "You are already registered");
-			}
-			else {
-				//User is logged in with an account, but not registered.
-				//We need to parse thier data out and put it into the form
-				//to aid them filling it in.
+            if (authentication.isRegistered(req.user)) {
+                internalError(res, "You are already registered");
+            }
+            else {
+                //User is logged in with an account, but not registered.
+                //We need to parse thier data out and put it into the form
+                //to aid them filling it in.
                 var userAsBlogger = authentication.getBloggerFieldsFromAuthenticatedUser(req.user);
-                
-	            res.render('register', {
-	                title: 'Register / CS Blogs',
-	                submitText: 'Add your blog',
-					postAction: 'register',
-	                user: userAsBlogger
-	            });
-			}
+
+                res.render('register', {
+                    title: 'Register / CS Blogs',
+                    submitText: 'Add your blog',
+                    postAction: 'register',
+                    user: userAsBlogger
+                });
+            }
         })
-        .post(ensureAuthenticated, function(req, res) {            	
+        .post(ensureAuthenticated, function(req, res) {
             var newBlogger = new blogger({
                 userProvider: 		req.user.provider,
                 firstName: 			req.body.firstName,
@@ -172,7 +172,7 @@ exports.serveRoutes = function(app) {
                     newBlogger.avatarUrl = req.user.profile_image;
                     break;
             }
-        
+
             BloggerController.register(newBlogger, function(validBlogger, errors, dbError) {
                 if (dbError) {
                     internalError(res, dbError);
@@ -193,7 +193,7 @@ exports.serveRoutes = function(app) {
                 }
             });
     });
-    
+
     app.route('/account')
         .get(ensureAuthenticated, function(req, res) {
         console.log("/account GET called");
@@ -209,7 +209,7 @@ exports.serveRoutes = function(app) {
     .post(ensureAuthenticated, function(req, res) {
         console.log('/account POST called');
     });
-    
+
     // Handle error 404
     app.use(function(req, res) {
         console.error("ERROR 404. Request: %j", req);
@@ -221,10 +221,10 @@ exports.serveRoutes = function(app) {
             user: req.user
         });
     });
-    
+
     // Handle error 500
     app.use(function(error, req, res, next) {
-		console.error("ERROR 500. Error: %j", error);
+        console.error("ERROR 500. Error: %j", error);
         internalError(res, error);
     });
 
@@ -237,7 +237,7 @@ exports.serveRoutes = function(app) {
             errorMessage: errorMessage
         });
     }
-    
+
     // Code to call any error code (could replace internalError)
     function renderError(res, errorCode, errorMessage) {
         res.status(errorCode);

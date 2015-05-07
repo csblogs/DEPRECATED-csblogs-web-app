@@ -30,7 +30,7 @@ h2 {
     text-align: center;
     width: 125px;
     background: #fff;
-    
+
     svg {
         display: block;
         margin: 0px auto;
@@ -38,13 +38,13 @@ h2 {
         height: 100px;
         fill: @link-color;
     }
-    
+
     a {
         display: inline-block;
         text-decoration: none;
         text-align: center;
     }
-    
+
     p {
         margin: 4px 0px;
         font-family: @sans-serif-font;
@@ -72,16 +72,69 @@ h2 {
     }
 }
 
+// Confirm-delete CSS
+#delete-txt {
+    margin: 10px 30px;
+
+    p {
+        margin: 0;
+        text-align: center;
+    }
+}
+
+#delete-btns {
+    text-align: center;
+    margin: 25px 0px;
+}
+
+#submit-button {
+    background: #CF000F;
+    text-decoration: none;
+    color: #fff;
+    border: 0;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    padding: 7px 16px;
+    margin: 0px 10px;
+    width: 200px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.4s ease-out;
+}
+
+#submit-button:hover {
+    background: #F22613;
+}
+
+#cancel-button {
+    background: #16a085;
+    text-decoration: none;
+    color: #fff;
+    border: 0;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    padding: 7px 16px;
+    margin: 0px 10px;
+    width: 200px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.4s ease-out;
+}
+
+#cancel-button:hover {
+    background: #19b698;
+}
+
 @media screen and (max-width: 435px) {
     #login-selector {
         width: 100%;
     }
-    
+
     #login-selector li {
         width: 50%;
         margin: 0;
     }
-    
+
     // Display in horizontal center of list
     #login-selector li:last-child {
         width: 100%;

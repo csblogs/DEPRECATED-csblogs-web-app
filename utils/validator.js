@@ -65,7 +65,7 @@ function isObject() {
         for (var i = 1; i < arguments.length; ++i) {
             validators.push(arguments[i]);
         }
-        
+
         rules[name] = { required: true, validator: validators };
         return v;
     }
@@ -75,7 +75,7 @@ function isObject() {
         for (var i = 1; i < arguments.length; ++i) {
             validators.push(arguments[i]);
         }
-        
+
         rules[name] = { required: false, validator: validators };
         return v;
     }
@@ -94,12 +94,12 @@ function isObject() {
 
             onError('Unexpected value.', parameter, value[parameter]);
         }
-        
+
         // Check rules
         for (var parameterName in rules) {
             var parameterValue = value[parameterName];
             var rule = rules[parameterName];
-            
+
             if (rule.required && isEmpty(parameterValue)) {
                 onError('Value cannot be blank.', parameterName, parameterValue);
                 continue;
@@ -110,7 +110,7 @@ function isObject() {
 
             for (var i = 0; i < rule.validator.length; ++i) {
                 var hasError = false;
-                
+
                 if (parameterValue === undefined || parameterValue === null || !rule.validator[i]) {
                     continue;
                 }
@@ -131,7 +131,7 @@ function isObject() {
                         hasError = true;
                     });
                 }
-                
+
                 if (hasError) {
                     // Error found, do not perform other validations on this parameter.
                     break;
