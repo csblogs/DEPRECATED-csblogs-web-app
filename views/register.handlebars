@@ -5,7 +5,7 @@
 
 <div id="body-content">
     <div class="avatar" style="background-image: url('{{user.avatarUrl}}');"></div>
-    
+
     <form method="post" action="/{{postAction}}">
         <div class="alert-box alert-info">
             <p>You can update your profile picture by changing it inside the service you log in with.</p>
@@ -27,7 +27,7 @@
             <div class="input-field column">
                 <input id="last_name" name="lastName" type="text" value="{{user.lastName}}" {{ifInvalid errors name="lastName"}}>
                 <label for="last_name">Last Name</label>
-            </div> 
+            </div>
         </div>
         <div class="input-field">
             <input id="email" name="emailAddress" type="email" value="{{user.emailAddress}}" {{ifInvalid errors name="emailAddress"}}>
@@ -80,5 +80,8 @@
         {{/unless}}
         <input id="submit-button" type="submit" value="{{submitText}}">
     </form>
+    {{#ifRegistered postAction}}
+    <a id="delete-btn" href="/confirm-delete">Delete account</a>
+    {{/ifRegistered}}
 </div>
 <script src="scripts/register.min.js" type="text/javascript"></script>

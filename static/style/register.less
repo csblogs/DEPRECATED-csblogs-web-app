@@ -194,6 +194,26 @@ form p {
     margin-bottom: 1.8em;
 }
 
+#delete-btn {
+    display: inline-block;
+    position: relative;
+    color: @accent-color;
+    font-size: 18px;
+    margin-top: -1.1em;
+    margin-bottom: 1em;
+    text-decoration: none;
+}
+
+#delete-btn:hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0px;
+    left: 0px;
+    bottom: 0px;
+    border-bottom: 1px solid @accent-color;
+}
+
 @media screen and (max-width: 450px) {
     .column {
         float: none;

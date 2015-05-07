@@ -14,21 +14,21 @@ exports.truncateAndRemoveHTML = function (str, len) {
         new_str = str.substr (0, new_str.lastIndexOf(" "));
         new_str = (new_str.length > 0) ? new_str : str.substr (0, len);
 
-        return new_str + '&hellip;'; 
+        return new_str + '&hellip;';
     }
-    
+
     //Some blogs leave annoying bits at then end, such as their own
     //continue reading link or ellipses. Remove these.
-	var continueReadingPosition = str.indexOf('… Continue reading →');
+    var continueReadingPosition = str.indexOf('… Continue reading →');
     if(continueReadingPosition !== -1) {
         str = str.substring(0, continueReadingPosition);
     }
-    
+
     var readMorePosition = str.indexOf('... Read more');
     if(readMorePosition !== -1) {
         str = str.substring(0, readMorePosition);
     }
-    
+
     if (str.indexOf('[…]', str.length - 3) !== -1) {
         str = str.substring(0, str.length - 3);
     }
@@ -76,16 +76,16 @@ exports.section = function(name, options) {
 }
 
 exports.urlFormat = function(url) {
-	if(typeof url !== 'undefined' && url != null) {
-	    if (url.lastIndexOf('http://', 0) === 0) {
-	        url = url.substring(7);
-        
-	        if (url.lastIndexOf('www.', 0) === 0) {
-	            url = url.substring(4);
-	        }
-	    }
-	    return url;
-	} 
+    if(typeof url !== 'undefined' && url != null) {
+        if (url.lastIndexOf('http://', 0) === 0) {
+            url = url.substring(7);
+
+            if (url.lastIndexOf('www.', 0) === 0) {
+                url = url.substring(4);
+            }
+        }
+        return url;
+    }
 }
 
 exports.ifEqualBlogger = function(user, blogger, options) {
@@ -116,4 +116,13 @@ exports.ifInvalid = function(errors, options) {
         }
     }
     return '';
+}
+
+exports.ifRegistered = function(postAction, options) {
+    if (postAction === 'register') {
+        return options.inverse(this);
+    }
+    else {
+        return options.fn(this);
+    }
 }
