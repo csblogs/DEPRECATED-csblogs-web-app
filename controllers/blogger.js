@@ -62,6 +62,10 @@ exports.getAllProfiles = function(validatedOnly, done) {
     });
 };
 
+exports.updateProfile = function(user, update, done) {
+    Blogger.update({userId: user.userId, userProvider: user.userProvider}, update, done);
+}
+
 function isVanityUrlTaken(vanityUrl, done) {
     Blogger.findOne({vanityUrl: vanityUrl}, function(error, profile) {
         if (error) {
@@ -90,7 +94,7 @@ function getBlogs(bloggerQuery, req, done) {
     });
 }
 
-exports.register = function(newBlogger, done) {
+exports.validate = function(newBlogger, done) {
     newBlogger.sanitize();
     newBlogger.validate(function(errors) {
         isVanityUrlTaken(newBlogger.vanityUrl, function(taken, error) {
@@ -124,7 +128,7 @@ exports.register = function(newBlogger, done) {
 };
 
 //Done of form done(brokenUrls);
-function validateUserSubmittedUrls (blogger, done) {
+function validateUserSubmittedUrls(blogger, done) {
     //Everything is valid in terms of syntax. Now lets make sure user submitted URLs are real/live
     var brokenUrls = [];
     var urls = [{name: "feedUrl",     	    location: blogger.feedUrl},
