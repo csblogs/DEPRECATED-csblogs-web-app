@@ -57,10 +57,7 @@ exports.getAllProfiles = function(validatedOnly, done) {
 		options.validated = true;
 	}
 	
-    Blogger.find(options, {emailAddress: 0, __v: 0}, function(error, allBloggers) {
-        allBloggers.sort(function(a,b) {
-           return a.firstName - b.firstName;
-        });
+    Blogger.find(options, {emailAddress: 0, __v: 0}, {sort:{firstName: 'asc'}}, function(error, allBloggers) {
 		done(allBloggers, error);
 	});
 };
