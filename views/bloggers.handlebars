@@ -5,7 +5,9 @@
 <ul>
     {{#each bloggers}}
     <li>
-        <a class="avatar" href="/bloggers/{{vanityUrl}}" style="background-image: url('{{avatarUrl}}');"></a>
+        <a class="avatar" href="/bloggers/{{vanityUrl}}">
+            <img class="avatar" src="{{avatarUrl}}" alt="Avatar"/>
+        </a>
         <h2>{{firstName}} {{lastName}}</h2>
         <a href="{{websiteUrl}}">{{urlFormat websiteUrl}}</a>
     </li>

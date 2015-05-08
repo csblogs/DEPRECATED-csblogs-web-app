@@ -8,8 +8,8 @@ var Blogger = require('../models/blogger').Blogger;
 
 // Callback of form done(profile, error);
 exports.getUserProfile = function(passportUser, req, done) {
-	if (passportUser.userProvider && passportUser.userId) {
-		// This user is registered (so their profile is actually already in req.user, but we need to attach some blogs)
+    if (passportUser.userProvider && passportUser.userId) {
+        // This user is registered (so their profile is actually already in req.user, but we need to attach some blogs)
         getBlogs({userId: passportUser.userId, userProvider: passportUser.userProvider}, req, function(page, error) {
             if (error) {
                 console.log("[ERROR] %j", error);
@@ -19,20 +19,20 @@ exports.getUserProfile = function(passportUser, req, done) {
                 done(passportUser, page, null);
             }
         });
-	}
-	else {
-		// Not a registered user
-		done(null, null, null);
-	}
+    }
+    else {
+        // Not a registered user
+        done(null, null, null);
+    }
 };
 
 exports.getProfileByVanityUrl = function(vanityUrl, req, done) {
-	Blogger.findOne({vanityUrl: vanityUrl}, {emailAddress: 0, __v: 0}, function(error, profile) {
-		if (error) {
-			console.log("[ERROR] %j", error);
-			done(null, null, error);
-		}
-		else if (profile) {
+    Blogger.findOne({vanityUrl: vanityUrl}, {emailAddress: 0, __v: 0}, function(error, profile) {
+        if (error) {
+            console.log("[ERROR] %j", error);
+            done(null, null, error);
+        }
+        else if (profile) {
             // Attach blogs to user to create full profile
             getBlogs({userId: profile.userId, userProvider: profile.userProvider}, req, function(page, error) {
                 if (error) {
@@ -43,23 +43,23 @@ exports.getProfileByVanityUrl = function(vanityUrl, req, done) {
                     done(profile, page, null);
                 }
             });
-		}
+        }
         else {
             // Not a registered user
             done(null, null, null);
         }
-	});
+    });
 };
 
 exports.getAllProfiles = function(validatedOnly, done) {
-	var options = {};
-	if (validatedOnly) {
-		options.validated = true;
-	}
-	
-    Blogger.find(options, {emailAddress: 0, __v: 0}, {sort:{firstName: 'asc'}}, function(error, allBloggers) {
-		done(allBloggers, error);
-	});
+    var options = {};
+    if (validatedOnly) {
+        options.validated = true;
+    }
+
+    Blogger.find(options, {emailAddress: 0, __v: 0}, {sort: {firstName: 'asc'}}, function(error, allBloggers) {
+        done(allBloggers, error);
+    });
 };
 
 function isVanityUrlTaken(vanityUrl, done) {
@@ -85,7 +85,7 @@ function getBlogs(bloggerQuery, req, done) {
             hasLess: showBack,
             hasMore: showNext
         };
-        
+
         done(page, error);
     });
 }
@@ -105,7 +105,7 @@ exports.register = function(newBlogger, done) {
                         message: 'Profile name is already taken by another user.'
                     });
                 }
-                
+
                 brokenUrls.forEach(function(brokenUrl) {
                    errors.push({
                        parameter: brokenUrl.name,
@@ -113,11 +113,11 @@ exports.register = function(newBlogger, done) {
                        message: 'URL doesn\'t appear to link to valid location.'
                    });
                 });
-                
+
                 if (brokenUrls.length > 0) { console.log("%j", brokenUrls); }
                 if (errors.length > 0) { console.log("%j", errors); }
-                
-            	done(newBlogger, errors, null);
+
+                done(newBlogger, errors, null);
             });
         });
     });
@@ -126,37 +126,37 @@ exports.register = function(newBlogger, done) {
 //Done of form done(brokenUrls);
 function validateUserSubmittedUrls (blogger, done) {
     //Everything is valid in terms of syntax. Now lets make sure user submitted URLs are real/live
-	var brokenUrls = [];
-	var urls = [{name: "feedUrl",     	    location: blogger.feedUrl}, 
-                {name: "blogWebsiteUrl",    location: blogger.blogWebsiteUrl}, 
-                {name: "websiteUrl",        location: blogger.websiteUrl}, 
+    var brokenUrls = [];
+    var urls = [{name: "feedUrl",     	    location: blogger.feedUrl},
+                {name: "blogWebsiteUrl",    location: blogger.blogWebsiteUrl},
+                {name: "websiteUrl",        location: blogger.websiteUrl},
                 {name: "cvUrl",             location: blogger.cvUrl}];
-                
-	async.each(urls, function(url, asyncCallback) {
+
+    async.each(urls, function(url, asyncCallback) {
         if (url.location != "") {
-    		request({url: url.location, method: 'HEAD'}, function (err, resp) {
-    			if (err) {
-    				brokenUrls.push(url);
-    			}
-    			else {
-    		    	if (resp.statusCode === 200) {
-    		      	    // url exists
-    		    	}
-    		  	  	else {
-    			   	 	brokenUrls.push(url);
-    		   	 	}
-    	   		}
-    			asyncCallback();
-    		});
+            request({url: url.location, method: 'HEAD'}, function (err, resp) {
+                if (err) {
+                    brokenUrls.push(url);
+                }
+                else {
+                    if (resp.statusCode === 200) {
+                          // url exists
+                    }
+                        else {
+                            brokenUrls.push(url);
+                        }
+                   }
+                asyncCallback();
+            });
         }
         else {
-    		asyncCallback();
+            asyncCallback();
         }
-	},
-	function(err) {
+    },
+    function(err) {
         if (err) {
             console.error("[ERROR] %j", err);
         }
-	    done(brokenUrls);
-	});
+        done(brokenUrls);
+    });
 };
