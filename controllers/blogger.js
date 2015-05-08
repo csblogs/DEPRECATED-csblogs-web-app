@@ -58,6 +58,9 @@ exports.getAllProfiles = function(validatedOnly, done) {
 	}
 	
     Blogger.find(options, {emailAddress: 0, __v: 0}, function(error, allBloggers) {
+        allBloggers.sort(function(a,b) {
+           return a.firstName - b.firstName;
+        });
 		done(allBloggers, error);
 	});
 };
