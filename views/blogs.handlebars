@@ -12,7 +12,9 @@
         <p>{{{truncateAndRemoveHTML summary 400}}} <a class="read-more" href="{{link}}">Read more &#8594;</a></p>
         <footer>
             <div class="article-info">
-                <a class="avatar" href="/bloggers/{{author.vanityUrl}}" style="background-image: url('{{author.avatarUrl}}');"></a>
+                <a class="avatar" href="/bloggers/{{author.vanityUrl}}">
+                    <img class="avatar" src="{{author.avatarUrl}}" alt="Avatar"/>
+                </a>
                 <a class="article-author" href="/bloggers/{{author.vanityUrl}}">{{author.firstName}} {{author.lastName}}</a>
                 <p class="article-date">{{formatDateShort pubDate}}</p>
             </div>
