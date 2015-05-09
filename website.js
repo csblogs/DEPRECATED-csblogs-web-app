@@ -209,6 +209,7 @@ exports.serveRoutes = function(app) {
         console.log('/account POST called');
 
         var newBlogger = new blogger({
+            _id:                req.user._id,
             userId:             req.user.userId,
             userProvider:       req.user.userProvider,
             avatarUrl:          req.user.avatarUrl,
@@ -241,7 +242,7 @@ exports.serveRoutes = function(app) {
                 });
             }
             else {
-                BloggerController.updateProfile(req.user, validBlogger, function(updateError, numAffected) {
+                BloggerController.updateProfile(req.user, validBlogger.toObject(), function(updateError, numAffected) {
                     if (updateError) {
                         internalError(res, updateError);
                     }
