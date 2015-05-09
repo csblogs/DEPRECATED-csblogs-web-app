@@ -38,3 +38,15 @@ exports.getAllBlogs = function (options, done) {
         }
     });
 };
+
+//Done of form (recentBlogs, error)
+exports.getMostRecentBlogs = function(options, howMany, done) {
+    Blog.find(options, null, {skip: 0, limit: howMany, sort: {pubDate: -1}}, function(error, recentBlogs) {
+       	if(error) {
+            done(null, error);
+        }
+        else {
+            done(recentBlogs, null);
+        }
+    });
+};
