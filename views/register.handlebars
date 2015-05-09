@@ -34,7 +34,7 @@
             <label for="email">Email Address</label>
         </div>
         <div class="input-field">
-            <textarea id="bio" name="bio" maxlength="200" value="{{user.bio}}" autoresize {{ifInvalid errors name="bio"}}>{{user._json.bio}}</textarea>
+            <textarea id="bio" name="bio" maxlength="200" autoresize {{ifInvalid errors name="bio"}}>{{user.bio}}</textarea>
             <label for="bio">About You</label>
         </div>
         <p id="bio-desc">A short bio about yourself, up to 200 characters.</p>
