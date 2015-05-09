@@ -66,14 +66,19 @@ exports.updateProfile = function(user, update, done) {
     Blogger.update({userId: user.userId, userProvider: user.userProvider}, update, done);
 }
 
-function isVanityUrlTaken(vanityUrl, done) {
-    Blogger.findOne({vanityUrl: vanityUrl}, function(error, profile) {
+function isVanityUrlTaken(user, done) {
+    Blogger.findOne({vanityUrl: user.vanityUrl}, function(error, profile) {
         if (error) {
             console.log("[ERROR] %j", error);
             done(true, error);
         }
         else if (profile) {
-            done(true, null);
+            if (profile.userId === user.userId && profile.userProvider === user.userProvider) {
+                done(false, null); // Vanity url belongs to current user
+            }
+            else {
+                done(true, null);
+            }
         }
         else {
             done(false, null);
@@ -97,7 +102,7 @@ function getBlogs(bloggerQuery, req, done) {
 exports.validate = function(newBlogger, done) {
     newBlogger.sanitize();
     newBlogger.validate(function(errors) {
-        isVanityUrlTaken(newBlogger.vanityUrl, function(taken, error) {
+        isVanityUrlTaken(newBlogger, function(taken, error) {
             validateUserSubmittedUrls(newBlogger, function (brokenUrls) {
                 if (error) {
                     return done(null, null, error);
