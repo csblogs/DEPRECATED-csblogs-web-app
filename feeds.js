@@ -13,7 +13,7 @@ exports.serveRoutes = function(router) {
 			site_url: "http://csblogs.com",
 		});
 		
-		BlogController.getAllBlogs({limit: 20}, function(blogs, error) {
+		BlogController.getAllBlogs({}, function(blogs, error) {
 			blogs.forEach(function(blog) {
 				mainFeed.item({
 					title: 			blog.title,
