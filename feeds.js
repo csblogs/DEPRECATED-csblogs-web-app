@@ -24,9 +24,9 @@ exports.serveRoutes = function(router) {
 					date: 			blog.pubDate
 				});	
 			});
+			
+			res.header('Content-Type','application/rss+xml');
+			res.send(mainFeed.xml({indent: true}));
 		});
-		
-		res.header('Content-Type','application/rss+xml');
-		res.send(mainFeed.xml({indent: true}));
 	});	
 };
