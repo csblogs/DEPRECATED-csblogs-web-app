@@ -127,9 +127,9 @@ exports.serveRoutes = function(app) {
                 internalError(res, "You are already registered");
             }
             else {
-                //User is logged in with an account, but not registered.
-                //We need to parse thier data out and put it into the form
-                //to aid them filling it in.
+                // User is logged in with an account, but not registered.
+                // We need to parse thier data out and put it into the form
+                // to aid them filling it in.
                 var userAsBlogger = authentication.getBloggerFieldsFromAuthenticatedUser(req.user);
 
                 res.render('register', {
@@ -173,7 +173,7 @@ exports.serveRoutes = function(app) {
                     break;
             }
 
-            BloggerController.register(newBlogger, function(validBlogger, errors, dbError) {
+            BloggerController.validate(newBlogger, function(validBlogger, errors, dbError) {
                 if (dbError) {
                     internalError(res, dbError);
                 }
@@ -198,16 +198,61 @@ exports.serveRoutes = function(app) {
         .get(ensureAuthenticated, function(req, res) {
         console.log("/account GET called");
 
-//        res.render('register', {
-//            title: 'Account / CS Blogs',
-//            postAction: 'account',
-//            submitText: 'Update profile',
-//            user: req.user
-//        });
-        renderError(res, 501, 'The ability to edit your profile is still under development.');
+        res.render('register', {
+            title: 'Account / CS Blogs',
+            postAction: 'account',
+            submitText: 'Update profile',
+            user: req.user
+        });
     })
     .post(ensureAuthenticated, function(req, res) {
         console.log('/account POST called');
+
+        var newBlogger = new blogger({
+            _id:                req.user._id,
+            userId:             req.user.userId,
+            userProvider:       req.user.userProvider,
+            avatarUrl:          req.user.avatarUrl,
+            firstName: 			req.body.firstName,
+            lastName: 			req.body.lastName,
+            emailAddress: 		req.body.emailAddress,
+            feedUrl: 			req.body.feedUrl,
+            blogWebsiteUrl: 	req.body.blogWebsiteUrl,
+            websiteUrl: 		req.body.websiteUrl,
+            cvUrl: 				req.body.cvUrl,
+            githubProfile:      req.body.githubProfile,
+            twitterProfile: 	req.body.twitterProfile,
+            linkedInProfile: 	req.body.linkedInProfile,
+            bio: 				req.body.bio,
+            vanityUrl:          req.body.vanityUrl,
+            validated:          req.user.validated
+        });
+
+        BloggerController.validate(newBlogger, function(validBlogger, errors, dbError) {
+            if (dbError) {
+                internalError(res, dbError);
+            }
+            else if (errors.length > 0) {
+                res.render('register', {
+                    title: 'Account / CS Blogs',
+                    submitText: 'Update profile',
+                    postAction: 'account',
+                    user: newBlogger,
+                    errors: errors
+                });
+            }
+            else {
+                BloggerController.updateProfile(req.user, validBlogger.toObject(), function(updateError, numAffected) {
+                    if (updateError) {
+                        internalError(res, updateError);
+                    }
+                    else {
+                        req.session.passport.user = validBlogger;
+                        res.redirect('/profile');
+                    }
+                });
+            }
+        });
     });
 
     // Handle error 404
