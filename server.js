@@ -12,12 +12,15 @@ var paginate = require('express-paginate');
 var bodyParser = require('body-parser')
 var passport = require('./authentication').Passport;
 var helpers = require('./utils/helpers');
-var router = express.Router();
 
 // Routes
 var authentication = require('./authentication');
 var website = require('./website');
 var api = require('./api');
+var feeds = require('./feeds');
+
+var apiRouter = express.Router();
+var feedsRouter = express.Router();
 
 // Initialize app
 var app = express();
@@ -71,10 +74,16 @@ database.once('open', function(callback) {
     console.log('Database connection established successfully.');
 
     // Import routes (and thus serve the site) if the database connection worked
-    api.serveRoutes(router);
-    app.use(subdomain('api', router));
+    feeds.serveRoutes(feedsRouter);
+    app.use(subdomain('feeds', feedsRouter));
+    
+    api.serveRoutes(apiRouter);
+    app.use(subdomain('api', apiRouter));
+    
     authentication.serveOAuthRoutes(app);
+    
     website.serveRoutes(app);
+    
     console.log('Now serving all routes!');
 });
 
