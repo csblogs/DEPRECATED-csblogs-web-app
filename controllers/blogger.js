@@ -103,7 +103,7 @@ exports.validate = function(newBlogger, done) {
     newBlogger.sanitize();
     newBlogger.validate(function(errors) {
         isVanityUrlTaken(newBlogger, function(taken, error) {
-            validateUserSubmittedUrls(newBlogger, function (brokenUrls) {
+            validateUserSubmittedUrls(newBlogger, function(brokenUrls) {
                 if (error) {
                     return done(null, null, error);
                 }
@@ -115,13 +115,13 @@ exports.validate = function(newBlogger, done) {
                     });
                 }
 
-                brokenUrls.forEach(function(brokenUrl) {
+                for (var i = 0; i < brokenUrls.length; ++i) {
                    errors.push({
-                       parameter: brokenUrl.name,
-                       value: brokenUrl.location,
+                       parameter: brokenUrls[i].name,
+                       value: brokenUrls[i].location,
                        message: 'URL doesn\'t appear to link to valid location.'
                    });
-                });
+                }
 
                 if (brokenUrls.length > 0) { console.log("%j", brokenUrls); }
                 if (errors.length > 0) { console.log("%j", errors); }
