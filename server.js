@@ -76,14 +76,14 @@ database.once('open', function(callback) {
     // Import routes (and thus serve the site) if the database connection worked
     feeds.serveRoutes(feedsRouter);
     app.use(subdomain('feeds', feedsRouter));
-    
+
     api.serveRoutes(apiRouter);
     app.use(subdomain('api', apiRouter));
-    
+
     authentication.serveOAuthRoutes(app);
-    
+
     website.serveRoutes(app);
-    
+
     console.log('Now serving all routes!');
 });
 
