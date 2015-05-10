@@ -11,6 +11,9 @@ exports.serveRoutes = function(router) {
             description: "All of the posts from bloggers on CSBlogs.com",
             feed_url: "http://feeds.csblogs.com/main",
             site_url: "http://csblogs.com",
+            custom_namespaces: {
+                media: "http://search.yahoo.com/mrss/"
+            }
         });
 
         BlogController.getMostRecentBlogs({}, 20, function(blogs, error) {
@@ -18,14 +21,34 @@ exports.serveRoutes = function(router) {
                 BlogController.removeAllHTML(blogs, 400);
             }
             for (var i = 0; i < blogs.length; ++i) {
-                mainFeed.item({
-                    title: 			blogs[i].title,
-                    description: 	blogs[i].summary,
-                    url: 			blogs[i].link,
-                    guid: 			blogs[i]._id.toString(),
-                    author: 		blogs[i].author.firstName + ' ' + blogs[i].author.lastName,
-                    date: 			blogs[i].pubDate
-                });
+                if (blogs[i].imageUrl) {
+                    mainFeed.item({
+                        title: 			blogs[i].title,
+                        description: 	blogs[i].summary,
+                        url: 			blogs[i].link,
+                        guid: 			blogs[i]._id.toString(),
+                        author: 		blogs[i].author.firstName + ' ' + blogs[i].author.lastName,
+                        date: 			blogs[i].pubDate,
+                        custom_elements: [{
+                            "media:content": [{
+                                _attr: {
+                                    medium: "image",
+                                    url: blogs[i].imageUrl
+                                }
+                            }]
+                        }]
+                    });
+                }
+                else {
+                    mainFeed.item({
+                        title: 			blogs[i].title,
+                        description: 	blogs[i].summary,
+                        url: 			blogs[i].link,
+                        guid: 			blogs[i]._id.toString(),
+                        author: 		blogs[i].author.firstName + ' ' + blogs[i].author.lastName,
+                        date: 			blogs[i].pubDate
+                    });
+                }
             }
 
             res.header('Content-Type','application/rss+xml');
