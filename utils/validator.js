@@ -13,6 +13,7 @@ exports.isAlphanumeric = isAlphanumeric;
 exports.isEmail = isEmail;
 exports.isUrl = isUrl;
 exports.notUrl = notUrl;
+exports.notCSBurl = notCSBurl;
 exports.notBlank = notBlank;
 exports.noSpaces = noSpaces;
 exports.maxLength = maxLength;
@@ -224,6 +225,19 @@ function vanityUrl(message) {
     function validate(value, onError) {
         if (!regex_vanityUrl.test(value.toString())) {
             return onError(message || 'Value must contain only a-z, 0-9, -, _ and start with a letter.');
+        }
+        return null;
+    }
+}
+
+function notCSBurl() {
+    return {
+        validate: validate
+    };
+
+    function validate(value, onError) {
+        if (value.indexOf('csblogs.com') > -1) {
+            return onError('Value cannot be from csblogs.com');
         }
         return null;
     }

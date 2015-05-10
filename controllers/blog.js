@@ -90,7 +90,10 @@ exports.truncateAndRemoveHTML = function(str, len) {
         str = str.substring(0, str.length - 3);
     }
 
-    return str.trim();
+    // Trim start and end of string
+    str = str.replace(/^\s+|\s+$/g, '');
+
+    return str;
 };
 
 exports.removeAllHTML = function(blogs, len) {
