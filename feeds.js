@@ -11,6 +11,7 @@ exports.serveRoutes = function(router) {
             description: "All of the posts from bloggers on CSBlogs.com",
             feed_url: "http://feeds.csblogs.com/main",
             site_url: "http://csblogs.com",
+            image_url: "http://csblogs.com/apple-touch-icon-precomposed.png",
             custom_namespaces: {
                 media: "http://search.yahoo.com/mrss/"
             }
@@ -32,8 +33,8 @@ exports.serveRoutes = function(router) {
                         custom_elements: [{
                             "media:content": [{
                                 _attr: {
-                                    medium: "image",
-                                    url: blogs[i].imageUrl
+                                    url: blogs[i].imageUrl,
+                                    medium: "image"
                                 }
                             }]
                         }]
