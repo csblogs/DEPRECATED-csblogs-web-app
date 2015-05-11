@@ -71,7 +71,7 @@ exports.truncateAndRemoveHTML = function(str, len) {
         new_str = str.substr(0, new_str.lastIndexOf(" "));
         new_str = (new_str.length > 0) ? new_str : str.substr(0, len);
 
-        return new_str + '&hellip;';
+        return new_str.trim() + '&hellip;';
     }
 
     // Some blogs leave annoying bits at then end, such as their own
@@ -90,10 +90,7 @@ exports.truncateAndRemoveHTML = function(str, len) {
         str = str.substring(0, str.length - 3);
     }
 
-    // Trim start and end of string
-    str = str.replace(/^\s+|\s+$/g, '');
-
-    return str;
+    return str.trim();
 };
 
 exports.removeAllHTML = function(blogs, len) {
