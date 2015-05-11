@@ -11,7 +11,7 @@ exports.formatDateShort = function(datestamp) {
     try {
         var date = moment(datestamp);
 
-        if (date.isBefore(moment(), 'week')) {
+        if (moment().diff(date, 'days') > 6) {
             return date.format('MMM D, YYYY');
         }
         else {
@@ -26,13 +26,7 @@ exports.formatDateShort = function(datestamp) {
 exports.formatDateLong = function(datestamp) {
     try {
         var date = moment(datestamp);
-
-        if (date.isBefore(moment(), 'week')) {
-            return date.format('MMMM D, YYYY  h:mm a');
-        }
-        else {
-            return date.fromNow();
-        }
+        return date.format('MMMM D, YYYY h:mm a');
     }
     catch (error) {
         return '';
