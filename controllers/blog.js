@@ -2,33 +2,47 @@
 
 var Blog = require("../models/blog").Blog;
 var Blogger = require("../models/blogger").Blogger;
-var BloggerController = require("./blogger")
+var BloggerController = require("./blogger");
 var paginate = require('express-paginate');
 var sanitizeHtml = require('sanitize-html');
 
-//Done of form (blogs, pageNumber, showBack, showNext, error)
-exports.getPaginatedBlogs = function (options, req, done) {
-    Blog.paginate(options, req.query.page, req.query.limit, function (error, pageCount, blogs, itemCount) {
+/** Retrieve blog posts in paginated form
+ * @param   {Object}   bloOptions     for blogs
+ * @param   {Boolean}  includeAuthors Include authors in result
+ * @param   {Object}   bloggerFilter  Filter for bloggers
+ * @param   {Object}   req            Request object
+ * @param   {function} done           Callback method of form: (blogs, pageNumber, showBack, showNext, error)
+ */
+exports.getPaginatedBlogs = function(blogOptions, includeAuthors, bloggerFilter, req, done) {
+    Blog.paginate(blogOptions, req.query.page, req.query.limit, function (error, pageCount, blogs, itemCount) {
         if (error) {
             done(null, -1, false, false, error);
         }
         else {
-            // Attach bloggers to blogs
-            BloggerController.getAllProfiles(true, function(allBloggers, error) {
-                if (error) {
-                    done(null, -1, false, false, error);
-                }
-                else {
-                    for (var i = 0; i < blogs.length; ++i) {
-                        // Associate each blog with its blogger
-                        blogs[i].author = allBloggers.filter(function(element) {
-                            return ((element.userId == blogs[i].userId) && (element.userProvider == blogs[i].userProvider));
-                        })[0];
+            if (includeAuthors) {
+                // Attach bloggers to blogs
+                BloggerController.getAllFilteredProfiles(true, bloggerFilter, function(allBloggers, error) {
+                    if (error) {
+                        done(null, -1, false, false, error);
                     }
+                    else {
+                        for (var i = 0; i < blogs.length; ++i) {
+                            // Convert to regular JS object
+                            blogs[i] = blogs[i].toObject();
 
-                    done(blogs, req.query.page, (req.query.page > 1), paginate.hasNextPages(req)(pageCount), null);
-                }
-            });
+                            // Associate each blog with its blogger
+                            blogs[i].author = allBloggers.filter(function(element) {
+                                return ((element.userId == blogs[i].userId) && (element.userProvider == blogs[i].userProvider));
+                            })[0];
+                        }
+
+                        done(blogs, req.query.page, (req.query.page > 1), paginate.hasNextPages(req)(pageCount), null);
+                    }
+                });
+            }
+            else {
+                done(blogs, req.query.page, (req.query.page > 1), paginate.hasNextPages(req)(pageCount), null);
+            }
         }
     }, {sortBy: {pubDate : 'desc'}, columns: {__v: 0}});
 };

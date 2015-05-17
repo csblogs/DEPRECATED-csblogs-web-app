@@ -17,19 +17,20 @@ exports.serveRoutes = function(app) {
             url += 'limit=' + req.query.limit + '&'
         }
 
-        BlogController.getPaginatedBlogs({}, req, function(blogs, pageNumber, showBack, showNext, error) {
-            if (error) { internalError(res, error); }
-            else {
-                res.render('blogs', {
-                    title: 'Home / CS Blogs',
-                    blogs: blogs,
-                    url: url,
-                    pageNumber: pageNumber,
-                    hasLess: showBack,
-                    hasMore: showNext,
-                    user: req.user
-                });
-            }
+        BlogController.getPaginatedBlogs({}, true, {}, req,
+            function(blogs, pageNumber, showBack, showNext, error) {
+                if (error) { internalError(res, error); }
+                else {
+                    res.render('blogs', {
+                        title: 'Home / CS Blogs',
+                        blogs: blogs,
+                        url: url,
+                        pageNumber: pageNumber,
+                        hasLess: showBack,
+                        hasMore: showNext,
+                        user: req.user
+                    });
+                }
         });
     });
 
