@@ -8,11 +8,11 @@ exports.serveRoutes = function(router) {
         var includeAuthor = true;
         var bloggerFilter = {};
 
-        if (req.query.author) {
-            if (req.query.author === 'false') {
+        if (req.query.authors) {
+            if (req.query.authors === 'false') {
                 includeAuthor = false;
             }
-            else if (req.query.author === 'minimal') {
+            else if (req.query.authors === 'minimal') {
                 bloggerFilter = {
                     cvUrl: 0,
                     githubProfile: 0,
