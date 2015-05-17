@@ -5,24 +5,43 @@ var BloggerController = require('./controllers/blogger');
 
 exports.serveRoutes = function(router) {
     router.get('/v0.1/blogs', function(req, res) {
-        BlogController.getPaginatedBlogs({}, req, function(blogs, pageNumber, showBack, showNext, error) {
-            if (error) {
-                res.send(error);
-            }
-            else {
-                if (req.query.original !== 'true') {
-                    BlogController.removeAllHTML(blogs, 400);
-                }
+        var includeAuthor = true;
+        var bloggerFilter = {};
 
-                var page = {
-                    blogs: blogs,
-                    pageNumber: pageNumber,
-                    hasLess: showBack,
-                    hasMore: showNext
+        if (req.query.author) {
+            if (req.query.author === 'false') {
+                includeAuthor = false;
+            }
+            else if (req.query.author === 'minimal') {
+                bloggerFilter = {
+                    cvUrl: 0,
+                    githubProfile: 0,
+                    twitterProfile: 0,
+                    linkedInProfile: 0,
+                    bio: 0
                 };
-
-                res.json(page);
             }
+        }
+
+        BlogController.getPaginatedBlogs({}, includeAuthor, bloggerFilter, req,
+            function(blogs, pageNumber, showBack, showNext, error) {
+                if (error) {
+                    res.send(error);
+                }
+                else {
+                    if (req.query.original !== 'true') {
+                        BlogController.removeAllHTML(blogs, 400);
+                    }
+
+                    var page = {
+                        blogs: blogs,
+                        pageNumber: pageNumber,
+                        hasLess: showBack,
+                        hasMore: showNext
+                    };
+
+                    res.json(page);
+                }
         });
     });
 
