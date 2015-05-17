@@ -124,10 +124,9 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
     var userAsBlogger = null;
     switch(passportjsUser.provider) {
     	case 'github':
-            var avatarUrl = new URI(passportjsUser._json.avatar_url);
-            avatarUrl.removeSearch(['v']); //Remove version from Github, this means the most recent pic is always used.
-        
-            var usersName = passportjsUser.displayName.split(' ');				
+            var avatarUrl = new URI(passportjsUser._json.avatar_url).removeSearch("v"); //Remove version from Github, this means the most recent pic is always used.
+            var usersName = passportjsUser.displayName.split(' ');
+							
             userAsBlogger = new Blogger({
     			avatarUrl: 		avatarUrl,
                 firstName: 		usersName[0],
