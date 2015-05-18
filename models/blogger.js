@@ -42,7 +42,7 @@ bloggerSchema.methods.sanitize = function() {
                         );
 };
 
-bloggerSchema.methods.validate = function(done) {    
+bloggerSchema.methods.validate = function(done) {
     var check = validator.isObject()
     .withRequired('_id')
     .withRequired('userProvider')
@@ -51,7 +51,7 @@ bloggerSchema.methods.validate = function(done) {
     .withRequired('lastName', validator.isAlphanumeric())
     .withRequired('emailAddress', validator.isEmail())
     .withRequired('avatarUrl', validator.isUrl())
-    .withRequired('feedUrl', validator.isUrl())
+    .withRequired('feedUrl', validator.isUrl(), validator.notCSBurl())
     .withRequired('blogWebsiteUrl', validator.isUrl())
     .withRequired('websiteUrl', validator.isUrl())
     .withOptional('cvUrl', validator.isUrl())
@@ -63,7 +63,7 @@ bloggerSchema.methods.validate = function(done) {
     .withRequired('vanityUrl', validator.noSpaces(), validator.vanityUrl());
 
     validator.run(check, this._doc, function(errors) {
-		done(errors);
+        done(errors);
     });
 };
 

@@ -52,12 +52,19 @@ exports.getProfileByVanityUrl = function(vanityUrl, req, done) {
 };
 
 exports.getAllProfiles = function(validatedOnly, done) {
-    var options = {};
-    if (validatedOnly) {
-        options.validated = true;
+    Blogger.find({validated: validatedOnly}, {emailAddress: 0, __v: 0}, {sort: {firstName: 'asc'}}, function(error, allBloggers) {
+        done(allBloggers, error);
+    });
+};
+
+exports.getAllFilteredProfiles = function(validatedOnly, filter, done) {
+    filter = filter || {};
+    if (filter[0] != 1) {
+        filter.__v = 0;
+        filter.emailAddress = 0;
     }
 
-    Blogger.find(options, {emailAddress: 0, __v: 0}, {sort: {firstName: 'asc'}}, function(error, allBloggers) {
+    Blogger.find({validated: validatedOnly}, filter, {sort: {firstName: 'asc'}}, function(error, allBloggers) {
         done(allBloggers, error);
     });
 };
@@ -87,15 +94,16 @@ function isVanityUrlTaken(user, done) {
 };
 
 function getBlogs(bloggerQuery, req, done) {
-    BlogController.getPaginatedBlogs(bloggerQuery, req, function(blogs, pageNumber, showBack, showNext, error) {
-        var page = {
-            blogs: blogs,
-            pageNumber: pageNumber,
-            hasLess: showBack,
-            hasMore: showNext
-        };
+    BlogController.getPaginatedBlogs(bloggerQuery, false, {}, req,
+        function(blogs, pageNumber, showBack, showNext, error) {
+            var page = {
+                blogs: blogs,
+                pageNumber: pageNumber,
+                hasLess: showBack,
+                hasMore: showNext
+            };
 
-        done(page, error);
+            done(page, error);
     });
 }
 
@@ -103,7 +111,7 @@ exports.validate = function(newBlogger, done) {
     newBlogger.sanitize();
     newBlogger.validate(function(errors) {
         isVanityUrlTaken(newBlogger, function(taken, error) {
-            validateUserSubmittedUrls(newBlogger, function (brokenUrls) {
+            validateUserSubmittedUrls(newBlogger, function(brokenUrls) {
                 if (error) {
                     return done(null, null, error);
                 }
@@ -115,13 +123,13 @@ exports.validate = function(newBlogger, done) {
                     });
                 }
 
-                brokenUrls.forEach(function(brokenUrl) {
+                for (var i = 0; i < brokenUrls.length; ++i) {
                    errors.push({
-                       parameter: brokenUrl.name,
-                       value: brokenUrl.location,
+                       parameter: brokenUrls[i].name,
+                       value: brokenUrls[i].location,
                        message: 'URL doesn\'t appear to link to valid location.'
                    });
-                });
+                }
 
                 if (brokenUrls.length > 0) { console.log("%j", brokenUrls); }
                 if (errors.length > 0) { console.log("%j", errors); }

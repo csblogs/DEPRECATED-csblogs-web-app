@@ -1,45 +1,17 @@
 "use strict";
 
 var moment = require('moment');
-var sanitizeHtml = require('sanitize-html');
+var BlogController = require('../controllers/blog');
 
-exports.truncateAndRemoveHTML = function (str, len) {
-    str = sanitizeHtml(str, {
-        allowedTags: [],
-        allowedAttributes: {}
-    });
-    if (str.length > len && str.length > 0) {
-        var new_str = str + " ";
-        new_str = str.substr (0, len);
-        new_str = str.substr (0, new_str.lastIndexOf(" "));
-        new_str = (new_str.length > 0) ? new_str : str.substr (0, len);
-
-        return new_str + '&hellip;';
-    }
-
-    //Some blogs leave annoying bits at then end, such as their own
-    //continue reading link or ellipses. Remove these.
-    var continueReadingPosition = str.indexOf('… Continue reading →');
-    if(continueReadingPosition !== -1) {
-        str = str.substring(0, continueReadingPosition);
-    }
-
-    var readMorePosition = str.indexOf('... Read more');
-    if(readMorePosition !== -1) {
-        str = str.substring(0, readMorePosition);
-    }
-
-    if (str.indexOf('[…]', str.length - 3) !== -1) {
-        str = str.substring(0, str.length - 3);
-    }
-    return str;
+exports.truncateAndRemoveHTML = function(str, len) {
+    return BlogController.truncateAndRemoveHTML(str, len);
 };
 
 exports.formatDateShort = function(datestamp) {
     try {
         var date = moment(datestamp);
 
-        if (date.isBefore(moment(), 'week')) {
+        if (moment().diff(date, 'days') > 6) {
             return date.format('MMM D, YYYY');
         }
         else {
@@ -54,13 +26,7 @@ exports.formatDateShort = function(datestamp) {
 exports.formatDateLong = function(datestamp) {
     try {
         var date = moment(datestamp);
-
-        if (date.isBefore(moment(), 'week')) {
-            return date.format('MMMM D, YYYY  h:mm a');
-        }
-        else {
-            return date.fromNow();
-        }
+        return date.format('MMMM D, YYYY h:mm a');
     }
     catch (error) {
         return '';

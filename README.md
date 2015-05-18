@@ -1,4 +1,4 @@
-# Computer Science Blogs
+# Computer Science Blogs [![Build Status](https://travis-ci.org/csblogs/csblogs-web-app.svg?branch=master)](https://travis-ci.org/csblogs/csblogs-web-app)
 The Computer Science Blogs project works to develop an open source blog aggregation system for Computer Scientists. 
 
 CS Students, academics and those working in industry can set up a profile and open up their blog posts to a much wider audience.

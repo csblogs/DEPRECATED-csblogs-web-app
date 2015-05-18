@@ -2,21 +2,18 @@
 <link rel="stylesheet" href="/style/css/profile.css">
 {{/section}}
 
-<!--
-<p>first Name: {{user.firstName}}</p>
-<p>last Name: {{user.lastName}}</p>
-<p>email Address: {{user.emailAddress}}</p>
-<p>feed URL: {{user.feedUrl}}</p>
-<p>blog URL: {{user.blogWebsiteUrl}}</p>
-<p>website URL: {{user.webisteUrl}}</p>
-<p>cv URL: {{user.cvUrl}}</p>
-<p>github URL: {{user.githubProfile}}</p>
-<p>twitter URL: {{user.twitterProfile}}</p>
-<p>linkedIn URL: {{user.linkedInProfile}}</p>
-<p>bio: {{user.bio}}</p>
-<p>validated: {{user.validated}}</p>
-<p>vanityUrl: {{user.vanityUrl}}</p>
--->
+{{#section 'meta'}}
+<meta name="author" content="{{blogger.firstName}} {{blogger.lastName}}"/>
+<meta name="description" content="The Computer Science Blogs profile of {{blogger.firstName}} {{blogger.lastName}}"/>
+<meta property="og:title"  content="The Computer Science Blogs profile of {{blogger.firstName}} {{blogger.lastName}}" /> 
+<meta property="og:site_name" content="Computer Science Blogs"/>
+<meta property="og:type"   content="profile"/> 
+<meta property="og:locale" content="en_GB"/>
+<meta property="og:image"  content="{{blogger.avatarUrl}}" /> 
+<meta property="profile:first_name" content="{{blogger.firstName}}"/>
+<meta property="profile:last_name" content="{{blogger.lastName}}"/>
+<meta property="profile:username" content="{{blogger.vanityUrl}}"/>
+{{/section}}
 
 <div>
     <div id="profile-header">

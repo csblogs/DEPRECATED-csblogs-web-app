@@ -6,6 +6,7 @@ var Blog = require('./models/blog').Blog;
 var GitHubStrategy = require('passport-github').Strategy;
 var WordpressStrategy = require('passport-wordpress').Strategy;
 var StackExchangeStrategy = require('passport-stackexchange').Strategy;
+var URI = require('URIjs'); 
 
 function normalizeUser(profile, callback) {
 	var identifier = '';
@@ -123,9 +124,11 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
     var userAsBlogger = null;
     switch(passportjsUser.provider) {
     	case 'github':
-            var usersName = passportjsUser.displayName.split(' ');				
+            var avatarUrl = new URI(passportjsUser._json.avatar_url).removeSearch("v"); //Remove version from Github, this means the most recent pic is always used.
+            var usersName = passportjsUser.displayName.split(' ');
+							
             userAsBlogger = new Blogger({
-    			avatarUrl: 		passportjsUser._json.avatar_url,
+    			avatarUrl: 		avatarUrl,
                 firstName: 		usersName[0],
                 lastName: 		usersName[1],
                 emailAddress: 	passportjsUser._json.email,

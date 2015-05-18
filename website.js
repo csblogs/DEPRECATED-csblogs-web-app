@@ -1,5 +1,6 @@
 "use strict";
 
+var URI = require('URIjs');
 var BloggerController = require('./controllers/blogger');
 var BlogController = require('./controllers/blog');
 var blogger = require('./models/blogger').Blogger;
@@ -16,19 +17,20 @@ exports.serveRoutes = function(app) {
             url += 'limit=' + req.query.limit + '&'
         }
 
-        BlogController.getPaginatedBlogs({}, req, function(blogs, pageNumber, showBack, showNext, error) {
-            if (error) { internalError(res, error); }
-            else {
-                res.render('blogs', {
-                    title: 'Home / CS Blogs',
-                    blogs: blogs,
-                    url: url,
-                    pageNumber: pageNumber,
-                    hasLess: showBack,
-                    hasMore: showNext,
-                    user: req.user
-                });
-            }
+        BlogController.getPaginatedBlogs({}, true, {}, req,
+            function(blogs, pageNumber, showBack, showNext, error) {
+                if (error) { internalError(res, error); }
+                else {
+                    res.render('blogs', {
+                        title: 'Home / CS Blogs',
+                        blogs: blogs,
+                        url: url,
+                        pageNumber: pageNumber,
+                        hasLess: showBack,
+                        hasMore: showNext,
+                        user: req.user
+                    });
+                }
         });
     });
 
@@ -161,7 +163,7 @@ exports.serveRoutes = function(app) {
             switch(req.user.provider) {
                 case 'github':
                     newBlogger.userId = req.user.id,
-                        newBlogger.avatarUrl = req.user._json.avatar_url;
+                    newBlogger.avatarUrl = new URI(req.user._json.avatar_url).removeSearch("v");
                     break;
                 case 'Wordpress':
                     newBlogger.userId = req.user._json.ID;
