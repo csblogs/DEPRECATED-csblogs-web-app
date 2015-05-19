@@ -26,20 +26,32 @@ exports.serveRoutes = function(app) {
             vanityUrl: 1
         };
 
-        BlogController.getPaginatedBlogs({}, true, columns, req,
-            function(blogs, pageNumber, showBack, showNext, error) {
-                if (error) { internalError(res, error); }
-                else {
-                    res.render('blogs', {
-                        title: 'Home / CS Blogs',
-                        blogs: blogs,
-                        url: url,
-                        pageNumber: pageNumber,
-                        hasLess: showBack,
-                        hasMore: showNext,
-                        user: req.user
-                    });
-                }
+        BloggerController.getValidatedBloggers(function(error, ids, providers) {
+            if (error) {
+                internalError(res, error.$err);
+            }
+            else {
+                var options = {
+                    userId: {$in: ids},
+                    userProvider: {$in: providers}
+                };
+
+                BlogController.getPaginatedBlogs(options, true, columns, req,
+                    function(blogs, pageNumber, showBack, showNext, error) {
+                        if (error) { internalError(res, error); }
+                        else {
+                            res.render('blogs', {
+                                title: 'Home / CS Blogs',
+                                blogs: blogs,
+                                url: url,
+                                pageNumber: pageNumber,
+                                hasLess: showBack,
+                                hasMore: showNext,
+                                user: req.user
+                            });
+                        }
+                });
+            }
         });
     });
 

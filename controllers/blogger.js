@@ -67,6 +67,26 @@ exports.updateProfile = function(user, update, done) {
     Blogger.update({userId: user.userId, userProvider: user.userProvider}, update, done);
 }
 
+exports.getValidatedBloggers = function(done) {
+    Blogger.find({validated: true}, {_id: 0, userId: 1, userProvider: 1}).lean().exec(
+    function(error, bloggers) {
+        if (error) {
+            done(error, null, null);
+        }
+        else {
+            var ids = [];
+            var providers = [];
+
+            for (var i = 0; i < bloggers.length; ++i) {
+                ids.push(bloggers[i].userId);
+                providers.push(bloggers[i].userProvider);
+            }
+
+            done(null, ids, providers);
+        }
+    });
+}
+
 function isVanityUrlTaken(user, done) {
     Blogger.findOne({vanityUrl: user.vanityUrl}, function(error, profile) {
         if (error) {

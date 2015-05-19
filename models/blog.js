@@ -9,7 +9,7 @@ var blogSchema = new Schema({
   userId : String,
 
   // Information about blog
-  title: String,
+  title : String,
   imageUrl : String,
   summary : String,
   pubDate : Date,
@@ -17,6 +17,6 @@ var blogSchema = new Schema({
   link : String
 });
 
-blogSchema.plugin(require('mongoose-paginate'));
+blogSchema.plugin(require('mongo-pages'));
 
 exports.Blog = mongoose.model('Blog', blogSchema);

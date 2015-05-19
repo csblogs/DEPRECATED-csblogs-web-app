@@ -27,25 +27,37 @@ exports.serveRoutes = function(router) {
             }
         }
 
-        BlogController.getPaginatedBlogs({}, includeAuthor, columns, req,
-            function(blogs, pageNumber, showBack, showNext, error) {
-                if (error) {
-                    sendError(res, 500, error.$err);
-                }
-                else {
-                    if (req.query.original !== 'true') {
-                        BlogController.removeAllHTML(blogs, 400);
-                    }
+        BloggerController.getValidatedBloggers(function(error, ids, providers) {
+            if (error) {
+                sendError(res, 500, error.$err);
+            }
+            else {
+                var options = {
+                    userId: {$in: ids},
+                    userProvider: {$in: providers}
+                };
 
-                    var page = {
-                        blogs: blogs,
-                        pageNumber: pageNumber,
-                        hasLess: showBack,
-                        hasMore: showNext
-                    };
+                BlogController.getPaginatedBlogs(options, includeAuthor, columns, req,
+                    function(blogs, pageNumber, showBack, showNext, error) {
+                        if (error) {
+                            sendError(res, 500, error.$err);
+                        }
+                        else {
+                            if (req.query.original !== 'true') {
+                                BlogController.removeAllHTML(blogs, 400);
+                            }
 
-                    res.json(page);
-                }
+                            var page = {
+                                blogs: blogs,
+                                pageNumber: pageNumber,
+                                hasLess: showBack,
+                                hasMore: showNext
+                            };
+
+                            res.json(page);
+                        }
+                });
+            }
         });
     });
 
