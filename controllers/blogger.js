@@ -51,26 +51,40 @@ exports.getProfileByVanityUrl = function(vanityUrl, req, done) {
     });
 };
 
-exports.getAllProfiles = function(validatedOnly, done) {
-    Blogger.find({validated: validatedOnly}, {emailAddress: 0, __v: 0}, {sort: {firstName: 'asc'}}, function(error, allBloggers) {
-        done(allBloggers, error);
-    });
-};
-
-exports.getAllFilteredProfiles = function(validatedOnly, filter, done) {
-    filter = filter || {};
-    if (filter[0] != 1) {
-        filter.__v = 0;
-        filter.emailAddress = 0;
+exports.getAllProfiles = function(validatedOnly, columns, done) {
+    var keys = Object.keys(columns);
+    if ((keys.length > 0 && columns[keys[0]] !== 1) || (keys.length === 0)) {
+        columns.__v = 0;
+        columns.emailAddress = 0;
     }
 
-    Blogger.find({validated: validatedOnly}, filter, {sort: {firstName: 'asc'}}, function(error, allBloggers) {
+    Blogger.find({validated: validatedOnly}, columns, {sort: {firstName: 'asc'}}, function(error, allBloggers) {
         done(allBloggers, error);
     });
 };
 
 exports.updateProfile = function(user, update, done) {
     Blogger.update({userId: user.userId, userProvider: user.userProvider}, update, done);
+}
+
+exports.getValidatedBloggers = function(done) {
+    Blogger.find({validated: true}, {_id: 0, userId: 1, userProvider: 1}).lean().exec(
+    function(error, bloggers) {
+        if (error) {
+            done(error, null, null);
+        }
+        else {
+            var ids = [];
+            var providers = [];
+
+            for (var i = 0; i < bloggers.length; ++i) {
+                ids.push(bloggers[i].userId);
+                providers.push(bloggers[i].userProvider);
+            }
+
+            done(null, ids, providers);
+        }
+    });
 }
 
 function isVanityUrlTaken(user, done) {

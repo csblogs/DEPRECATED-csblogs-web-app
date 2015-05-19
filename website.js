@@ -17,20 +17,41 @@ exports.serveRoutes = function(app) {
             url += 'limit=' + req.query.limit + '&'
         }
 
-        BlogController.getPaginatedBlogs({}, true, {}, req,
-            function(blogs, pageNumber, showBack, showNext, error) {
-                if (error) { internalError(res, error); }
-                else {
-                    res.render('blogs', {
-                        title: 'Home / CS Blogs',
-                        blogs: blogs,
-                        url: url,
-                        pageNumber: pageNumber,
-                        hasLess: showBack,
-                        hasMore: showNext,
-                        user: req.user
-                    });
-                }
+        var columns = {
+            userId: 1,
+            userProvider: 1,
+            firstName: 1,
+            lastName: 1,
+            avatarUrl: 1,
+            vanityUrl: 1
+        };
+
+        BloggerController.getValidatedBloggers(function(error, ids, providers) {
+            if (error) {
+                internalError(res, error.$err);
+            }
+            else {
+                var options = {
+                    userId: {$in: ids},
+                    userProvider: {$in: providers}
+                };
+
+                BlogController.getPaginatedBlogs(options, true, columns, req,
+                    function(blogs, pageNumber, showBack, showNext, error) {
+                        if (error) { internalError(res, error); }
+                        else {
+                            res.render('blogs', {
+                                title: 'Home / CS Blogs',
+                                blogs: blogs,
+                                url: url,
+                                pageNumber: pageNumber,
+                                hasLess: showBack,
+                                hasMore: showNext,
+                                user: req.user
+                            });
+                        }
+                });
+            }
         });
     });
 
@@ -86,7 +107,7 @@ exports.serveRoutes = function(app) {
     });
 
     app.get('/bloggers', function(req, res) {
-        BloggerController.getAllProfiles(true, function(allProfiles, error) {
+        BloggerController.getAllProfiles(true, {}, function(allProfiles, error) {
             if (error) { internalError(res, error); }
             else {
                 res.render('bloggers', {
