@@ -7,21 +7,21 @@ var paginate = require('express-paginate');
 var sanitizeHtml = require('sanitize-html');
 
 /** Retrieve blog posts in paginated form
- * @param   {Object}   bloOptions     for blogs
+ * @param   {Object}   options        for blogs
  * @param   {Boolean}  includeAuthors Include authors in result
- * @param   {Object}   bloggerFilter  Filter for bloggers
+ * @param   {Object}   columns        Select columns for bloggers
  * @param   {Object}   req            Request object
  * @param   {function} done           Callback method of form: (blogs, pageNumber, showBack, showNext, error)
  */
-exports.getPaginatedBlogs = function(blogOptions, includeAuthors, bloggerFilter, req, done) {
-    Blog.paginate(blogOptions, req.query.page, req.query.limit, function (error, pageCount, blogs, itemCount) {
+exports.getPaginatedBlogs = function(options, includeAuthors, columns, req, done) {
+    Blog.paginate(options, req.query.page, req.query.limit, function (error, pageCount, blogs, itemCount) {
         if (error) {
             done(null, -1, false, false, error);
         }
         else {
             if (includeAuthors) {
                 // Attach bloggers to blogs
-                BloggerController.getAllFilteredProfiles(true, bloggerFilter, function(allBloggers, error) {
+                BloggerController.getAllProfiles(true, columns, function(allBloggers, error) {
                     if (error) {
                         done(null, -1, false, false, error);
                     }
@@ -55,7 +55,7 @@ exports.getMostRecentBlogs = function(options, howMany, done) {
         }
         else {
             // Attach bloggers to blogs
-            BloggerController.getAllProfiles(true, function(allBloggers, error) {
+            BloggerController.getAllProfiles(true, {}, function(allBloggers, error) {
                 if (error) {
                     done(null, error);
                 }

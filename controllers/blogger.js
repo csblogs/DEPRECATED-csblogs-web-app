@@ -51,20 +51,14 @@ exports.getProfileByVanityUrl = function(vanityUrl, req, done) {
     });
 };
 
-exports.getAllProfiles = function(validatedOnly, done) {
-    Blogger.find({validated: validatedOnly}, {emailAddress: 0, __v: 0}, {sort: {firstName: 'asc'}}, function(error, allBloggers) {
-        done(allBloggers, error);
-    });
-};
-
-exports.getAllFilteredProfiles = function(validatedOnly, filter, done) {
-    filter = filter || {};
-    if (filter[0] != 1) {
-        filter.__v = 0;
-        filter.emailAddress = 0;
+exports.getAllProfiles = function(validatedOnly, columns, done) {
+    var keys = Object.keys(columns);
+    if ((keys.length > 0 && columns[keys[0]] !== 1) || (keys.length === 0)) {
+        columns.__v = 0;
+        columns.emailAddress = 0;
     }
 
-    Blogger.find({validated: validatedOnly}, filter, {sort: {firstName: 'asc'}}, function(error, allBloggers) {
+    Blogger.find({validated: validatedOnly}, columns, {sort: {firstName: 'asc'}}, function(error, allBloggers) {
         done(allBloggers, error);
     });
 };

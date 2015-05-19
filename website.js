@@ -17,7 +17,16 @@ exports.serveRoutes = function(app) {
             url += 'limit=' + req.query.limit + '&'
         }
 
-        BlogController.getPaginatedBlogs({}, true, {}, req,
+        var columns = {
+            userId: 1,
+            userProvider: 1,
+            firstName: 1,
+            lastName: 1,
+            avatarUrl: 1,
+            vanityUrl: 1
+        };
+
+        BlogController.getPaginatedBlogs({}, true, columns, req,
             function(blogs, pageNumber, showBack, showNext, error) {
                 if (error) { internalError(res, error); }
                 else {
@@ -86,7 +95,7 @@ exports.serveRoutes = function(app) {
     });
 
     app.get('/bloggers', function(req, res) {
-        BloggerController.getAllProfiles(true, function(allProfiles, error) {
+        BloggerController.getAllProfiles(true, {}, function(allProfiles, error) {
             if (error) { internalError(res, error); }
             else {
                 res.render('bloggers', {
