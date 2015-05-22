@@ -16,11 +16,11 @@
         <p itemprop="articleBody">{{{truncateAndRemoveHTML summary 400}}} <a itemprop="url" class="read-more" href="{{link}}">Read more &#8594;</a></p>
         <footer>
             <div class="article-info">
-				<div itemprop="author" itemtype="https://schema.org/Person">
+				<div itemscope itemprop="author" itemtype="https://schema.org/Person">
 	                <a class="avatar" itemprop="url" href="/bloggers/{{author.vanityUrl}}">
 	                    <img class="avatar" itemprop="image" src="{{author.avatarUrl}}" alt="Avatar"/>
 	                </a>
-	                <a class="article-author" itemprop="url" href="/bloggers/{{author.vanityUrl}}"><span>{{author.firstName}}</span> <span>{{author.lastName}}</span></a>
+	                <a class="article-author" itemprop="url" href="/bloggers/{{author.vanityUrl}}"><span itemprop="givenName">{{author.firstName}}</span><span itemprop="familyName">{{author.lastName}}</span></a>
 				</div>
                 <p class="article-date" itemprop="datePublished">{{formatDateShort pubDate}}</p>
             </div>
