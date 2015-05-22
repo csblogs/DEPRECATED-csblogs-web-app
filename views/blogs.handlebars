@@ -2,21 +2,27 @@
 <link rel="stylesheet" href="/style/css/blogs.css">
 {{/section}}
 
+{{#section 'meta'}}
+<meta name="description" content="CSBlogs.com is the blog aggregation website for Computer Scientists. Here you can find blogs from Computer Science Students, Lecturers and Practitioners."/>
+{{/section}}
+
 <div id="space-saver"></div>
 {{#each blogs}}
-    <article>
+    <article itemscope itemtype="http://schema.org/BlogPosting">
         <header>
-            <h2><a href="{{link}}">{{title}}</a></h2>
+            <h2 itemprop="headline"><a href="{{link}}">{{title}}</a></h2>
         </header>
-        {{#if imageUrl}}<img src="{{imageUrl}}" alt="Featured Image"/>{{/if}}
-        <p>{{{truncateAndRemoveHTML summary 400}}} <a class="read-more" href="{{link}}">Read more &#8594;</a></p>
+        {{#if imageUrl}}<img itemprop="image" src="{{imageUrl}}" alt="Featured Image"/>{{/if}}
+        <p itemprop="articleBody">{{{truncateAndRemoveHTML summary 400}}} <a itemprop="url" class="read-more" href="{{link}}">Read more &#8594;</a></p>
         <footer>
             <div class="article-info">
-                <a class="avatar" href="/bloggers/{{author.vanityUrl}}">
-                    <img class="avatar" src="{{author.avatarUrl}}" alt="Avatar"/>
-                </a>
-                <a class="article-author" href="/bloggers/{{author.vanityUrl}}">{{author.firstName}} {{author.lastName}}</a>
-                <p class="article-date">{{formatDateShort pubDate}}</p>
+				<div itemprop="author" itemtype="https://schema.org/Person">
+	                <a class="avatar" itemprop="url" href="/bloggers/{{author.vanityUrl}}">
+	                    <img class="avatar" itemprop="image" src="{{author.avatarUrl}}" alt="Avatar"/>
+	                </a>
+	                <a class="article-author" itemprop="url" href="/bloggers/{{author.vanityUrl}}"><span>{{author.firstName}}</span> <span>{{author.lastName}}</span></a>
+				</div>
+                <p class="article-date" itemprop="datePublished">{{formatDateShort pubDate}}</p>
             </div>
         </footer>
         {{#unless @last}}<hr/>{{/unless}}
