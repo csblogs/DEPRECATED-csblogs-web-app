@@ -47,7 +47,7 @@
 	            {{/ifEqualBlogger}}
 	        </div>
 	    </div>
-	    <div id="profile-body">
+	    <div class="profile-body">
 	        {{#ifEqualBlogger user blogger}}{{#unless user.validated}}
 	        <div class="alert-box alert-info">
 	            <p>Your profile will be validated by a moderator before it can be seen by the public. An email will be sent to you when this has been done.</p>
@@ -94,7 +94,7 @@
 	            {{/if}}
 	        </div>
 		</div>
-		<div>
+		<div class="profile-body">
 	        <h3>Blog posts</h3>
 
 	        {{#if page.blogs}}
