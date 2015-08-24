@@ -136,17 +136,17 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
             });
             
             //Check displayName for first/last name combinations
-            if (passportJsUser.displayName != null)
+            if (passportjsUser.displayName != null)
             {
-	            if (passportJsUser.displayName.contains(' '))
+	            if (passportjsUser.displayName.contains(' '))
 	            {
-		            var name = passportJsUser.displayName.split(' ');
+		            var name = passportjsUser.displayName.split(' ');
 		            userAsBlogger.firstName = name[0];
 		            userAsBlogger.lastName = name[name.length - 1];
 	            }
 	            else
 	            {
-		            userAsBlogger.firstName = passportJsUser.displayName;
+		            userAsBlogger.firstName = passportjsUser.displayName;
 	            }
             }
             
