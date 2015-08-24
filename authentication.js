@@ -138,7 +138,7 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
             //Check displayName for first/last name combinations
             if (passportjsUser.displayName != null)
             {
-	            if (passportjsUser.displayName.contains(' '))
+	            if (passportjsUser.displayName.indexOf(' '))
 	            {
 		            var name = passportjsUser.displayName.split(' ');
 		            userAsBlogger.firstName = name[0];
