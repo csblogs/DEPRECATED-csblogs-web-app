@@ -191,7 +191,7 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
             userAsBlogger = new Blogger({
     			avatarUrl: 		passportjsUser.profile_image,
                 vanityUrl: 		passportjsUser.display_name,
-    			websiteUrl: 	passportjsUser.website_url,
+    			websiteUrl: 	passportjsUser.website_url
             });
     		break;
     		
