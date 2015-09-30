@@ -196,7 +196,6 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
     		break;
     		
     	case 'twitter':
-    	console.log(passportjsUser._json);
     		userAsBlogger = new Blogger({
 	    		vanityUrl: passportjsUser.username,
 	    		twitterProfile: passportjsUser.username,
