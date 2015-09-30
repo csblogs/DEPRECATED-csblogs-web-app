@@ -6,6 +6,7 @@ var Blog = require('./models/blog').Blog;
 var GitHubStrategy = require('passport-github').Strategy;
 var WordpressStrategy = require('passport-wordpress').Strategy;
 var StackExchangeStrategy = require('passport-stackexchange').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
 var URI = require('URIjs'); 
 
 function normalizeUser(profile, callback) {
@@ -19,6 +20,9 @@ function normalizeUser(profile, callback) {
 			break;
 		case 'stackexchange':
 			identifier = profile.user_id;
+			break;
+		case 'twitter':
+			identifier = profile.id;
 			break;
 	}
 	
@@ -100,6 +104,27 @@ passport.use(new StackExchangeStrategy({
     }
 ));
 
+//Twitter
+passport.use(new TwitterStrategy({
+		//TODO: Change these for release
+		consumerKey: "YcewRiLCzJKXxueEk0yJyWM0R",
+		consumerSecret: "13KOFtCmXrH1uDGGzgq01TBbDNHuk1JQmiogeFcFugfFYTXy4k",
+		callbackURL: "http://127.0.0.1:3000/auth/twitter/callback",
+	},
+	function(accessToken, refreshToken, profile, done) {
+		console.log("[INFO] Twitter user logged in: %s", profile.id);
+		normalizeUser(profile, function(normalizedUser) {
+			if (normalizedUser != null) {
+				done(null, normalizedUser);
+			}
+			else {
+				//Error
+				done(normalizedUser);
+			}
+		});
+	}
+));
+
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
@@ -138,7 +163,7 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
             //Check displayName for first/last name combinations
             if (passportjsUser.displayName != null)
             {
-	            if (passportjsUser.displayName.indexOf(' '))
+	            if (passportjsUser.displayName.indexOf(' ') > -1)
 	            {
 		            var name = passportjsUser.displayName.split(' ');
 		            userAsBlogger.firstName = name[0];
@@ -151,6 +176,7 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
             }
             
     		break;
+    		
     	case 'Wordpress':
             userAsBlogger = new Blogger({
     			avatarUrl: 		passportjsUser._json.avatar_URL,
@@ -160,12 +186,37 @@ exports.getBloggerFieldsFromAuthenticatedUser = function (passportjsUser) {
                 vanityUrl: 		passportjsUser._json.display_name.replace(/\s+/g, '-').toLowerCase()
             });
     		break;
+    		
     	case 'stackexchange':
             userAsBlogger = new Blogger({
     			avatarUrl: 		passportjsUser.profile_image,
                 vanityUrl: 		passportjsUser.display_name,
-    			websiteUrl: 	passportjsUser.website_url
+    			websiteUrl: 	passportjsUser.website_url,
             });
+    		break;
+    		
+    	case 'twitter':
+    	console.log(passportjsUser._json);
+    		userAsBlogger = new Blogger({
+	    		vanityUrl: passportjsUser.username,
+	    		twitterProfile: passportjsUser.username,
+	    		bio: passportjsUser._json.description
+    		});
+    		
+    		if (passportjsUser.displayName != null)
+            {
+	            if (passportjsUser.displayName.indexOf(' ') > -1)
+	            {
+		            var name = passportjsUser.displayName.split(' ');
+		            userAsBlogger.firstName = name[0];
+		            userAsBlogger.lastName = name[name.length - 1];
+	            }
+	            else
+	            {
+		            userAsBlogger.firstName = passportjsUser.displayName;
+	            }
+            }   	
+            userAsBlogger.avatarUrl = passportjsUser.photos[0].value.substring(0, passportjsUser.photos[0].value.length - 11) + ".png";
     		break;
     }
     return userAsBlogger; 
@@ -207,6 +258,16 @@ exports.serveOAuthRoutes = function(app) {
             failureRedirect: '/login',
             failureFlash: true
         }));
+        
+    //Twitter routes
+    app.get('/auth/twitter', passport.authenticate('twitter'));
+    
+    app.get('/auth/twitter/callback',
+    	passport.authenticate('twitter', {
+	    	successRedirect: '/profile',
+	    	failureRedirect: '/login',
+	    	failureFlash: true
+    	}));
 };
 
 exports.deleteUser = function(passportJSUser) {
