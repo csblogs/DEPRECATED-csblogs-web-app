@@ -35,7 +35,7 @@
     "mongo-pages": "^4.0.2",
     "mongoose": "^4.0.2",
     "passport": "^0.2.1",
-    "passport-github": "^0.1.5",
+    "passport-github2": "^0.1.10",
     "passport-stackexchange": "^0.1.0",
     "passport-wordpress": "0.0.3",
     "request": "^2.55.0",
